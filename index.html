@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DesignDrop — Free Graphics & Illustrations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #F9F8F6; --surface: #FFFFFF; --border: #E8E6E0;
+    --border-strong: #C8C5BC; --text-primary: #1A1916;
+    --text-secondary: #6B6860; --text-muted: #A09E99;
+    --accent: #1A1916; --accent-soft: #F0EEE8;
+    --tag-bg: #EDECEA; --tag-text: #4A4844;
+    --ad-bg: #F4F2ED; --danger: #C0392B;
+  }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-primary); min-height: 100vh; font-size: 15px; line-height: 1.6; }
+  .view { display: none; }
+  .view.active { display: block; }
+
+  nav { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+  .logo { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--text-primary); letter-spacing: -0.5px; cursor: pointer; }
+  .logo span { color: var(--text-muted); }
+  .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+  .nav-link { font-size: 13px; color: var(--text-secondary); cursor: pointer; text-decoration: none; transition: color 0.15s; }
+  .nav-link:hover { color: var(--text-primary); }
+  .btn-admin { font-size: 12px; font-weight: 500; padding: 6px 14px; border: 1px solid var(--border-strong); border-radius: 6px; background: transparent; color: var(--text-primary); cursor: pointer; transition: background 0.15s; }
+  .btn-admin:hover { background: var(--accent-soft); }
+
+  .hero { padding: 5rem 2rem 3.5rem; text-align: center; max-width: 700px; margin: 0 auto; }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.1; letter-spacing: -1px; margin-bottom: 1rem; }
+  .hero h1 em { font-style: italic; color: var(--text-secondary); }
+  .hero p { font-size: 1rem; color: var(--text-secondary); margin-bottom: 2rem; }
+  .search-wrap { display: flex; max-width: 480px; margin: 0 auto; border: 1px solid var(--border-strong); border-radius: 10px; background: var(--surface); overflow: hidden; }
+  .search-wrap input { flex: 1; border: none; outline: none; padding: 0.75rem 1rem; font-size: 14px; font-family: 'Inter', sans-serif; background: transparent; color: var(--text-primary); }
+  .search-wrap input::placeholder { color: var(--text-muted); }
+  .btn-search { padding: 0.75rem 1.25rem; border: none; background: var(--accent); color: #fff; font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'Inter', sans-serif; }
+
+  .ad-banner { background: var(--ad-bg); border: 1px dashed var(--border-strong); border-radius: 10px; text-align: center; color: var(--text-muted); font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; display: flex; align-items: center; justify-content: center; }
+  .ad-banner.leaderboard { max-width: 900px; margin: 0 auto 2.5rem; height: 90px; }
+  .ad-banner.sidebar { height: 250px; width: 100%; margin-bottom: 1.5rem; }
+  .ad-banner.footer-ad { max-width: 900px; margin: 3rem auto 0; height: 90px; }
+
+  .page-wrap { max-width: 1200px; margin: 0 auto; padding: 0 2rem 4rem; }
+  .content-with-sidebar { display: grid; grid-template-columns: 1fr 260px; gap: 2.5rem; align-items: start; }
+
+  .filters { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .filter-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-right: 0.5rem; }
+  .filter-btn { font-size: 12px; font-family: 'Inter', sans-serif; padding: 5px 12px; border: 1px solid var(--border); border-radius: 20px; background: var(--surface); color: var(--text-secondary); cursor: pointer; transition: all 0.15s; }
+  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  .design-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.25rem; }
+  .design-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: border-color 0.15s, transform 0.15s; cursor: pointer; }
+  .design-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+  .card-thumb { aspect-ratio: 4/3; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+  .card-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .card-thumb .no-img { font-size: 2rem; color: var(--text-muted); }
+  .card-overlay { position: absolute; inset: 0; background: rgba(26,25,22,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.2s; }
+  .design-card:hover .card-overlay { opacity: 1; }
+  .btn-preview { background: #fff; color: var(--text-primary); border: none; padding: 8px 18px; border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'Inter', sans-serif; }
+  .card-body { padding: 0.85rem 1rem; }
+  .card-title { font-size: 13px; font-weight: 500; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .card-meta { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+  .card-tag { font-size: 11px; background: var(--tag-bg); color: var(--tag-text); padding: 2px 8px; border-radius: 20px; }
+  .card-dl-count { font-size: 11px; color: var(--text-muted); }
+
+  .sidebar { position: sticky; top: 80px; }
+  .sidebar-section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.25rem; }
+  .sidebar-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 0.85rem; }
+  .stat-row { display: flex; justify-content: space-between; font-size: 13px; padding: 5px 0; border-bottom: 1px solid var(--border); }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-row span:last-child { font-weight: 500; }
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; }
+  .cloud-tag { font-size: 12px; background: var(--tag-bg); color: var(--tag-text); padding: 3px 10px; border-radius: 20px; cursor: pointer; }
+  .cloud-tag:hover { background: var(--border-strong); }
+
+  .modal-overlay { position: fixed; inset: 0; background: rgba(26,25,22,0.6); z-index: 200; display: none; align-items: center; justify-content: center; padding: 1rem; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--surface); border-radius: 16px; max-width: 560px; width: 100%; overflow: hidden; }
+  .modal-img { aspect-ratio: 16/9; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .modal-img img { width: 100%; height: 100%; object-fit: cover; }
+  .modal-img .no-img { font-size: 3rem; color: var(--text-muted); }
+  .modal-body { padding: 1.5rem; }
+  .modal-title { font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .modal-desc { font-size: 13px; color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.6; }
+  .modal-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+  .modal-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+  .modal-meta { font-size: 12px; color: var(--text-muted); }
+  .btn-dl { background: var(--accent); color: #fff; border: none; padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 6px; transition: opacity 0.15s; }
+  .btn-dl:hover { opacity: 0.85; }
+  .btn-close-modal { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.9); border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; }
+  .modal-inner { position: relative; }
+
+  .empty-state { text-align: center; padding: 4rem 2rem; color: var(--text-muted); }
+  .empty-state p { margin-top: 0.5rem; font-size: 14px; }
+  .loading-state { text-align: center; padding: 4rem 2rem; color: var(--text-muted); font-size: 14px; }
+  .spinner { display: inline-block; width: 28px; height: 28px; border: 2px solid var(--border); border-top-color: var(--text-primary); border-radius: 50%; animation: spin 0.7s linear infinite; margin-bottom: 1rem; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ADMIN */
+  .admin-wrap { max-width: 920px; margin: 0 auto; padding: 2rem; }
+  .admin-tabs { display: flex; gap: 0.25rem; background: var(--accent-soft); padding: 4px; border-radius: 8px; margin-bottom: 2rem; }
+  .admin-tab { flex: 1; text-align: center; padding: 7px 16px; font-size: 13px; font-weight: 500; cursor: pointer; border-radius: 6px; transition: all 0.15s; color: var(--text-secondary); border: none; background: transparent; font-family: 'Inter', sans-serif; }
+  .admin-tab.active { background: var(--surface); color: var(--text-primary); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+
+  .upload-form { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group.full { grid-column: 1/-1; }
+  .form-group label { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); }
+  .form-group input, .form-group textarea, .form-group select { font-family: 'Inter', sans-serif; font-size: 14px; padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text-primary); outline: none; transition: border-color 0.15s; resize: vertical; }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--border-strong); }
+
+  .drop-zone { border: 2px dashed var(--border-strong); border-radius: 10px; padding: 2rem; text-align: center; cursor: pointer; transition: border-color 0.15s, background 0.15s; background: var(--bg); }
+  .drop-zone:hover { border-color: var(--text-primary); background: var(--accent-soft); }
+  .drop-zone p { font-size: 13px; color: var(--text-secondary); margin-top: 0.5rem; }
+  .drop-zone .dz-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .preview-thumb { width: 100%; max-height: 160px; object-fit: contain; border-radius: 6px; margin-top: 0.75rem; display: none; }
+
+  .progress-wrap { background: var(--border); border-radius: 4px; height: 6px; margin-top: 1rem; display: none; }
+  .progress-bar { background: var(--accent); height: 6px; border-radius: 4px; width: 0%; transition: width 0.3s; }
+  .upload-status { font-size: 12px; color: var(--text-secondary); margin-top: 6px; min-height: 18px; }
+
+  .btn-submit { background: var(--accent); color: #fff; border: none; padding: 11px 28px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'Inter', sans-serif; margin-top: 1rem; transition: opacity 0.15s; }
+  .btn-submit:hover { opacity: 0.85; }
+  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-danger { background: transparent; color: var(--danger); border: 1px solid var(--danger); padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; font-family: 'Inter', sans-serif; }
+  .btn-danger:hover { background: #fef2f2; }
+
+  .manage-table { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+  .manage-table table { width: 100%; border-collapse: collapse; }
+  .manage-table th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); background: var(--bg); }
+  .manage-table td { padding: 12px 16px; font-size: 13px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  .manage-table tr:last-child td { border-bottom: none; }
+  .manage-table img.thumb-sm { width: 48px; height: 36px; object-fit: cover; border-radius: 4px; }
+  .thumb-sm-box { width: 48px; height: 36px; border-radius: 4px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
+  .stat-card .s-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat-card .s-value { font-size: 1.8rem; font-weight: 600; margin-top: 4px; }
+
+  .login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--bg); }
+  .login-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; width: 100%; max-width: 380px; text-align: center; }
+  .login-card h2 { font-family: 'DM Serif Display', serif; font-size: 1.6rem; margin-bottom: 0.5rem; }
+  .login-card p { font-size: 13px; color: var(--text-secondary); margin-bottom: 1.5rem; }
+  .login-input { width: 100%; font-family: 'Inter', sans-serif; font-size: 14px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text-primary); outline: none; margin-bottom: 0.75rem; }
+  .btn-login { width: 100%; background: var(--accent); color: #fff; border: none; padding: 10px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'Inter', sans-serif; }
+  .login-error { font-size: 12px; color: var(--danger); margin-top: 0.5rem; display: none; }
+
+  .toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--text-primary); color: #fff; padding: 12px 20px; border-radius: 10px; font-size: 13px; font-weight: 500; z-index: 999; transform: translateY(100px); opacity: 0; transition: all 0.3s; pointer-events: none; }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-size: 12px; color: var(--text-muted); background: var(--surface); }
+
+  @media (max-width: 768px) {
+    .content-with-sidebar { grid-template-columns: 1fr; }
+    .sidebar { position: static; }
+    .form-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ PUBLIC SITE ══ -->
+<div id="view-public" class="view active">
+  <nav>
+    <div class="logo" onclick="goHome()">Design<span>Drop</span></div>
+    <div class="nav-right">
+      <span class="nav-link" onclick="scrollToGallery()">Browse</span>
+      <button class="btn-admin" onclick="showAdminLogin()">Admin ↗</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>Free graphics &amp;<br><em>illustrations</em> for everyone</h1>
+    <p>Download high-quality design assets at no cost — forever free.</p>
+    <div class="search-wrap">
+      <input type="text" id="search-input" placeholder="Search illustrations, graphics…" oninput="filterDesigns()">
+      <button class="btn-search">Search</button>
+    </div>
+  </section>
+
+  <div class="page-wrap" style="padding-bottom:0;">
+    <!-- Replace with Google AdSense leaderboard code -->
+    <div class="ad-banner leaderboard">📢 Advertisement — 728×90 (Google AdSense here)</div>
+  </div>
+
+  <div id="gallery-anchor" class="page-wrap">
+    <div class="content-with-sidebar">
+      <div>
+        <div class="filters">
+          <span class="filter-label">Filter:</span>
+          <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+          <button class="filter-btn" onclick="setFilter('illustration',this)">Illustrations</button>
+          <button class="filter-btn" onclick="setFilter('graphic',this)">Graphics</button>
+          <button class="filter-btn" onclick="setFilter('icon',this)">Icons</button>
+          <button class="filter-btn" onclick="setFilter('abstract',this)">Abstract</button>
+        </div>
+        <div id="design-grid" class="design-grid"></div>
+        <div id="loading-state" class="loading-state"><div class="spinner"></div><br>Loading designs…</div>
+        <div id="empty-state" class="empty-state" style="display:none;"><div style="font-size:2rem;">🔍</div><p>No designs found.</p></div>
+      </div>
+      <aside class="sidebar">
+        <!-- Replace with AdSense 250x250 -->
+        <div class="ad-banner sidebar">📢 Ad — 250×250</div>
+        <div class="sidebar-section">
+          <div class="sidebar-title">Stats</div>
+          <div class="stat-row"><span>Total designs</span><span id="sb-total">—</span></div>
+          <div class="stat-row"><span>Downloads</span><span id="sb-downloads">—</span></div>
+          <div class="stat-row"><span>Categories</span><span>4</span></div>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-title">Popular tags</div>
+          <div class="tag-cloud" id="tag-cloud"></div>
+        </div>
+        <!-- Replace with AdSense 250x250 -->
+        <div class="ad-banner sidebar">📢 Ad — 250×250</div>
+      </aside>
+    </div>
+    <!-- Replace with AdSense footer banner -->
+    <div class="ad-banner footer-ad">📢 Footer Advertisement — 728×90</div>
+  </div>
+  <footer>&copy; 2025 DesignDrop — Free Graphics &amp; Illustrations</footer>
+</div>
+
+<!-- ══ MODAL ══ -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-inner">
+      <button class="btn-close-modal" onclick="closeModalDirect()">✕</button>
+      <div class="modal-img" id="modal-img-wrap"></div>
+      <div class="modal-body">
+        <h2 class="modal-title" id="modal-title"></h2>
+        <p class="modal-desc" id="modal-desc"></p>
+        <div class="modal-tags" id="modal-tags"></div>
+        <div class="modal-footer">
+          <div class="modal-meta" id="modal-meta"></div>
+          <button class="btn-dl" onclick="downloadDesign()">⬇ Free Download</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ADMIN LOGIN ══ -->
+<div id="view-login" class="view">
+  <div class="login-screen">
+    <div class="login-card">
+      <div style="font-size:2rem;margin-bottom:0.75rem;">🔐</div>
+      <h2>Admin Login</h2>
+      <p>Enter your credentials to manage designs.</p>
+      <input type="text" class="login-input" placeholder="Username" id="login-user">
+      <input type="password" class="login-input" placeholder="Password" id="login-pass" onkeydown="if(event.key==='Enter')doLogin()">
+      <button class="btn-login" onclick="doLogin()">Sign In</button>
+      <div class="login-error" id="login-error">Incorrect credentials. Try again.</div>
+      <p style="margin-top:1rem;"><span class="nav-link" onclick="showPublic()">← Back to site</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ADMIN PANEL ══ -->
+<div id="view-admin" class="view">
+  <nav>
+    <div class="logo">Design<span>Drop</span> <span style="font-size:12px;font-family:Inter;color:var(--text-muted);font-weight:400;">/ Admin</span></div>
+    <div class="nav-right">
+      <span class="nav-link" onclick="showPublic()">← View site</span>
+      <button class="btn-admin" onclick="logout()">Log out</button>
+    </div>
+  </nav>
+  <div class="admin-wrap">
+    <div class="stats-grid">
+      <div class="stat-card"><div class="s-label">Total Designs</div><div class="s-value" id="adm-total">—</div></div>
+      <div class="stat-card"><div class="s-label">Total Downloads</div><div class="s-value" id="adm-dls">—</div></div>
+      <div class="stat-card"><div class="s-label">Storage</div><div class="s-value" style="font-size:1rem;padding-top:6px;">Cloudinary ✓</div></div>
+    </div>
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="switchAdminTab('upload',this)">Upload New Design</button>
+      <button class="admin-tab" onclick="switchAdminTab('manage',this)">Manage Designs</button>
+    </div>
+
+    <div id="tab-upload">
+      <div class="upload-form">
+        <div class="form-group full" style="margin-bottom:1.25rem;">
+          <label>Preview Image * (JPG, PNG, SVG)</label>
+          <div class="drop-zone" onclick="document.getElementById('img-input').click()">
+            <div class="dz-icon">🖼</div>
+            <strong>Click to choose preview image</strong>
+            <p>This is the thumbnail visitors will see in the gallery</p>
+            <img class="preview-thumb" id="preview-thumb" alt="Preview">
+          </div>
+          <input type="file" id="img-input" accept="image/*" style="display:none" onchange="previewImage(this)">
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Design Title *</label>
+            <input type="text" id="f-title" placeholder="e.g. Abstract Wave Set">
+          </div>
+          <div class="form-group">
+            <label>Category *</label>
+            <select id="f-cat">
+              <option value="illustration">Illustration</option>
+              <option value="graphic">Graphic</option>
+              <option value="icon">Icon</option>
+              <option value="abstract">Abstract</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>Description</label>
+            <textarea id="f-desc" rows="3" placeholder="Describe this design asset…"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Tags (comma-separated)</label>
+            <input type="text" id="f-tags" placeholder="vector, colorful, nature">
+          </div>
+          <div class="form-group">
+            <label>Download File * (ZIP, PDF, AI, PNG…)</label>
+            <input type="file" id="f-file">
+          </div>
+        </div>
+        <div class="progress-wrap" id="progress-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+        <div class="upload-status" id="upload-status"></div>
+        <button class="btn-submit" id="btn-publish" onclick="uploadDesign()">Publish Design ↗</button>
+      </div>
+    </div>
+
+    <div id="tab-manage" style="display:none;">
+      <div class="manage-table">
+        <table>
+          <thead>
+            <tr><th>Preview</th><th>Title</th><th>Category</th><th>Downloads</th><th>Date</th><th>Action</th></tr>
+          </thead>
+          <tbody id="manage-tbody">
+            <tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:2rem;">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+// ══ CONFIG ══
+const CLOUDINARY_CLOUD = 'dlq5xhxop';
+const CLOUDINARY_PRESET = 'vidhgnck';
+const ADMIN_USER = 'admin';
+const ADMIN_PASS = 'design2024';
+
+// ══ FIREBASE ══
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, orderBy, increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const app = initializeApp({
+  apiKey: "AIzaSyBsLrJMAUdXmcXuzytbxKIexiGG6yscpaM",
+  authDomain: "designdrop-97fd8.firebaseapp.com",
+  projectId: "designdrop-97fd8",
+  messagingSenderId: "66176019365",
+  appId: "1:66176019365:web:dc5bec5a7bac497767d64c"
+});
+const db = getFirestore(app);
+
+const EMOJIS = { illustration:'🎨', graphic:'✏️', icon:'⚡', abstract:'🌀' };
+let allDesigns = [];
+let currentDesign = null;
+let currentFilter = 'all';
+
+// ══ CLOUDINARY UPLOAD ══
+async function cloudinaryUpload(file, folder, onProgress) {
+  const fd = new FormData();
+  fd.append('file', file);
+  fd.append('upload_preset', CLOUDINARY_PRESET);
+  fd.append('folder', folder);
+
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/auto/upload`);
+    xhr.upload.onprogress = e => { if (e.lengthComputable) onProgress(e.loaded / e.total); };
+    xhr.onload = () => {
+      if (xhr.status === 200) resolve(JSON.parse(xhr.responseText));
+      else reject(new Error('Upload failed: ' + xhr.responseText));
+    };
+    xhr.onerror = () => reject(new Error('Network error'));
+    xhr.send(fd);
+  });
+}
+
+// ══ VIEWS ══
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+window.showPublic = () => { showView('view-public'); loadDesigns(); };
+window.showAdminLogin = () => showView('view-login');
+window.goHome = () => { showView('view-public'); loadDesigns(); };
+window.scrollToGallery = () => document.getElementById('gallery-anchor').scrollIntoView({ behavior:'smooth' });
+window.logout = () => showView('view-public');
+
+// ══ AUTH ══
+window.doLogin = () => {
+  const u = document.getElementById('login-user').value.trim();
+  const p = document.getElementById('login-pass').value;
+  if (u === ADMIN_USER && p === ADMIN_PASS) {
+    document.getElementById('login-error').style.display = 'none';
+    showView('view-admin');
+    refreshAdmin();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+};
+
+// ══ LOAD FROM FIRESTORE ══
+async function loadDesigns() {
+  document.getElementById('loading-state').style.display = 'block';
+  document.getElementById('design-grid').innerHTML = '';
+  document.getElementById('empty-state').style.display = 'none';
+  try {
+    const q = query(collection(db, 'designs'), orderBy('createdAt', 'desc'));
+    const snap = await getDocs(q);
+    allDesigns = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    document.getElementById('loading-state').style.display = 'none';
+    renderGrid();
+    updateSidebar();
+  } catch(e) {
+    document.getElementById('loading-state').innerHTML = `<p style="color:var(--danger)">Failed to load designs. Make sure Firestore rules are published.<br><small>${e.message}</small></p>`;
+  }
+}
+
+// ══ GALLERY ══
+function renderGrid() {
+  const search = (document.getElementById('search-input').value || '').toLowerCase();
+  const filtered = allDesigns.filter(d => {
+    const matchCat = currentFilter === 'all' || d.category === currentFilter;
+    const matchSearch = !search || d.title.toLowerCase().includes(search) ||
+      (d.desc||'').toLowerCase().includes(search) ||
+      (d.tags||[]).some(t => t.toLowerCase().includes(search));
+    return matchCat && matchSearch;
+  });
+  const grid = document.getElementById('design-grid');
+  const empty = document.getElementById('empty-state');
+  if (!filtered.length) { grid.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+  grid.innerHTML = filtered.map(d => `
+    <div class="design-card" onclick="openModal('${d.id}')">
+      <div class="card-thumb">
+        ${d.imageUrl ? `<img src="${d.imageUrl}" alt="${d.title}" loading="lazy">` : `<span class="no-img">${EMOJIS[d.category]||'🎨'}</span>`}
+        <div class="card-overlay"><button class="btn-preview">Preview</button></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">${d.title}</div>
+        <div class="card-meta">
+          <span class="card-tag">${d.category}</span>
+          <span class="card-dl-count">⬇ ${d.downloads||0}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function updateSidebar() {
+  document.getElementById('sb-total').textContent = allDesigns.length;
+  document.getElementById('sb-downloads').textContent = allDesigns.reduce((s,d)=>s+(d.downloads||0),0);
+  const tagCounts = {};
+  allDesigns.flatMap(d=>d.tags||[]).forEach(t=>tagCounts[t]=(tagCounts[t]||0)+1);
+  const top = Object.entries(tagCounts).sort((a,b)=>b[1]-a[1]).slice(0,12).map(x=>x[0]);
+  document.getElementById('tag-cloud').innerHTML = top.map(t=>
+    `<span class="cloud-tag" onclick="setTagFilter('${t}')">${t}</span>`
+  ).join('');
+}
+
+window.filterDesigns = renderGrid;
+window.setFilter = (cat, btn) => {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+};
+window.setTagFilter = tag => {
+  document.getElementById('search-input').value = tag;
+  renderGrid();
+  window.scrollToGallery();
+};
+
+// ══ MODAL ══
+window.openModal = id => {
+  const d = allDesigns.find(x=>x.id===id);
+  if (!d) return;
+  currentDesign = d;
+  document.getElementById('modal-img-wrap').innerHTML = d.imageUrl
+    ? `<img src="${d.imageUrl}" alt="${d.title}">`
+    : `<div class="no-img">${EMOJIS[d.category]||'🎨'}</div>`;
+  document.getElementById('modal-title').textContent = d.title;
+  document.getElementById('modal-desc').textContent = d.desc || 'No description provided.';
+  document.getElementById('modal-meta').textContent = `${d.downloads||0} downloads`;
+  document.getElementById('modal-tags').innerHTML = (d.tags||[]).map(t=>`<span class="card-tag">${t}</span>`).join('');
+  document.getElementById('modal-overlay').classList.add('open');
+};
+window.closeModal = e => { if(e.target===document.getElementById('modal-overlay')) closeModalDirect(); };
+window.closeModalDirect = () => document.getElementById('modal-overlay').classList.remove('open');
+
+window.downloadDesign = async () => {
+  if (!currentDesign) return;
+  try {
+    await updateDoc(doc(db,'designs',currentDesign.id), { downloads: increment(1) });
+    const local = allDesigns.find(x=>x.id===currentDesign.id);
+    if (local) local.downloads = (local.downloads||0)+1;
+    updateSidebar();
+  } catch(e) { console.warn('count update failed', e); }
+  if (currentDesign.fileUrl) {
+    const a = document.createElement('a');
+    a.href = currentDesign.fileUrl;
+    a.target = '_blank';
+    a.download = currentDesign.fileName || currentDesign.title;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    showToast('Download started! ✓');
+  } else {
+    showToast('No file attached to this design.');
+  }
+  closeModalDirect();
+  renderGrid();
+};
+
+// ══ ADMIN ══
+window.switchAdminTab = (tab, btn) => {
+  document.querySelectorAll('.admin-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-upload').style.display = tab==='upload' ? 'block' : 'none';
+  document.getElementById('tab-manage').style.display = tab==='manage' ? 'block' : 'none';
+  if (tab==='manage') renderManage();
+};
+
+window.previewImage = input => {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = document.getElementById('preview-thumb');
+    img.src = e.target.result;
+    img.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+};
+
+function setProgress(pct) { document.getElementById('progress-bar').style.width = pct + '%'; }
+function setStatus(msg) { document.getElementById('upload-status').textContent = msg; }
+
+window.uploadDesign = async () => {
+  const title = document.getElementById('f-title').value.trim();
+  const cat = document.getElementById('f-cat').value;
+  const desc = document.getElementById('f-desc').value.trim();
+  const tags = document.getElementById('f-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const imgFile = document.getElementById('img-input').files[0];
+  const dlFile = document.getElementById('f-file').files[0];
+
+  if (!title) { showToast('Please enter a title.'); return; }
+  if (!imgFile) { showToast('Please select a preview image.'); return; }
+  if (!dlFile) { showToast('Please select a download file.'); return; }
+
+  const btn = document.getElementById('btn-publish');
+  btn.disabled = true;
+  btn.textContent = 'Uploading…';
+  document.getElementById('progress-wrap').style.display = 'block';
+
+  try {
+    setStatus('Uploading preview image to Cloudinary…');
+    const imgRes = await cloudinaryUpload(imgFile, 'designdrop/previews', p => setProgress(p * 50));
+    const imageUrl = imgRes.secure_url;
+    const imagePublicId = imgRes.public_id;
+
+    setStatus('Uploading design file to Cloudinary…');
+    const fileRes = await cloudinaryUpload(dlFile, 'designdrop/files', p => setProgress(50 + p * 45));
+    const fileUrl = fileRes.secure_url;
+    const filePublicId = fileRes.public_id;
+
+    setStatus('Saving to database…');
+    setProgress(98);
+
+    await addDoc(collection(db, 'designs'), {
+      title, category: cat, desc, tags,
+      imageUrl, imagePublicId,
+      fileUrl, filePublicId,
+      fileName: dlFile.name,
+      downloads: 0,
+      createdAt: new Date().toISOString(),
+      date: new Date().toLocaleDateString()
+    });
+
+    setProgress(100);
+    setStatus('✓ Published successfully!');
+    showToast('Design published! ✓');
+    resetForm();
+    await loadDesigns();
+    refreshAdmin();
+  } catch(e) {
+    console.error(e);
+    showToast('Upload failed: ' + e.message);
+    setStatus('❌ Upload failed. See console for details.');
+    btn.disabled = false;
+    btn.textContent = 'Publish Design ↗';
+  }
+};
+
+function resetForm() {
+  ['f-title','f-desc','f-tags'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('img-input').value = '';
+  document.getElementById('f-file').value = '';
+  document.getElementById('preview-thumb').style.display = 'none';
+  document.getElementById('progress-wrap').style.display = 'none';
+  document.getElementById('progress-bar').style.width = '0%';
+  document.getElementById('upload-status').textContent = '';
+  const btn = document.getElementById('btn-publish');
+  btn.disabled = false;
+  btn.textContent = 'Publish Design ↗';
+}
+
+window.deleteDesign = async id => {
+  if (!confirm('Delete this design permanently?')) return;
+  try {
+    await deleteDoc(doc(db,'designs',id));
+    allDesigns = allDesigns.filter(d=>d.id!==id);
+    renderManage();
+    renderGrid();
+    updateSidebar();
+    refreshAdmin();
+    showToast('Design deleted.');
+  } catch(e) { showToast('Delete failed: ' + e.message); }
+};
+
+function renderManage() {
+  const tbody = document.getElementById('manage-tbody');
+  if (!allDesigns.length) {
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:2rem;">No designs yet. Upload your first one!</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = allDesigns.map(d => `
+    <tr>
+      <td>${d.imageUrl ? `<img class="thumb-sm" src="${d.imageUrl}" alt="">` : `<div class="thumb-sm-box">${EMOJIS[d.category]||'🎨'}</div>`}</td>
+      <td style="font-weight:500">${d.title}</td>
+      <td><span class="card-tag">${d.category}</span></td>
+      <td>${d.downloads||0}</td>
+      <td style="color:var(--text-muted)">${d.date||''}</td>
+      <td><button class="btn-danger" onclick="deleteDesign('${d.id}')">Delete</button></td>
+    </tr>
+  `).join('');
+}
+
+async function refreshAdmin() {
+  document.getElementById('adm-total').textContent = allDesigns.length;
+  document.getElementById('adm-dls').textContent = allDesigns.reduce((s,d)=>s+(d.downloads||0),0);
+}
+
+window.showToast = msg => {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+};
+
+// ══ INIT ══
+loadDesigns();
+</script>
+</body>
+</html>
