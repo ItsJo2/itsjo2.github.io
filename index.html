@@ -171,7 +171,7 @@
     <div class="logo" onclick="goHome()">Design<span>Drop</span></div>
     <div class="nav-right">
       <span class="nav-link" onclick="scrollToGallery()">Browse</span>
-      <button class="btn-admin" onclick="showAdminLogin()">Admin ↗</button>
+
     </div>
   </nav>
 
@@ -675,7 +675,12 @@ window.showToast = msg => {
 };
 
 // ══ INIT ══
-loadDesigns();
+// Secret admin URL: add ?admin to the URL to open login
+if (window.location.search.includes('admin')) {
+  showView('view-login');
+} else {
+  loadDesigns();
+}
 </script>
 </body>
 </html>
