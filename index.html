@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="monetag" content="5ff18a96fa4cdf723d84cd3e9869aeab">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DesignDrop — Free Graphics & Illustrations</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -195,10 +196,10 @@
         <div class="filters">
           <span class="filter-label">Filter:</span>
           <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
-          <button class="filter-btn" onclick="setFilter('Cars',this)">Cars</button>
-          <button class="filter-btn" onclick="setFilter('Anime',this)">Anime</button>
-          <button class="filter-btn" onclick="setFilter('Typography',this)">Typography</button>
-          <button class="filter-btn" onclick="setFilter('Streetwear',this)">Streetwear</button>
+          <button class="filter-btn" onclick="setFilter('illustration',this)">Illustrations</button>
+          <button class="filter-btn" onclick="setFilter('graphic',this)">Graphics</button>
+          <button class="filter-btn" onclick="setFilter('icon',this)">Icons</button>
+          <button class="filter-btn" onclick="setFilter('abstract',this)">Abstract</button>
         </div>
         <div id="design-grid" class="design-grid"></div>
         <div id="loading-state" class="loading-state"><div class="spinner"></div><br>Loading designs…</div>
@@ -302,10 +303,10 @@
           <div class="form-group">
             <label>Category *</label>
             <select id="f-cat">
-              <option value="Cars">Cars</option>
-              <option value="Anime">Anime</option>
-              <option value="Typography">Typography</option>
-              <option value="Streetwear">Streetwear</option>
+              <option value="illustration">Illustration</option>
+              <option value="graphic">Graphic</option>
+              <option value="icon">Icon</option>
+              <option value="abstract">Abstract</option>
             </select>
           </div>
           <div class="form-group full">
