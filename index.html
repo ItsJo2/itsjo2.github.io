@@ -3,9 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DesignDrop — Free Graphics & Illustrations</title>
-<meta id="meta-desc" name="description" content="Download free graphics and illustrations — forever free.">
+<title>Drop Designs — Free Graphics & Illustrations for Everyone</title>
+<meta id="meta-desc" name="description" content="Download 100+ free graphics, illustrations, anime art, car designs, typography and streetwear designs on Drop Designs. Free for personal and commercial use.">
 <meta id="meta-keywords" name="keywords" content="free graphics, illustrations, design assets">
+<meta property="og:title" content="Drop Designs — Free Graphics & Illustrations">
+<meta property="og:url" id="og-url" content="https://www.dropdesigns.net">
+<link rel="canonical" id="canonical-link" href="https://www.dropdesigns.net">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Drop Designs",
+  "url": "https://www.dropdesigns.net",
+  "description": "Free graphics and illustrations for everyone",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.dropdesigns.net/?search={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
@@ -142,10 +159,70 @@
   .manage-table tr:last-child td { border-bottom: none; }
   .manage-table img.thumb-sm { width: 48px; height: 36px; object-fit: cover; border-radius: 4px; }
   .thumb-sm-box { width: 48px; height: 36px; border-radius: 4px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
   .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
   .stat-card .s-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
   .stat-card .s-value { font-size: 1.8rem; font-weight: 600; margin-top: 4px; }
+
+  /* NEWSLETTER SECTION */
+  .newsletter-section {
+    background: var(--accent);
+    color: #fff;
+    padding: 3rem 2rem;
+    text-align: center;
+    margin: 2rem 0 0;
+  }
+  .newsletter-section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.5px;
+  }
+  .newsletter-section p {
+    font-size: 14px;
+    opacity: 0.75;
+    margin-bottom: 1.5rem;
+  }
+  .newsletter-form {
+    display: flex;
+    max-width: 460px;
+    margin: 0 auto;
+    gap: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+  .newsletter-form input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0.85rem 1.25rem;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+  }
+  .newsletter-form input::placeholder { color: rgba(255,255,255,0.5); }
+  .newsletter-form button {
+    border: none;
+    background: #fff;
+    color: var(--accent);
+    padding: 0.85rem 1.5rem;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+  }
+  .newsletter-form button:hover { opacity: 0.85; }
+  .newsletter-success {
+    font-size: 14px;
+    color: #fff;
+    margin-top: 1rem;
+    display: none;
+    opacity: 0.9;
+  }
 
   /* AI BUTTON */
   .btn-ai { background: var(--ai-color); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'Inter', sans-serif; display: inline-flex; align-items: center; gap: 7px; transition: opacity 0.15s; margin-top: 0.75rem; }
@@ -189,6 +266,47 @@
 
   @media (max-width: 1300px) { .outer-layout { grid-template-columns: 1fr; } .left-ads, .right-ads { display: none; } }
   @media (max-width: 768px) { .content-with-sidebar { grid-template-columns: 1fr; } .sidebar { position: static; } .form-grid { grid-template-columns: 1fr; } .stats-grid { grid-template-columns: 1fr 1fr; } .design-page-grid { grid-template-columns: 1fr; } }
+
+  /* SHARE SECTION */
+  .share-section {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .share-title {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+  }
+  .share-buttons {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+  .share-btn:hover { opacity: 0.85; }
+  .share-btn.pinterest { background: #E60023; }
+  .share-btn.twitter { background: #000000; }
+  .share-btn.facebook { background: #1877F2; }
+  .share-btn.whatsapp { background: #25D366; }
+  .share-btn.copy-link { background: var(--accent); }
 </style>
 </head>
 <body>
@@ -196,9 +314,12 @@
 <!-- PUBLIC SITE -->
 <div id="view-public" class="view active">
   <nav>
-    <div class="logo" onclick="goHome()">Design<span>Drop</span></div>
+    <div class="logo" onclick="goHome()">Drop<span>Designs</span></div>
     <div class="nav-right">
       <span class="nav-link" onclick="scrollToGallery()">Browse</span>
+      <span class="nav-link" onclick="showView('view-about')">About</span>
+      <span class="nav-link" onclick="showView('view-privacy')">Privacy</span>
+      <span class="nav-link" onclick="showView('view-terms')">Terms</span>
     </div>
   </nav>
   <div style="display:flex;justify-content:center;padding:1rem 1rem 0;">
@@ -211,7 +332,7 @@
     <h1>Free graphics &amp;<br><em>illustrations</em> for everyone</h1>
     <p>Download high-quality design assets at no cost — forever free.</p>
     <div class="search-wrap">
-      <input type="text" id="search-input" placeholder="Search illustrations, graphics…" oninput="filterDesigns()">
+      <input type="text" id="search-input" placeholder="Search illustrations, graphics…" oninput="filterDesigns()" onkeydown="if(event.key==='Enter'){currentPage=1;filterDesigns();}">
       <button class="btn-search">Search</button>
     </div>
   </section>
@@ -239,9 +360,14 @@
               <button class="filter-btn" onclick="setFilter('Streetwear',this)">Streetwear</button>
               <button class="filter-btn" onclick="setFilter('Cute',this)">Cute</button>
             </div>
+            <div id="results-count" style="font-size:13px;color:var(--text-muted);margin-bottom:1rem;min-height:20px;"></div>
             <div id="design-grid" class="design-grid"></div>
             <div id="loading-state" class="loading-state"><div class="spinner"></div><br>Loading designs…</div>
-            <div id="empty-state" class="empty-state" style="display:none;"><div style="font-size:2rem;">🔍</div><p>No designs found.</p></div>
+            <div id="empty-state" class="empty-state" style="display:none;">
+              <div style="font-size:2.5rem;">🔍</div>
+              <p style="font-weight:500;margin-top:0.75rem;">No designs found</p>
+              <p style="margin-top:0.25rem;">Try a different keyword or <span style="cursor:pointer;text-decoration:underline;color:var(--text-primary)" onclick="document.getElementById('search-input').value='';setFilter('all',document.querySelector('.filter-btn'));filterDesigns()">browse all designs</span></p>
+            </div>
             <div class="pagination" id="pagination"></div>
             <div class="page-info" id="page-info"></div>
           </div>
@@ -256,6 +382,10 @@
               <div class="sidebar-title">Popular tags</div>
               <div class="tag-cloud" id="tag-cloud"></div>
             </div>
+            <a class="affiliate-ad" href="YOUR_ENVATO_AFFILIATE_LINK" target="_blank" rel="noopener sponsored" style="margin-bottom:1rem;display:block;">
+              <img src="https://placehold.co/260x160/ff6b35/FFFFFF?text=Envato+Elements%0AUnlimited+Design+Assets" alt="Envato Elements - Unlimited Design Assets" style="width:100%;display:block;">
+              <div class="affiliate-ad-label">Sponsored</div>
+            </a>
             <a class="affiliate-ad" href="my.hosting.com/aff/6922df49ccf445bd27f373177f898a1419e59499" target="_blank" rel="noopener" style="margin-bottom:1rem;display:block;">
               <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_14_57_43_y5emne.png" alt="Sponsored">
               <div class="affiliate-ad-label">Sponsored</div>
@@ -282,13 +412,40 @@
       <div class="affiliate-ad-label">Sponsored</div>
     </a>
   </div>
-  <footer>&copy; 2025 DesignDrop — Free Graphics &amp; Illustrations</footer>
+  <div style="max-width:900px;margin:2rem auto;padding:0 1rem;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;">
+    <a class="affiliate-ad" href="YOUR_ENVATO_AFFILIATE_LINK" target="_blank" rel="noopener sponsored" style="flex:1;min-width:200px;max-width:280px;">
+      <img src="https://placehold.co/280x120/ff6b35/FFFFFF?text=Envato+Elements" alt="Envato Elements" style="width:100%;display:block;">
+      <div class="affiliate-ad-label">Sponsored</div>
+    </a>
+    <a class="affiliate-ad" href="YOUR_CREATIVE_FABRICA_LINK" target="_blank" rel="noopener sponsored" style="flex:1;min-width:200px;max-width:280px;">
+      <img src="https://placehold.co/280x120/7c3aed/FFFFFF?text=Creative+Fabrica" alt="Creative Fabrica" style="width:100%;display:block;">
+      <div class="affiliate-ad-label">Sponsored</div>
+    </a>
+    <a class="affiliate-ad" href="YOUR_CANVA_AFFILIATE_LINK" target="_blank" rel="noopener sponsored" style="flex:1;min-width:200px;max-width:280px;">
+      <img src="https://placehold.co/280x120/00c4cc/FFFFFF?text=Canva+Pro" alt="Canva Pro" style="width:100%;display:block;">
+      <div class="affiliate-ad-label">Sponsored</div>
+    </a>
+  </div>
+  <!-- Newsletter Signup -->
+  <div class="newsletter-section">
+    <h2>Get new designs in your inbox</h2>
+    <p>We drop new free graphics every week. Be the first to know.</p>
+    <div class="newsletter-form">
+      <input type="email" id="newsletter-email" placeholder="Your email address…">
+      <button onclick="subscribeNewsletter()">Notify Me →</button>
+    </div>
+    <div class="newsletter-success" id="newsletter-success">✓ You're in! We'll notify you when new designs drop.</div>
+  </div>
+  <footer>
+    <p style="font-size:11px;color:var(--text-muted);margin-bottom:0.5rem;">This site contains affiliate links. We may earn a commission if you make a purchase — at no extra cost to you.</p>
+    &copy; 2025 Drop Designs — Free Graphics &amp; Illustrations
+  </footer>
 </div>
 
 <!-- DESIGN PAGE (own URL) -->
 <div id="view-design" class="view">
   <nav>
-    <div class="logo" onclick="goHome()">Design<span>Drop</span></div>
+    <div class="logo" onclick="goHome()">Drop<span>Designs</span></div>
     <div class="nav-right">
       <span class="nav-link" onclick="goHome()">← Back to gallery</span>
     </div>
@@ -322,6 +479,12 @@
             <div id="dp-tags" class="dp-tags"></div>
             <div id="dp-meta" class="dp-meta"></div>
             <button class="btn-dl-big" onclick="downloadCurrentDesign()">⬇ Free Download</button>
+            <div class="share-section">
+              <div class="share-title">Share this design</div>
+              <div class="share-buttons" id="share-buttons">
+                <!-- populated by JS -->
+              </div>
+            </div>
           </div>
         </div>
         <!-- Related designs -->
@@ -348,7 +511,34 @@
       <div class="affiliate-ad-label">Sponsored</div>
     </a>
   </div>
-  <footer>&copy; 2025 DesignDrop — Free Graphics &amp; Illustrations</footer>
+  <div style="max-width:900px;margin:2rem auto;padding:0 1rem;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;">
+    <a class="affiliate-ad" href="YOUR_ENVATO_AFFILIATE_LINK" target="_blank" rel="noopener sponsored" style="flex:1;min-width:200px;max-width:280px;">
+      <img src="https://placehold.co/280x120/ff6b35/FFFFFF?text=Envato+Elements" alt="Envato Elements" style="width:100%;display:block;">
+      <div class="affiliate-ad-label">Sponsored</div>
+    </a>
+    <a class="affiliate-ad" href="YOUR_CREATIVE_FABRICA_LINK" target="_blank" rel="noopener sponsored" style="flex:1;min-width:200px;max-width:280px;">
+      <img src="https://placehold.co/280x120/7c3aed/FFFFFF?text=Creative+Fabrica" alt="Creative Fabrica" style="width:100%;display:block;">
+      <div class="affiliate-ad-label">Sponsored</div>
+    </a>
+    <a class="affiliate-ad" href="YOUR_CANVA_AFFILIATE_LINK" target="_blank" rel="noopener sponsored" style="flex:1;min-width:200px;max-width:280px;">
+      <img src="https://placehold.co/280x120/00c4cc/FFFFFF?text=Canva+Pro" alt="Canva Pro" style="width:100%;display:block;">
+      <div class="affiliate-ad-label">Sponsored</div>
+    </a>
+  </div>
+  <!-- Newsletter Signup -->
+  <div class="newsletter-section">
+    <h2>Get new designs in your inbox</h2>
+    <p>We drop new free graphics every week. Be the first to know.</p>
+    <div class="newsletter-form">
+      <input type="email" id="newsletter-email" placeholder="Your email address…">
+      <button onclick="subscribeNewsletter()">Notify Me →</button>
+    </div>
+    <div class="newsletter-success" id="newsletter-success">✓ You're in! We'll notify you when new designs drop.</div>
+  </div>
+  <footer>
+    <p style="font-size:11px;color:var(--text-muted);margin-bottom:0.5rem;">This site contains affiliate links. We may earn a commission if you make a purchase — at no extra cost to you.</p>
+    &copy; 2025 Drop Designs — Free Graphics &amp; Illustrations
+  </footer>
 </div>
 
 <!-- MODAL -->
@@ -391,7 +581,7 @@
 <!-- ADMIN PANEL -->
 <div id="view-admin" class="view">
   <nav>
-    <div class="logo">Design<span>Drop</span> <span style="font-size:12px;font-family:Inter;color:var(--text-muted);font-weight:400;">/ Admin</span></div>
+    <div class="logo">Drop<span>Designs</span> <span style="font-size:12px;font-family:Inter;color:var(--text-muted);font-weight:400;">/ Admin</span></div>
     <div class="nav-right">
       <span class="nav-link" onclick="showPublic()">← View site</span>
       <button class="btn-admin" onclick="logout()">Log out</button>
@@ -402,6 +592,10 @@
       <div class="stat-card"><div class="s-label">Total Designs</div><div class="s-value" id="adm-total">—</div></div>
       <div class="stat-card"><div class="s-label">Total Downloads</div><div class="s-value" id="adm-dls">—</div></div>
       <div class="stat-card"><div class="s-label">Storage</div><div class="s-value" style="font-size:1rem;padding-top:6px;">Cloudinary ✓</div></div>
+      <div class="stat-card">
+        <div class="s-label">Subscribers</div>
+        <div class="s-value" id="adm-subs">—</div>
+      </div>
     </div>
     <div class="admin-tabs">
       <button class="admin-tab active" onclick="switchAdminTab('upload',this)">Upload New Design</button>
@@ -510,6 +704,260 @@
   </div>
 </div>
 
+<!-- ABOUT PAGE -->
+<div id="view-about" class="view">
+  <nav>
+    <div class="logo" onclick="goHome()">Drop<span>Designs</span></div>
+    <div class="nav-right">
+      <span class="nav-link" onclick="goHome()">← Back to gallery</span>
+    </div>
+  </nav>
+  <div style="display:flex;justify-content:center;padding:1rem 1rem 0;">
+    <a class="affiliate-ad" href="https://www.hostinger.com/ae?REFERRALCODE=ROUJIHEDLE8T" target="_blank" rel="noopener" style="width:100%;max-width:728px;">
+      <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781898802/2d4a44201355603.6672fa0a04c20_l9wbrx.png" alt="Sponsored" style="width:100%;height:auto;display:block;">
+      <div class="affiliate-ad-label">Sponsored</div>
+    </a>
+  </div>
+  <div class="outer-layout">
+    <div class="left-ads">
+      <a class="affiliate-ad" href="https://referral.bluehost.com/jihedlajili55!bd7fed8ba3!a" target="_blank" rel="noopener">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891029/0_H-HZMiDSHvq3YnH5_ajkzd7.png" alt="Sponsored">
+        <div class="affiliate-ad-label">Sponsored</div>
+      </a>
+      <a class="affiliate-ad" href="https://www.hostinger.com/ae?REFERRALCODE=ROUJIHEDLE8T" target="_blank" rel="noopener">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781890763/e9f8de201355603.6672fa0a045ea_pptvuf.png" alt="Sponsored">
+        <div class="affiliate-ad-label">Sponsored</div>
+      </a>
+    </div>
+    <div>
+      <div style="max-width:700px; margin:1rem auto 2rem; padding:2.5rem 2rem; background:var(--surface); border:1px solid var(--border); border-radius:16px;">
+        <a href="#" onclick="goHome(); return false;" style="font-family:'Inter',sans-serif; font-size:14px; color:var(--text-secondary); text-decoration:none; display:inline-block; margin-bottom:1.5rem; transition:color 0.15s;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-secondary)'">← Back to gallery</a>
+        <h1 style="font-family:'DM Serif Display',serif; font-size:2.2rem; color:var(--text-primary); margin-bottom:1.5rem; font-weight:normal; line-height:1.2;">About Drop Designs</h1>
+        <p style="font-family:'Inter',sans-serif; font-size:15px; line-height:1.6; color:var(--text-secondary); margin-bottom:1.25rem;">
+          Drop Designs is a curated platform offering high-quality, completely free graphics and illustrations for designers, developers, creators, and everyone in between.
+        </p>
+        <h2 style="font-family:'DM Serif Display',serif; font-size:1.6rem; color:var(--text-primary); margin-top:2rem; margin-bottom:1rem; font-weight:normal; line-height:1.3;">Free for Personal and Commercial Use</h2>
+        <p style="font-family:'Inter',sans-serif; font-size:15px; line-height:1.6; color:var(--text-secondary); margin-bottom:1.25rem;">
+          Every single asset available on Drop Designs is fully free to download and use in both personal and commercial projects. No attribution is required, though it is always appreciated! You are free to modify and adapt the designs to suit your needs.
+        </p>
+        <h2 style="font-family:'DM Serif Display',serif; font-size:1.6rem; color:var(--text-primary); margin-top:2rem; margin-bottom:1rem; font-weight:normal; line-height:1.3;">Independent Project</h2>
+        <p style="font-family:'Inter',sans-serif; font-size:15px; line-height:1.6; color:var(--text-secondary); margin-bottom:1.25rem;">
+          This platform is run completely independently. We rely on curated affiliate ads to support hosting, database storage, and continuing to produce/curate new free graphics for our wonderful community.
+        </p>
+        <h2 style="font-family:'DM Serif Display',serif; font-size:1.6rem; color:var(--text-primary); margin-top:2rem; margin-bottom:1rem; font-weight:normal; line-height:1.3;">Contact Us</h2>
+        <p style="font-family:'Inter',sans-serif; font-size:15px; line-height:1.6; color:var(--text-secondary); margin-bottom:1.25rem;">
+          We would love to hear your feedback, suggestions, or design requests! Feel free to reach out to us at: <a href="mailto:dropdesigns.contact@gmail.com" style="color:var(--accent); text-decoration:none; font-weight:500;">dropdesigns.contact@gmail.com</a>
+        </p>
+      </div>
+    </div>
+    <div class="right-ads">
+      <a class="affiliate-ad" href="https://vidiq.com/itsjo" target="_blank" rel="noopener">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_14_45_22_nxnkwi.png" alt="Sponsored">
+        <div class="affiliate-ad-label">Sponsored</div>
+      </a>
+      <a class="affiliate-ad" href="https://www.greengeeks.com/track/itsjo" target="_blank" rel="noopener">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_15_02_16_ff413p.png" alt="Sponsored">
+        <div class="affiliate-ad-label">Sponsored</div>
+      </a>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:center;margin-top:1.5rem;">
+    <a class="affiliate-ad" href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=151841" target="_blank" rel="noopener" style="width:100%;max-width:728px;">
+      <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1783176118/affiliate-french-summer-sales-2026-fr-728x90_h4t5jr.png" alt="Sponsored" style="width:100%;height:auto;display:block;">
+      <div class="affiliate-ad-label">Sponsored</div>
+    </a>
+  </div>
+  <!-- Newsletter Signup -->
+  <div class="newsletter-section">
+    <h2>Get new designs in your inbox</h2>
+    <p>We drop new free graphics every week. Be the first to know.</p>
+    <div class="newsletter-form">
+      <input type="email" id="newsletter-email" placeholder="Your email address…">
+      <button onclick="subscribeNewsletter()">Notify Me →</button>
+    </div>
+    <div class="newsletter-success" id="newsletter-success">✓ You're in! We'll notify you when new designs drop.</div>
+  </div>
+  <footer>
+    <p style="font-size:11px;color:var(--text-muted);margin-bottom:0.5rem;">This site contains affiliate links. We may earn a commission if you make a purchase — at no extra cost to you.</p>
+    &copy; 2025 Drop Designs — Free Graphics &amp; Illustrations
+  </footer>
+</div>
+
+<!-- PRIVACY POLICY PAGE -->
+<div id="view-privacy" class="view">
+  <nav>
+    <div class="logo" onclick="goHome()">Drop<span>Designs</span></div>
+    <div class="nav-right">
+      <span class="nav-link" onclick="goHome()">← Back to gallery</span>
+    </div>
+  </nav>
+  <div style="display:flex;justify-content:center;padding:1rem 1rem 0;">
+    <a class="affiliate-ad" href="https://www.hostinger.com/ae?REFERRALCODE=ROUJIHEDLE8T" target="_blank" rel="noopener" style="width:100%;max-width:728px;">
+      <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781898802/2d4a44201355603.6672fa0a04c20_l9wbrx.png" alt="Sponsored" style="width:100%;height:auto;display:block;">
+      <div class="affiliate-ad-label">Sponsored</div>
+    </a>
+  </div>
+  <div class="outer-layout">
+    <div class="left-ads">
+      <a class="affiliate-ad" href="https://referral.bluehost.com/jihedlajili55!bd7fed8ba3!a" target="_blank" rel="noopener">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891029/0_H-HZMiDSHvq3YnH5_ajkzd7.png" alt="Sponsored">
+        <div class="affiliate-ad-label">Sponsored</div>
+      </a>
+      <a class="affiliate-ad" href="https://www.hostinger.com/ae?REFERRALCODE=ROUJIHEDLE8T" target="_blank" rel="noopener">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781890763/e9f8de201355603.6672fa0a045ea_pptvuf.png" alt="Sponsored">
+        <div class="affiliate-ad-label">Sponsored</div>
+      </a>
+    </div>
+    <div>
+      <div style="max-width:700px; margin:1rem auto 2rem; padding:2.5rem 2rem; background:var(--surface); border:1px solid var(--border); border-radius:16px;">
+        <a href="#" onclick="goHome(); return false;" style="font-family:'Inter',sans-serif; font-size:14px; color:var(--text-secondary); text-decoration:none; display:inline-block; margin-bottom:1.5rem; transition:color 0.15s;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-secondary)'">← Back to gallery</a>
+        <h1 style="font-family:'DM Serif Display',serif; font-size:2.2rem; color:var(--text-primary); margin-bottom:1.5rem; font-weight:normal; line-height:1.2;">Privacy Policy</h1>
+        <p style="font-family:'Inter',sans-serif; font-size:15px; line-height:1.6; color:var(--text-secondary); margin-bottom:1.25rem;">
+          At Drop Designs, we respect your privacy. This document outlines how your data is handled on our platform.
+        </p>
+        <h2 style="font-family:'DM Serif Display',serif; font-size:1.6rem; color:var(--text-primary); margin-top:2rem; margin-bottom:1rem; font-weight:normal; line-height:1.3;">What Data is Collected</h2>
+        <p style="font-family:'Inter',sans-serif; font-size:15px; line-height:1.6; color:var(--text-secondary); margin-bottom:1.25rem;">
+          We do not collect any personally identifiable information from you when you browse, view, or download designs. We only gather anonymous and aggregated analytics (such as general page views and download count tracking) to optimize our service and see which designs are most popular.
+        </p>
+        <h2 style="font-family:'DM Serif Display',serif; font-size:1.6rem; color:var(--text-primary); margin-top:2rem; margin-bottom:1rem; font-weight:normal; line-height:1.3;">Use of Third-Party Services</h2>
+        <p style="font-family:'Inter',sans-serif; font-size:15px; line-height:1.6; color:var(--text-secondary); margin-bottom:1.25rem;">
+          We use industry-standard external services to help power our platform:
+        </p>
+        <ul style="font-family:'Inter',sans-serif; font-size:15px; line-height:1.6; color:var(--text-secondary); margin-bottom:1.25rem; padding-left:1.5rem; list-style-type:disc;">
+          <li style="margin-bottom:0.5rem;"><strong>Firebase:</strong> Used for database hosting, securely managing illustration records, and keeping download statistics.</li>
+          <li style="margin-bottom:0.5rem;"><strong>Cloudinary:</strong> Used for secure hosting and lightning-fast delivery of illustration preview images and source files.</li>
+          <li style="margin-bottom:0.5rem;"><strong>Affiliate Ad Partners:</strong> We feature advertisements from reputable hosts, security companies, and web partners to fund the site.</li>
+        </ul>
+        <h2 style="font-family:'DM Serif Display',serif; font-size:1.6rem; color:var(--text-primary); margin-top:2rem; margin-bottom:1rem; font-weight:normal; line-height:1.3;">Cookies Policy</h2>
+        <p style="font-family:'Inter',sans-serif; font-size:15px; line-height:1.6; color:var(--text-secondary); margin-bottom:1.25rem;">
+          Drop Designs may use cookies and local storage to save basic visitor preferences (such as your UI view options) and to ensure our partner affiliate ads are tracked correctly. You can disable cookies inside your web browser settings if you wish, though some features may behave differently.
+        </p>
+        <h2 style="font-family:'DM Serif Display',serif; font-size:1.6rem; color:var(--text-primary); margin-top:2rem; margin-bottom:1rem; font-weight:normal; line-height:1.3;">Questions & Contact</h2>
+        <p style="font-family:'Inter',sans-serif; font-size:15px; line-height:1.6; color:var(--text-secondary); margin-bottom:1.25rem;">
+          If you have any questions about this policy, please feel free to reach out to us at: <a href="mailto:dropdesigns.contact@gmail.com" style="color:var(--accent); text-decoration:none; font-weight:500;">dropdesigns.contact@gmail.com</a>
+        </p>
+      </div>
+    </div>
+    <div class="right-ads">
+      <a class="affiliate-ad" href="https://vidiq.com/itsjo" target="_blank" rel="noopener">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_14_45_22_nxnkwi.png" alt="Sponsored">
+        <div class="affiliate-ad-label">Sponsored</div>
+      </a>
+      <a class="affiliate-ad" href="https://www.greengeeks.com/track/itsjo" target="_blank" rel="noopener">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_15_02_16_ff413p.png" alt="Sponsored">
+        <div class="affiliate-ad-label">Sponsored</div>
+      </a>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:center;margin-top:1.5rem;">
+    <a class="affiliate-ad" href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=151841" target="_blank" rel="noopener" style="width:100%;max-width:728px;">
+      <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1783176118/affiliate-french-summer-sales-2026-fr-728x90_h4t5jr.png" alt="Sponsored" style="width:100%;height:auto;display:block;">
+      <div class="affiliate-ad-label">Sponsored</div>
+    </a>
+  </div>
+  <!-- Newsletter Signup -->
+  <div class="newsletter-section">
+    <h2>Get new designs in your inbox</h2>
+    <p>We drop new free graphics every week. Be the first to know.</p>
+    <div class="newsletter-form">
+      <input type="email" id="newsletter-email" placeholder="Your email address…">
+      <button onclick="subscribeNewsletter()">Notify Me →</button>
+    </div>
+    <div class="newsletter-success" id="newsletter-success">✓ You're in! We'll notify you when new designs drop.</div>
+  </div>
+  <footer>
+    <p style="font-size:11px;color:var(--text-muted);margin-bottom:0.5rem;">This site contains affiliate links. We may earn a commission if you make a purchase — at no extra cost to you.</p>
+    &copy; 2025 Drop Designs — Free Graphics &amp; Illustrations
+  </footer>
+</div>
+
+<!-- TERMS OF USE PAGE -->
+<div id="view-terms" class="view">
+  <nav>
+    <div class="logo" onclick="goHome()">Drop<span>Designs</span></div>
+    <div class="nav-right">
+      <span class="nav-link" onclick="goHome()">← Back to gallery</span>
+    </div>
+  </nav>
+  <div style="display:flex;justify-content:center;padding:1rem 1rem 0;">
+    <a class="affiliate-ad" href="https://www.hostinger.com/ae?REFERRALCODE=ROUJIHEDLE8T" target="_blank" rel="noopener" style="width:100%;max-width:728px;">
+      <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781898802/2d4a44201355603.6672fa0a04c20_l9wbrx.png" alt="Sponsored" style="width:100%;height:auto;display:block;">
+      <div class="affiliate-ad-label">Sponsored</div>
+    </a>
+  </div>
+  <div class="outer-layout">
+    <div class="left-ads">
+      <a class="affiliate-ad" href="https://referral.bluehost.com/jihedlajili55!bd7fed8ba3!a" target="_blank" rel="noopener">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891029/0_H-HZMiDSHvq3YnH5_ajkzd7.png" alt="Sponsored">
+        <div class="affiliate-ad-label">Sponsored</div>
+      </a>
+      <a class="affiliate-ad" href="https://www.hostinger.com/ae?REFERRALCODE=ROUJIHEDLE8T" target="_blank" rel="noopener">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781890763/e9f8de201355603.6672fa0a045ea_pptvuf.png" alt="Sponsored">
+        <div class="affiliate-ad-label">Sponsored</div>
+      </a>
+    </div>
+    <div>
+      <div style="max-width:700px; margin:1rem auto 2rem; padding:2.5rem 2rem; background:var(--surface); border:1px solid var(--border); border-radius:16px;">
+        <a href="#" onclick="goHome(); return false;" style="font-family:'Inter',sans-serif; font-size:14px; color:var(--text-secondary); text-decoration:none; display:inline-block; margin-bottom:1.5rem; transition:color 0.15s;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-secondary)'">← Back to gallery</a>
+        <h1 style="font-family:'DM Serif Display',serif; font-size:2.2rem; color:var(--text-primary); margin-bottom:1.5rem; font-weight:normal; line-height:1.2;">Terms of Use</h1>
+        <p style="font-family:'Inter',sans-serif; font-size:15px; line-height:1.6; color:var(--text-secondary); margin-bottom:1.25rem;">
+          By accessing or using Drop Designs, you agree to comply with and be bound by the following Terms of Use.
+        </p>
+        <h2 style="font-family:'DM Serif Display',serif; font-size:1.6rem; color:var(--text-primary); margin-top:2rem; margin-bottom:1rem; font-weight:normal; line-height:1.3;">Designs License & Usage</h2>
+        <p style="font-family:'Inter',sans-serif; font-size:15px; line-height:1.6; color:var(--text-secondary); margin-bottom:1.25rem;">
+          All graphics and illustrations uploaded to Drop Designs are licensed to be completely free for personal and commercial use. You are allowed to use them in templates, client work, web designs, marketing materials, and physical products.
+        </p>
+        <h2 style="font-family:'DM Serif Display',serif; font-size:1.6rem; color:var(--text-primary); margin-top:2rem; margin-bottom:1rem; font-weight:normal; line-height:1.3;">Forbidden Use (No Reselling)</h2>
+        <p style="font-family:'Inter',sans-serif; font-size:15px; line-height:1.6; color:var(--text-secondary); margin-bottom:1.25rem;">
+          You <strong>cannot</strong> resell or redistribute the design files as-is or in bundled formats on any competing marketplace or asset site. You cannot claim ownership of original source design files without significant modifications.
+        </p>
+        <h2 style="font-family:'DM Serif Display',serif; font-size:1.6rem; color:var(--text-primary); margin-top:2rem; margin-bottom:1rem; font-weight:normal; line-height:1.3;">Affiliate Links Disclosure</h2>
+        <p style="font-family:'Inter',sans-serif; font-size:15px; line-height:1.6; color:var(--text-secondary); margin-bottom:1.25rem;">
+          Drop Designs contains affiliate ad banners and sponsored referral links (e.g. Hostinger, Bluehost, NordVPN). If you purchase a product or subscription through these links, we may earn a small referral commission at no additional cost to you. This is how we fund and keep the platform 100% free.
+        </p>
+        <h2 style="font-family:'DM Serif Display',serif; font-size:1.6rem; color:var(--text-primary); margin-top:2rem; margin-bottom:1rem; font-weight:normal; line-height:1.3;">Disclaimer of Liability</h2>
+        <p style="font-family:'Inter',sans-serif; font-size:15px; line-height:1.6; color:var(--text-secondary); margin-bottom:1.25rem;">
+          Drop Designs is provided on an "as-is" and "as available" basis. We are not responsible for any misuse, trademark violations, or damages arising out of your download or integration of our designs.
+        </p>
+        <h2 style="font-family:'DM Serif Display',serif; font-size:1.6rem; color:var(--text-primary); margin-top:2rem; margin-bottom:1rem; font-weight:normal; line-height:1.3;">Contact Email</h2>
+        <p style="font-family:'Inter',sans-serif; font-size:15px; line-height:1.6; color:var(--text-secondary); margin-bottom:1.25rem;">
+          For inquiries regarding terms or licensing permissions, please contact us at: <a href="mailto:dropdesigns.contact@gmail.com" style="color:var(--accent); text-decoration:none; font-weight:500;">dropdesigns.contact@gmail.com</a>
+        </p>
+      </div>
+    </div>
+    <div class="right-ads">
+      <a class="affiliate-ad" href="https://vidiq.com/itsjo" target="_blank" rel="noopener">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_14_45_22_nxnkwi.png" alt="Sponsored">
+        <div class="affiliate-ad-label">Sponsored</div>
+      </a>
+      <a class="affiliate-ad" href="https://www.greengeeks.com/track/itsjo" target="_blank" rel="noopener">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_15_02_16_ff413p.png" alt="Sponsored">
+        <div class="affiliate-ad-label">Sponsored</div>
+      </a>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:center;margin-top:1.5rem;">
+    <a class="affiliate-ad" href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=151841" target="_blank" rel="noopener" style="width:100%;max-width:728px;">
+      <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1783176118/affiliate-french-summer-sales-2026-fr-728x90_h4t5jr.png" alt="Sponsored" style="width:100%;height:auto;display:block;">
+      <div class="affiliate-ad-label">Sponsored</div>
+    </a>
+  </div>
+  <!-- Newsletter Signup -->
+  <div class="newsletter-section">
+    <h2>Get new designs in your inbox</h2>
+    <p>We drop new free graphics every week. Be the first to know.</p>
+    <div class="newsletter-form">
+      <input type="email" id="newsletter-email" placeholder="Your email address…">
+      <button onclick="subscribeNewsletter()">Notify Me →</button>
+    </div>
+    <div class="newsletter-success" id="newsletter-success">✓ You're in! We'll notify you when new designs drop.</div>
+  </div>
+  <footer>
+    <p style="font-size:11px;color:var(--text-muted);margin-bottom:0.5rem;">This site contains affiliate links. We may earn a commission if you make a purchase — at no extra cost to you.</p>
+    &copy; 2025 Drop Designs — Free Graphics &amp; Illustrations
+  </footer>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script type="module">
@@ -607,11 +1055,20 @@ function showView(id) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
-window.showPublic = () => { history.pushState({}, '', window.location.pathname); showView('view-public'); loadDesigns(); };
+window.showView = showView;
+function resetMetadataToHome() {
+  document.title = "Drop Designs — Free Graphics & Illustrations for Everyone";
+  document.getElementById('meta-desc').content = "Download 100+ free graphics, illustrations, anime art, car designs, typography and streetwear designs on Drop Designs. Free for personal and commercial use.";
+  const ogUrlElem = document.getElementById('og-url');
+  if (ogUrlElem) ogUrlElem.content = "https://www.dropdesigns.net";
+  const canonicalElem = document.getElementById('canonical-link');
+  if (canonicalElem) canonicalElem.href = "https://www.dropdesigns.net";
+}
+window.showPublic = () => { history.pushState({}, '', window.location.pathname); resetMetadataToHome(); showView('view-public'); loadDesigns(); };
 window.showAdminLogin = () => showView('view-login');
-window.goHome = () => { history.pushState({}, '', window.location.pathname); showView('view-public'); loadDesigns(); };
+window.goHome = () => { history.pushState({}, '', window.location.pathname); resetMetadataToHome(); showView('view-public'); loadDesigns(); };
 window.scrollToGallery = () => document.getElementById('gallery-anchor').scrollIntoView({ behavior:'smooth' });
-window.logout = () => { showView('view-public'); loadDesigns(); };
+window.logout = () => { resetMetadataToHome(); showView('view-public'); loadDesigns(); };
 
 // ── AUTH ──
 window.doLogin = () => {
@@ -657,16 +1114,32 @@ function renderGrid() {
   const empty = document.getElementById('empty-state');
   const paginationEl = document.getElementById('pagination');
   const pageInfoEl = document.getElementById('page-info');
+
+  const resultsCountEl = document.getElementById('results-count');
+  const searchTerm = (document.getElementById('search-input').value || '').trim();
+  if (resultsCountEl) {
+    if (searchTerm) {
+      resultsCountEl.textContent = `Found ${filtered.length} design${filtered.length !== 1 ? 's' : ''} for "${searchTerm}"`;
+    } else if (currentFilter !== 'all') {
+      resultsCountEl.textContent = `Showing ${filtered.length} design${filtered.length !== 1 ? 's' : ''} in ${currentFilter}`;
+    } else {
+      resultsCountEl.textContent = '';
+    }
+  }
+
   if (!filtered.length) { grid.innerHTML = ''; empty.style.display = 'block'; paginationEl.innerHTML = ''; pageInfoEl.textContent = ''; return; }
   empty.style.display = 'none';
   const totalPages = Math.ceil(filtered.length / PER_PAGE);
   if (currentPage > totalPages) currentPage = 1;
   const start = (currentPage - 1) * PER_PAGE;
   const pageItems = filtered.slice(start, start + PER_PAGE);
-  grid.innerHTML = pageItems.map(d => `
+  grid.innerHTML = pageItems.map(d => {
+    const isNew = d.createdAt && (Date.now() - new Date(d.createdAt).getTime()) < 7 * 24 * 60 * 60 * 1000;
+    return `
     <div class="design-card" data-id="${d.id}">
       <div class="card-thumb">
         ${d.imageUrl ? `<img src="${d.imageUrl}" alt="${d.title}" loading="lazy">` : `<span class="no-img">${EMOJIS[d.category]||'🎨'}</span>`}
+        ${isNew ? '<span style="position:absolute;top:8px;left:8px;background:#E60023;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:0.05em;">NEW</span>' : ''}
         <div class="card-overlay"><button class="btn-preview">Preview</button></div>
       </div>
       <div class="card-body">
@@ -674,7 +1147,8 @@ function renderGrid() {
         <div class="card-meta"><span class="card-tag">${d.category}</span><span class="card-dl-count">⬇ ${d.downloads||0}</span></div>
       </div>
     </div>
-  `).join('');
+    `;
+  }).join('');
   document.querySelectorAll('.design-card[data-id]').forEach(card => {
     card.addEventListener('click', () => openModal(card.getAttribute('data-id')));
   });
@@ -736,15 +1210,20 @@ window.openDesignPage = id => {
   // Update URL
   history.pushState({ designId: id }, d.title, `?design=${id}`);
   // Update page meta
-  document.title = `${d.title} — Free Download | DesignDrop`;
-  document.getElementById('meta-desc').content = d.desc || `Download ${d.title} for free on DesignDrop.`;
+  document.title = `${d.title} — Free Download | Drop Designs`;
+  document.getElementById('meta-desc').content = d.desc || `Download ${d.title} for free on Drop Designs.`;
   document.getElementById('meta-keywords').content = (d.tags||[]).join(', ');
+  const ogUrlElem = document.getElementById('og-url');
+  if (ogUrlElem) ogUrlElem.content = `https://www.dropdesigns.net/?design=${d.id}`;
+  const canonicalElem = document.getElementById('canonical-link');
+  if (canonicalElem) canonicalElem.href = `https://www.dropdesigns.net/?design=${d.id}`;
   // Fill page
   document.getElementById('dp-img-wrap').innerHTML = d.imageUrl ? `<img src="${d.imageUrl}" alt="${d.title}">` : `<div style="font-size:5rem;text-align:center;padding:3rem">${EMOJIS[d.category]||'🎨'}</div>`;
   document.getElementById('dp-title').textContent = d.title;
   document.getElementById('dp-category').textContent = d.category;
   document.getElementById('dp-desc').textContent = d.desc || 'No description provided.';
   document.getElementById('dp-meta').textContent = `${d.downloads||0} downloads · Free for personal & commercial use`;
+  updateShareButtons(d);
   document.getElementById('dp-tags').innerHTML = (d.tags||[]).map(t=>`<span class="card-tag">${t}</span>`).join('');
   // Related
   const related = allDesigns.filter(x=>x.id!==id && x.category===d.category).slice(0,6);
@@ -777,6 +1256,16 @@ async function doDownload(d) {
       document.body.appendChild(a); a.click(); document.body.removeChild(a);
       setTimeout(() => URL.revokeObjectURL(blobUrl), 5000);
       showToast('Download started! ✓');
+      const card = document.querySelector(`.design-card[data-id="${d.id}"] .card-dl-count`);
+      if (card) {
+        card.style.color = 'var(--success, #1D6A3A)';
+        card.style.fontWeight = '600';
+        card.textContent = '⬇ ' + ((d.downloads || 0));
+        setTimeout(() => {
+          card.style.color = '';
+          card.style.fontWeight = '';
+        }, 2000);
+      }
     } catch(err) { showToast('Download failed. Try right-clicking and Save As.'); }
   } else { showToast('No file attached to this design.'); }
 }
@@ -913,6 +1402,10 @@ async function refreshAdmin() {
   if (!allDesigns.length) await loadDesigns();
   document.getElementById('adm-total').textContent = allDesigns.length;
   document.getElementById('adm-dls').textContent = allDesigns.reduce((s,d)=>s+(d.downloads||0),0);
+  try {
+    const subsSnap = await getDocs(collection(db, 'subscribers'));
+    document.getElementById('adm-subs').textContent = subsSnap.size;
+  } catch(e) {}
   renderManage();
 }
 
@@ -920,6 +1413,90 @@ window.showToast = msg => {
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'), 3000);
+};
+
+window.subscribeNewsletter = async () => {
+  let emailInput = null;
+  // Try finding email input in the active view first
+  const activeView = document.querySelector('.view.active');
+  if (activeView) {
+    emailInput = activeView.querySelector('#newsletter-email');
+  }
+  // If not found or empty, fallback to searching all inputs for one with content
+  if (!emailInput || !emailInput.value.trim()) {
+    const inputs = document.querySelectorAll('#newsletter-email');
+    for (const inp of inputs) {
+      if (inp.value.trim()) {
+        emailInput = inp;
+        break;
+      }
+    }
+  }
+  // Ultimate fallback to getElementById
+  if (!emailInput) {
+    emailInput = document.getElementById('newsletter-email');
+  }
+
+  const email = emailInput ? emailInput.value.trim() : '';
+  if (!email || !email.includes('@')) {
+    showToast('Please enter a valid email address.');
+    return;
+  }
+  
+  // Save to Firebase Firestore
+  try {
+    const { collection, addDoc } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
+    await addDoc(collection(db, 'subscribers'), {
+      email: email,
+      subscribedAt: new Date().toISOString(),
+      source: window.location.href
+    });
+    
+    // Clear all email inputs and show success messages
+    document.querySelectorAll('#newsletter-email').forEach(inp => inp.value = '');
+    document.querySelectorAll('#newsletter-success').forEach(msg => msg.style.display = 'block');
+    showToast('Subscribed successfully! ✓');
+    setTimeout(() => {
+      document.querySelectorAll('#newsletter-success').forEach(msg => msg.style.display = 'none');
+    }, 5000);
+  } catch(e) {
+    showToast('Something went wrong. Please try again.');
+    console.error(e);
+  }
+};
+
+function updateShareButtons(design) {
+  const url = encodeURIComponent('https://www.dropdesigns.net/?design=' + design.id);
+  const title = encodeURIComponent(design.title + ' — Free Download on Drop Designs');
+  const image = encodeURIComponent(design.imageUrl || '');
+  const container = document.getElementById('share-buttons');
+  if (!container) return;
+  container.innerHTML = `
+    <a class="share-btn pinterest" href="https://pinterest.com/pin/create/button/?url=${url}&media=${image}&description=${title}" target="_blank" rel="noopener">
+      📌 Pinterest
+    </a>
+    <a class="share-btn twitter" href="https://twitter.com/intent/tweet?url=${url}&text=${title}" target="_blank" rel="noopener">
+      𝕏 Twitter
+    </a>
+    <a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" rel="noopener">
+      f Facebook
+    </a>
+    <a class="share-btn whatsapp" href="https://wa.me/?text=${title}%20${url}" target="_blank" rel="noopener">
+      💬 WhatsApp
+    </a>
+    <button class="share-btn copy-link" onclick="copyDesignLink('${design.id}')">
+      🔗 Copy Link
+    </button>
+  `;
+}
+
+window.copyDesignLink = (id) => {
+  const url = 'https://www.dropdesigns.net/?design=' + id;
+  navigator.clipboard.writeText(url).then(() => {
+    showToast('Link copied to clipboard! ✓');
+  }).catch(() => {
+    showToast('Could not copy. Try manually: ' + url);
+  });
 };
 
 // ── ROUTING ──
@@ -936,7 +1513,16 @@ function handleRoute() {
 
 window.addEventListener('popstate', () => handleRoute());
 handleRoute();
+
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('back-to-top');
+  if (btn) btn.style.display = window.scrollY > 400 ? 'flex' : 'none';
+});
 </script>
+
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:2rem;left:2rem;background:var(--accent);color:#fff;border:none;width:42px;height:42px;border-radius:50%;font-size:18px;cursor:pointer;z-index:500;display:none;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.2);transition:opacity 0.2s;">↑</button>
+
+<!-- REMINDER: Add Firestore rule for subscribers collection: allow write: if true -->
 
 </body>
 </html>
