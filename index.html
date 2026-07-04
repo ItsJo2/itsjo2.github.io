@@ -5,6 +5,8 @@
 <meta name="monetag" content="5ff18a96fa4cdf723d84cd3e9869aeab">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DesignDrop — Free Graphics & Illustrations</title>
+<meta id="meta-desc" name="description" content="Download free graphics and illustrations — forever free.">
+<meta id="meta-keywords" name="keywords" content="free graphics, illustrations, design assets">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
@@ -15,21 +17,20 @@
     --text-secondary: #6B6860; --text-muted: #A09E99;
     --accent: #1A1916; --accent-soft: #F0EEE8;
     --tag-bg: #EDECEA; --tag-text: #4A4844;
-    --ad-bg: #F4F2ED; --danger: #C0392B;
+    --ad-bg: #F4F2ED; --danger: #C0392B; --success: #1D6A3A;
+    --ai-color: #6B46C1;
   }
   body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-primary); min-height: 100vh; font-size: 15px; line-height: 1.6; }
   .view { display: none; }
   .view.active { display: block; }
-
   nav { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
   .logo { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--text-primary); letter-spacing: -0.5px; cursor: pointer; }
   .logo span { color: var(--text-muted); }
   .nav-right { display: flex; align-items: center; gap: 1.5rem; }
   .nav-link { font-size: 13px; color: var(--text-secondary); cursor: pointer; text-decoration: none; transition: color 0.15s; }
   .nav-link:hover { color: var(--text-primary); }
-  .btn-admin { font-size: 12px; font-weight: 500; padding: 6px 14px; border: 1px solid var(--border-strong); border-radius: 6px; background: transparent; color: var(--text-primary); cursor: pointer; transition: background 0.15s; }
+  .btn-admin { font-size: 12px; font-weight: 500; padding: 6px 14px; border: 1px solid var(--border-strong); border-radius: 6px; background: transparent; color: var(--text-primary); cursor: pointer; }
   .btn-admin:hover { background: var(--accent-soft); }
-
   .hero { padding: 5rem 2rem 3.5rem; text-align: center; max-width: 700px; margin: 0 auto; }
   .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.1; letter-spacing: -1px; margin-bottom: 1rem; }
   .hero h1 em { font-style: italic; color: var(--text-secondary); }
@@ -38,20 +39,12 @@
   .search-wrap input { flex: 1; border: none; outline: none; padding: 0.75rem 1rem; font-size: 14px; font-family: 'Inter', sans-serif; background: transparent; color: var(--text-primary); }
   .search-wrap input::placeholder { color: var(--text-muted); }
   .btn-search { padding: 0.75rem 1.25rem; border: none; background: var(--accent); color: #fff; font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'Inter', sans-serif; }
-
-  .ad-banner { background: var(--ad-bg); border: 1px dashed var(--border-strong); border-radius: 10px; text-align: center; color: var(--text-muted); font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; display: flex; align-items: center; justify-content: center; }
-  .ad-banner.leaderboard { max-width: 900px; margin: 0 auto 2.5rem; height: 90px; }
-  .ad-banner.sidebar { height: 250px; width: 100%; margin-bottom: 1.5rem; }
-  .ad-banner.footer-ad { max-width: 900px; margin: 3rem auto 0; height: 90px; }
-
   .page-wrap { max-width: 1200px; margin: 0 auto; padding: 0 2rem 4rem; }
   .content-with-sidebar { display: grid; grid-template-columns: 1fr 260px; gap: 2.5rem; align-items: start; }
-
   .filters { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
   .filter-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-right: 0.5rem; }
   .filter-btn { font-size: 12px; font-family: 'Inter', sans-serif; padding: 5px 12px; border: 1px solid var(--border); border-radius: 20px; background: var(--surface); color: var(--text-secondary); cursor: pointer; transition: all 0.15s; }
   .filter-btn:hover, .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-
   .design-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.25rem; }
   .design-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: border-color 0.15s, transform 0.15s; cursor: pointer; }
   .design-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
@@ -66,7 +59,6 @@
   .card-meta { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
   .card-tag { font-size: 11px; background: var(--tag-bg); color: var(--tag-text); padding: 2px 8px; border-radius: 20px; }
   .card-dl-count { font-size: 11px; color: var(--text-muted); }
-
   .sidebar { position: sticky; top: 80px; }
   .sidebar-section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.25rem; }
   .sidebar-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 0.85rem; }
@@ -77,12 +69,28 @@
   .cloud-tag { font-size: 12px; background: var(--tag-bg); color: var(--tag-text); padding: 3px 10px; border-radius: 20px; cursor: pointer; }
   .cloud-tag:hover { background: var(--border-strong); }
 
+  /* DESIGN PAGE */
+  .design-page { max-width: 900px; margin: 0 auto; padding: 2rem; }
+  .design-page-back { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); cursor: pointer; margin-bottom: 2rem; text-decoration: none; transition: color 0.15s; }
+  .design-page-back:hover { color: var(--text-primary); }
+  .design-page-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+  .design-page-img { border-radius: 16px; overflow: hidden; background: #fff; border: 1px solid var(--border); }
+  .design-page-img img { width: 100%; display: block; object-fit: contain; max-height: 500px; }
+  .design-page-info h1 { font-family: 'DM Serif Display', serif; font-size: 2rem; line-height: 1.2; margin-bottom: 0.75rem; }
+  .design-page-info .dp-category { display: inline-block; font-size: 12px; background: var(--tag-bg); color: var(--tag-text); padding: 3px 10px; border-radius: 20px; margin-bottom: 1rem; }
+  .design-page-info .dp-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.25rem; }
+  .design-page-info .dp-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.5rem; }
+  .design-page-info .dp-meta { font-size: 12px; color: var(--text-muted); margin-bottom: 1.5rem; }
+  .btn-dl-big { background: var(--accent); color: #fff; border: none; padding: 14px 32px; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; width: 100%; transition: opacity 0.15s; }
+  .btn-dl-big:hover { opacity: 0.85; }
+  .dp-ad { margin-top: 1.5rem; }
+
+  /* MODAL */
   .modal-overlay { position: fixed; inset: 0; background: rgba(26,25,22,0.6); z-index: 200; display: none; align-items: center; justify-content: center; padding: 1rem; }
   .modal-overlay.open { display: flex; }
   .modal { background: var(--surface); border-radius: 16px; max-width: 560px; width: 100%; overflow: hidden; }
   .modal-img { height: 380px; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; }
   .modal-img img { max-width: 100%; max-height: 100%; object-fit: contain; }
-  .modal-img .no-img { font-size: 3rem; color: var(--text-muted); }
   .modal-body { padding: 1.5rem; }
   .modal-title { font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem; }
   .modal-desc { font-size: 13px; color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.6; }
@@ -91,9 +99,10 @@
   .modal-meta { font-size: 12px; color: var(--text-muted); }
   .btn-dl { background: var(--accent); color: #fff; border: none; padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 6px; transition: opacity 0.15s; }
   .btn-dl:hover { opacity: 0.85; }
+  .btn-view-page { background: transparent; color: var(--text-primary); border: 1px solid var(--border-strong); padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.15s; }
+  .btn-view-page:hover { background: var(--accent-soft); }
   .btn-close-modal { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.9); border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; }
   .modal-inner { position: relative; }
-
   .empty-state { text-align: center; padding: 4rem 2rem; color: var(--text-muted); }
   .empty-state p { margin-top: 0.5rem; font-size: 14px; }
   .loading-state { text-align: center; padding: 4rem 2rem; color: var(--text-muted); font-size: 14px; }
@@ -101,11 +110,10 @@
   @keyframes spin { to { transform: rotate(360deg); } }
 
   /* ADMIN */
-  .admin-wrap { max-width: 920px; margin: 0 auto; padding: 2rem; }
+  .admin-wrap { max-width: 960px; margin: 0 auto; padding: 2rem; }
   .admin-tabs { display: flex; gap: 0.25rem; background: var(--accent-soft); padding: 4px; border-radius: 8px; margin-bottom: 2rem; }
   .admin-tab { flex: 1; text-align: center; padding: 7px 16px; font-size: 13px; font-weight: 500; cursor: pointer; border-radius: 6px; transition: all 0.15s; color: var(--text-secondary); border: none; background: transparent; font-family: 'Inter', sans-serif; }
   .admin-tab.active { background: var(--surface); color: var(--text-primary); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-
   .upload-form { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; }
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem; }
   .form-group { display: flex; flex-direction: column; gap: 6px; }
@@ -113,36 +121,46 @@
   .form-group label { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); }
   .form-group input, .form-group textarea, .form-group select { font-family: 'Inter', sans-serif; font-size: 14px; padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text-primary); outline: none; transition: border-color 0.15s; resize: vertical; }
   .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--border-strong); }
-
   .drop-zone { border: 2px dashed var(--border-strong); border-radius: 10px; padding: 2rem; text-align: center; cursor: pointer; transition: border-color 0.15s, background 0.15s; background: var(--bg); }
   .drop-zone:hover { border-color: var(--text-primary); background: var(--accent-soft); }
   .drop-zone p { font-size: 13px; color: var(--text-secondary); margin-top: 0.5rem; }
   .drop-zone .dz-icon { font-size: 2rem; margin-bottom: 0.5rem; }
   .preview-thumb { width: 100%; max-height: 160px; object-fit: contain; border-radius: 6px; margin-top: 0.75rem; display: none; }
-
   .progress-wrap { background: var(--border); border-radius: 4px; height: 6px; margin-top: 1rem; display: none; }
   .progress-bar { background: var(--accent); height: 6px; border-radius: 4px; width: 0%; transition: width 0.3s; }
   .upload-status { font-size: 12px; color: var(--text-secondary); margin-top: 6px; min-height: 18px; }
-
   .btn-submit { background: var(--accent); color: #fff; border: none; padding: 11px 28px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'Inter', sans-serif; margin-top: 1rem; transition: opacity 0.15s; }
   .btn-submit:hover { opacity: 0.85; }
   .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
-  .btn-danger { background: transparent; color: var(--danger); border: 1px solid var(--danger); padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; font-family: 'Inter', sans-serif; }
+  .btn-danger { background: transparent; color: var(--danger); border: 1px solid var(--danger); padding: 6px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; font-family: 'Inter', sans-serif; }
   .btn-danger:hover { background: #fef2f2; }
-
+  .btn-edit { background: transparent; color: var(--text-primary); border: 1px solid var(--border-strong); padding: 6px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; font-family: 'Inter', sans-serif; margin-right: 4px; }
+  .btn-edit:hover { background: var(--accent-soft); }
   .manage-table { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
   .manage-table table { width: 100%; border-collapse: collapse; }
   .manage-table th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); background: var(--bg); }
-  .manage-table td { padding: 12px 16px; font-size: 13px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  .manage-table td { padding: 10px 16px; font-size: 13px; border-bottom: 1px solid var(--border); vertical-align: middle; }
   .manage-table tr:last-child td { border-bottom: none; }
   .manage-table img.thumb-sm { width: 48px; height: 36px; object-fit: cover; border-radius: 4px; }
   .thumb-sm-box { width: 48px; height: 36px; border-radius: 4px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-
   .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
   .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
   .stat-card .s-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
   .stat-card .s-value { font-size: 1.8rem; font-weight: 600; margin-top: 4px; }
 
+  /* AI BUTTON */
+  .btn-ai { background: var(--ai-color); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'Inter', sans-serif; display: inline-flex; align-items: center; gap: 7px; transition: opacity 0.15s; margin-top: 0.75rem; }
+  .btn-ai:hover { opacity: 0.85; }
+  .btn-ai:disabled { opacity: 0.5; cursor: not-allowed; }
+  .ai-status { font-size: 12px; color: var(--ai-color); margin-top: 6px; min-height: 18px; font-weight: 500; }
+
+  /* EDIT MODAL */
+  .edit-overlay { position: fixed; inset: 0; background: rgba(26,25,22,0.6); z-index: 300; display: none; align-items: center; justify-content: center; padding: 1rem; }
+  .edit-overlay.open { display: flex; }
+  .edit-modal { background: var(--surface); border-radius: 16px; max-width: 600px; width: 100%; padding: 2rem; max-height: 90vh; overflow-y: auto; }
+  .edit-modal h3 { font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 1.5rem; }
+
+  /* LOGIN */
   .login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--bg); }
   .login-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; width: 100%; max-width: 380px; text-align: center; }
   .login-card h2 { font-family: 'DM Serif Display', serif; font-size: 1.6rem; margin-bottom: 0.5rem; }
@@ -150,12 +168,9 @@
   .login-input { width: 100%; font-family: 'Inter', sans-serif; font-size: 14px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text-primary); outline: none; margin-bottom: 0.75rem; }
   .btn-login { width: 100%; background: var(--accent); color: #fff; border: none; padding: 10px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'Inter', sans-serif; }
   .login-error { font-size: 12px; color: var(--danger); margin-top: 0.5rem; display: none; }
-
   .toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--text-primary); color: #fff; padding: 12px 20px; border-radius: 10px; font-size: 13px; font-weight: 500; z-index: 999; transform: translateY(100px); opacity: 0; transition: all 0.3s; pointer-events: none; }
   .toast.show { transform: translateY(0); opacity: 1; }
-
-  footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-size: 12px; color: var(--text-muted); background: var(--surface); }
-
+  footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-size: 12px; color: var(--text-muted); background: var(--surface); margin-top: 2rem; }
 
   /* PAGINATION */
   .pagination { display: flex; align-items: center; justify-content: center; gap: 0.4rem; margin-top: 2.5rem; flex-wrap: wrap; }
@@ -165,56 +180,34 @@
   .page-btn.dots { cursor: default; border: none; background: transparent; }
   .page-info { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 0.75rem; }
 
-  /* FULL WIDTH LAYOUT WITH LEFT/RIGHT ADS */
+  /* OUTER LAYOUT */
   .outer-layout { display: grid; grid-template-columns: 260px 1fr 260px; gap: 1rem; max-width: 1600px; margin: 0 auto; padding: 0 1rem; }
-  .left-ads { padding-top: 1rem; display: flex; flex-direction: column; gap: 1rem; }
-  .right-ads { padding-top: 1rem; display: flex; flex-direction: column; gap: 1rem; }
-  .ad-side { width: 250px; background: var(--ad-bg); border: 1px dashed var(--border-strong); border-radius: 8px; overflow: hidden; }
-  .ad-side-tall { height: 600px; }
-  .ad-side-med { height: 250px; }
-
-  /* AFFILIATE AD */
+  .left-ads, .right-ads { padding-top: 1rem; display: flex; flex-direction: column; gap: 1rem; }
   .affiliate-ad { display: block; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.15s, box-shadow 0.15s; cursor: pointer; text-decoration: none; background: var(--surface); }
   .affiliate-ad:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
   .affiliate-ad img { width: 100%; display: block; }
   .affiliate-ad-label { font-size: 10px; color: var(--text-muted); text-align: center; padding: 4px; letter-spacing: 0.05em; text-transform: uppercase; }
 
-  /* BETWEEN-GRID AD */
-  .mid-ad { grid-column: 1/-1; text-align: center; margin: 1rem 0; }
-
-  @media (max-width: 1300px) {
-    .outer-layout { grid-template-columns: 1fr; }
-    .left-ads, .right-ads { display: none; }
-  }
-  @media (max-width: 768px) {
-    .content-with-sidebar { grid-template-columns: 1fr; }
-    .sidebar { position: static; }
-    .form-grid { grid-template-columns: 1fr; }
-    .stats-grid { grid-template-columns: 1fr 1fr; }
-  }
-
+  @media (max-width: 1300px) { .outer-layout { grid-template-columns: 1fr; } .left-ads, .right-ads { display: none; } }
+  @media (max-width: 768px) { .content-with-sidebar { grid-template-columns: 1fr; } .sidebar { position: static; } .form-grid { grid-template-columns: 1fr; } .stats-grid { grid-template-columns: 1fr 1fr; } .design-page-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 
-<!-- ══ PUBLIC SITE ══ -->
+<!-- PUBLIC SITE -->
 <div id="view-public" class="view active">
   <nav>
     <div class="logo" onclick="goHome()">Design<span>Drop</span></div>
     <div class="nav-right">
       <span class="nav-link" onclick="scrollToGallery()">Browse</span>
-
     </div>
   </nav>
-
-  <!-- TOP-OF-PAGE BANNER 728x90 -->
   <div style="display:flex;justify-content:center;padding:1rem 1rem 0;">
-    <a class="affiliate-ad" href="https://www.hostinger.com/ae?REFERRALCODE=ROUJIHEDLE8T" target="_blank" rel="noopener" style="width:100%;max-width:728px;">
-      <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/q_auto/f_auto/v1781898802/2d4a44201355603.6672fa0a04c20_l9wbrx.png" alt="Sponsored" style="width:100%;height:auto;display:block;">
+    <a class="affiliate-ad" href="YOUR_AFFILIATE_LINK_TOP" target="_blank" rel="noopener" style="width:100%;max-width:728px;">
+      <img src="https://placehold.co/728x90/1A1916/FFFFFF?text=Your+Ad+Here" alt="Sponsored" style="width:100%;height:auto;display:block;">
       <div class="affiliate-ad-label">Sponsored</div>
     </a>
   </div>
-
   <section class="hero">
     <h1>Free graphics &amp;<br><em>illustrations</em> for everyone</h1>
     <p>Download high-quality design assets at no cost — forever free.</p>
@@ -223,32 +216,21 @@
       <button class="btn-search">Search</button>
     </div>
   </section>
-
-  <!-- TOP BANNER -->
   <div style="text-align:center;padding:0 1rem 1.5rem;">
     <script async src="https://js.onclckmn.com/static/onclicka.js" data-admpid="230109"></script>
   </div>
-
-  <!-- OUTER LAYOUT: left ads | content | right ads -->
   <div class="outer-layout" id="gallery-anchor">
-
-    <!-- LEFT ADS -->
     <div class="left-ads">
-      <!-- Affiliate Ad 1 - replace href and src with your own -->
-      <a class="affiliate-ad" href="https://www.hostinger.com/ae?REFERRALCODE=ROUJIHEDLE8T" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/q_auto/f_auto/v1781890763/e9f8de201355603.6672fa0a045ea_pptvuf.png" alt="Sponsored">
+      <a class="affiliate-ad" href="YOUR_AFFILIATE_LINK_1" target="_blank" rel="noopener">
+        <img src="https://placehold.co/250x250/1A1916/FFFFFF?text=Your+Ad+Here" alt="Sponsored">
         <div class="affiliate-ad-label">Sponsored</div>
       </a>
-      <!-- Affiliate Ad 2 -->
-      <a class="affiliate-ad" href="https://referral.bluehost.com/jihedlajili55!bd7fed8ba3!a" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/q_auto/f_auto/v1781891029/0_H-HZMiDSHvq3YnH5_ajkzd7.png" alt="Sponsored">
+      <a class="affiliate-ad" href="YOUR_AFFILIATE_LINK_2" target="_blank" rel="noopener">
+        <img src="https://placehold.co/250x250/1A1916/FFFFFF?text=Your+Ad+Here" alt="Sponsored">
         <div class="affiliate-ad-label">Sponsored</div>
       </a>
-      <!-- Onclicka left -->
       <div><script async src="https://js.onclckmn.com/static/onclicka.js" data-admpid="445256"></script></div>
     </div>
-
-    <!-- MAIN CONTENT -->
     <div>
       <div class="page-wrap" style="padding:0 0 4rem;">
         <div class="content-with-sidebar">
@@ -265,12 +247,10 @@
             <div id="design-grid" class="design-grid"></div>
             <div id="loading-state" class="loading-state"><div class="spinner"></div><br>Loading designs…</div>
             <div id="empty-state" class="empty-state" style="display:none;"><div style="font-size:2rem;">🔍</div><p>No designs found.</p></div>
-            <!-- PAGINATION -->
             <div class="pagination" id="pagination"></div>
             <div class="page-info" id="page-info"></div>
           </div>
           <aside class="sidebar">
-            <!-- Onclicka sidebar top -->
             <div style="margin-bottom:1.5rem;">
               <script async src="https://js.onclckmn.com/static/onclicka.js" data-admpid="445256"></script>
             </div>
@@ -284,52 +264,73 @@
               <div class="sidebar-title">Popular tags</div>
               <div class="tag-cloud" id="tag-cloud"></div>
             </div>
-            <!-- Affiliate sidebar ad -->
-            <a class="affiliate-ad" href="https://vidiq.com/itsjo" target="_blank" rel="noopener" style="margin-bottom:1rem;display:block;">
-              <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/q_auto/f_auto/v1781891032/ChatGPT_Image_19_juin_2026_14_45_22_nxnkwi.png" alt="Sponsored">
+            <a class="affiliate-ad" href="YOUR_AFFILIATE_LINK_3" target="_blank" rel="noopener" style="margin-bottom:1rem;display:block;">
+              <img src="https://placehold.co/260x200/1A1916/FFFFFF?text=Your+Ad+Here" alt="Sponsored">
               <div class="affiliate-ad-label">Sponsored</div>
             </a>
-            <!-- Onclicka sidebar bottom -->
-            <div>
-              <script async src="https://js.onclckmn.com/static/onclicka.js" data-admpid="445256"></script>
-            </div>
+            <div><script async src="https://js.onclckmn.com/static/onclicka.js" data-admpid="445256"></script></div>
           </aside>
         </div>
-        <!-- BOTTOM BANNER -->
         <div style="text-align:center;margin-top:2rem;">
           <script async src="https://js.onclckmn.com/static/onclicka.js" data-admpid="230109"></script>
         </div>
-        <!-- BOTTOM WIDE AFFILIATE AD 728x90 -->
         <div style="display:flex;justify-content:center;margin-top:1.5rem;">
-          <a class="affiliate-ad" href="https://www.hostinger.com/ae?REFERRALCODE=ROUJIHEDLE8T" target="_blank" rel="noopener" style="width:100%;max-width:728px;">
-            <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/q_auto/f_auto/v1781898802/2d4a44201355603.6672fa0a04c20_l9wbrx.png" alt="Sponsored" style="width:100%;height:auto;display:block;">
+          <a class="affiliate-ad" href="YOUR_AFFILIATE_LINK_4" target="_blank" rel="noopener" style="width:100%;max-width:728px;">
+            <img src="https://placehold.co/728x90/1A1916/FFFFFF?text=Your+Ad+Here" alt="Sponsored" style="width:100%;height:auto;display:block;">
             <div class="affiliate-ad-label">Sponsored</div>
           </a>
         </div>
       </div>
     </div>
-
-    <!-- RIGHT ADS -->
     <div class="right-ads">
-      <!-- Affiliate Ad right 1 -->
-      <a class="affiliate-ad" href="my.hosting.com/aff/ba070684070edaad5a42fae4f1864b0f22e69bbd" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/q_auto/f_auto/v1781891033/ChatGPT_Image_19_juin_2026_14_52_22_upm9ku.png" alt="Sponsored">
+      <a class="affiliate-ad" href="YOUR_AFFILIATE_LINK_7" target="_blank" rel="noopener">
+        <img src="https://placehold.co/250x250/1A1916/FFFFFF?text=Your+Ad+Here" alt="Sponsored">
         <div class="affiliate-ad-label">Sponsored</div>
       </a>
-      <!-- Affiliate Ad right 2 -->
-      <a class="affiliate-ad" href="my.hosting.com/aff/6922df49ccf445bd27f373177f898a1419e59499" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/q_auto/f_auto/v1781891032/ChatGPT_Image_19_juin_2026_14_57_43_y5emne.png" alt="Sponsored">
+      <a class="affiliate-ad" href="YOUR_AFFILIATE_LINK_8" target="_blank" rel="noopener">
+        <img src="https://placehold.co/250x250/1A1916/FFFFFF?text=Your+Ad+Here" alt="Sponsored">
         <div class="affiliate-ad-label">Sponsored</div>
       </a>
-      <!-- Onclicka right -->
       <div><script async src="https://js.onclckmn.com/static/onclicka.js" data-admpid="445256"></script></div>
     </div>
-
-  </div><!-- end outer-layout -->
+  </div>
   <footer>&copy; 2025 DesignDrop — Free Graphics &amp; Illustrations</footer>
 </div>
 
-<!-- ══ MODAL ══ -->
+<!-- DESIGN PAGE (own URL) -->
+<div id="view-design" class="view">
+  <nav>
+    <div class="logo" onclick="goHome()">Design<span>Drop</span></div>
+    <div class="nav-right">
+      <span class="nav-link" onclick="goHome()">← Back to gallery</span>
+    </div>
+  </nav>
+  <div class="design-page">
+    <a class="design-page-back" onclick="goHome()">← Back to all designs</a>
+    <div class="design-page-grid">
+      <div class="design-page-img" id="dp-img-wrap"></div>
+      <div class="design-page-info">
+        <div id="dp-category" class="dp-category"></div>
+        <h1 id="dp-title"></h1>
+        <p id="dp-desc" class="dp-desc"></p>
+        <div id="dp-tags" class="dp-tags"></div>
+        <div id="dp-meta" class="dp-meta"></div>
+        <button class="btn-dl-big" onclick="downloadCurrentDesign()">⬇ Free Download</button>
+        <div class="dp-ad" style="display:flex;justify-content:center;">
+          <script async src="https://js.onclckmn.com/static/onclicka.js" data-admpid="230109"></script>
+        </div>
+      </div>
+    </div>
+    <!-- Related designs -->
+    <div style="margin-top:3rem;">
+      <h2 style="font-family:'DM Serif Display',serif;font-size:1.4rem;margin-bottom:1.5rem;">More designs</h2>
+      <div id="related-grid" class="design-grid"></div>
+    </div>
+  </div>
+  <footer>&copy; 2025 DesignDrop — Free Graphics &amp; Illustrations</footer>
+</div>
+
+<!-- MODAL -->
 <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
   <div class="modal">
     <div class="modal-inner">
@@ -341,14 +342,17 @@
         <div class="modal-tags" id="modal-tags"></div>
         <div class="modal-footer">
           <div class="modal-meta" id="modal-meta"></div>
-          <button class="btn-dl" onclick="downloadDesign()">⬇ Free Download</button>
+          <div style="display:flex;gap:8px;">
+            <button class="btn-view-page" onclick="openDesignPage(currentDesignId)">View page</button>
+            <button class="btn-dl" onclick="downloadDesign()">⬇ Download</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══ ADMIN LOGIN ══ -->
+<!-- ADMIN LOGIN -->
 <div id="view-login" class="view">
   <div class="login-screen">
     <div class="login-card">
@@ -364,7 +368,7 @@
   </div>
 </div>
 
-<!-- ══ ADMIN PANEL ══ -->
+<!-- ADMIN PANEL -->
 <div id="view-admin" class="view">
   <nav>
     <div class="logo">Design<span>Drop</span> <span style="font-size:12px;font-family:Inter;color:var(--text-muted);font-weight:400;">/ Admin</span></div>
@@ -384,6 +388,7 @@
       <button class="admin-tab" onclick="switchAdminTab('manage',this)">Manage Designs</button>
     </div>
 
+    <!-- UPLOAD TAB -->
     <div id="tab-upload">
       <div class="upload-form">
         <div class="form-group full" style="margin-bottom:1.25rem;">
@@ -395,6 +400,11 @@
             <img class="preview-thumb" id="preview-thumb" alt="Preview">
           </div>
           <input type="file" id="img-input" accept="image/*" style="display:none" onchange="previewImage(this)">
+        </div>
+        <!-- AI Button -->
+        <div style="margin-bottom:1.25rem;">
+          <button class="btn-ai" id="btn-ai" onclick="generateWithAI()">✨ Generate title, description &amp; tags with AI</button>
+          <div class="ai-status" id="ai-status"></div>
         </div>
         <div class="form-grid">
           <div class="form-group">
@@ -430,11 +440,12 @@
       </div>
     </div>
 
+    <!-- MANAGE TAB -->
     <div id="tab-manage" style="display:none;">
       <div class="manage-table">
         <table>
           <thead>
-            <tr><th>Preview</th><th>Title</th><th>Category</th><th>Downloads</th><th>Date</th><th>Action</th></tr>
+            <tr><th>Preview</th><th>Title</th><th>Category</th><th>Downloads</th><th>Date</th><th>Actions</th></tr>
           </thead>
           <tbody id="manage-tbody">
             <tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:2rem;">Loading…</td></tr>
@@ -445,16 +456,48 @@
   </div>
 </div>
 
+<!-- EDIT MODAL -->
+<div class="edit-overlay" id="edit-overlay">
+  <div class="edit-modal">
+    <h3>Edit Design</h3>
+    <input type="hidden" id="edit-id">
+    <div class="form-group" style="margin-bottom:1rem;">
+      <label>Title</label>
+      <input type="text" id="edit-title">
+    </div>
+    <div class="form-group" style="margin-bottom:1rem;">
+      <label>Category</label>
+      <select id="edit-cat">
+        <option value="Cars">Cars</option>
+        <option value="Anime">Anime</option>
+        <option value="Typography">Typography</option>
+        <option value="Streetwear">Streetwear</option>
+        <option value="Cute">Cute</option>
+      </select>
+    </div>
+    <div class="form-group" style="margin-bottom:1rem;">
+      <label>Description</label>
+      <textarea id="edit-desc" rows="4"></textarea>
+    </div>
+    <div class="form-group" style="margin-bottom:1.5rem;">
+      <label>Tags (comma-separated)</label>
+      <input type="text" id="edit-tags">
+    </div>
+    <div style="display:flex;gap:0.75rem;">
+      <button class="btn-submit" onclick="saveEdit()">Save Changes</button>
+      <button class="btn-admin" onclick="closeEditModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script type="module">
-// ══ CONFIG ══
 const CLOUDINARY_CLOUD = 'dlq5xhxop';
 const CLOUDINARY_PRESET = 'vidhgnck';
 const ADMIN_USER = 'jihed lajili';
 const ADMIN_PASS = 'Jo248.';
 
-// ══ FIREBASE ══
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, orderBy, increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -470,40 +513,87 @@ const db = getFirestore(app);
 const EMOJIS = { Cars:'🚗', Anime:'🎌', Typography:'✍️', Streetwear:'👕', Cute:'🌸' };
 let allDesigns = [];
 let currentDesign = null;
+window.currentDesignId = null;
 let currentFilter = 'all';
+const PER_PAGE = 30;
+let currentPage = 1;
 
-// ══ CLOUDINARY UPLOAD ══
+// ── CLOUDINARY ──
 async function cloudinaryUpload(file, folder, onProgress) {
   const fd = new FormData();
   fd.append('file', file);
   fd.append('upload_preset', CLOUDINARY_PRESET);
   fd.append('folder', folder);
-
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/auto/upload`);
     xhr.upload.onprogress = e => { if (e.lengthComputable) onProgress(e.loaded / e.total); };
-    xhr.onload = () => {
-      if (xhr.status === 200) resolve(JSON.parse(xhr.responseText));
-      else reject(new Error('Upload failed: ' + xhr.responseText));
-    };
+    xhr.onload = () => { if (xhr.status === 200) resolve(JSON.parse(xhr.responseText)); else reject(new Error('Upload failed')); };
     xhr.onerror = () => reject(new Error('Network error'));
     xhr.send(fd);
   });
 }
 
-// ══ VIEWS ══
+// ── AI GENERATE ──
+window.generateWithAI = async () => {
+  const imgFile = document.getElementById('img-input').files[0];
+  if (!imgFile) { showToast('Please upload a preview image first!'); return; }
+  const btn = document.getElementById('btn-ai');
+  const status = document.getElementById('ai-status');
+  btn.disabled = true;
+  btn.textContent = '✨ Analyzing image…';
+  status.textContent = 'AI is looking at your design…';
+  try {
+    const base64 = await new Promise((res, rej) => {
+      const reader = new FileReader();
+      reader.onload = e => res(e.target.result.split(',')[1]);
+      reader.onerror = rej;
+      reader.readAsDataURL(imgFile);
+    });
+    const mediaType = imgFile.type || 'image/jpeg';
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1000,
+        messages: [{
+          role: 'user',
+          content: [
+            { type: 'image', source: { type: 'base64', media_type: mediaType, data: base64 } },
+            { type: 'text', text: 'You are a design asset curator. Analyze this design image and respond ONLY with a JSON object (no markdown, no backticks) with exactly these fields: {"title": "Short catchy title 3-6 words", "description": "2-3 sentence description of the design, its style, mood, and best use cases", "tags": "tag1, tag2, tag3, tag4, tag5, tag6"}' }
+          ]
+        }]
+      })
+    });
+    const data = await response.json();
+    const text = data.content[0].text.trim();
+    const parsed = JSON.parse(text);
+    document.getElementById('f-title').value = parsed.title || '';
+    document.getElementById('f-desc').value = parsed.description || '';
+    document.getElementById('f-tags').value = parsed.tags || '';
+    status.textContent = '✓ AI filled in the details — review and adjust if needed!';
+    showToast('AI generated title, description & tags! ✓');
+  } catch(e) {
+    console.error(e);
+    status.textContent = '❌ AI failed. Please fill in manually.';
+  }
+  btn.disabled = false;
+  btn.textContent = '✨ Generate with AI again';
+};
+
+// ── VIEWS ──
 function showView(id) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
-window.showPublic = () => { showView('view-public'); loadDesigns(); };
+window.showPublic = () => { history.pushState({}, '', window.location.pathname); showView('view-public'); loadDesigns(); };
 window.showAdminLogin = () => showView('view-login');
-window.goHome = () => { showView('view-public'); loadDesigns(); };
+window.goHome = () => { history.pushState({}, '', window.location.pathname); showView('view-public'); loadDesigns(); };
 window.scrollToGallery = () => document.getElementById('gallery-anchor').scrollIntoView({ behavior:'smooth' });
-window.logout = () => showView('view-public');
+window.logout = () => { showView('view-public'); loadDesigns(); };
 
-// ══ AUTH ══
+// ── AUTH ──
 window.doLogin = () => {
   const u = document.getElementById('login-user').value.trim();
   const p = document.getElementById('login-pass').value;
@@ -516,7 +606,7 @@ window.doLogin = () => {
   }
 };
 
-// ══ LOAD FROM FIRESTORE ══
+// ── LOAD DESIGNS ──
 async function loadDesigns() {
   document.getElementById('loading-state').style.display = 'block';
   document.getElementById('design-grid').innerHTML = '';
@@ -529,14 +619,11 @@ async function loadDesigns() {
     renderGrid();
     updateSidebar();
   } catch(e) {
-    document.getElementById('loading-state').innerHTML = `<p style="color:var(--danger)">Failed to load designs. Make sure Firestore rules are published.<br><small>${e.message}</small></p>`;
+    document.getElementById('loading-state').innerHTML = `<p style="color:var(--danger)">Failed to load designs.<br><small>${e.message}</small></p>`;
   }
 }
 
-// ══ GALLERY + PAGINATION ══
-const PER_PAGE = 30;
-let currentPage = 1;
-
+// ── GALLERY ──
 function renderGrid() {
   const search = (document.getElementById('search-input').value || '').toLowerCase();
   const filtered = allDesigns.filter(d => {
@@ -550,51 +637,33 @@ function renderGrid() {
   const empty = document.getElementById('empty-state');
   const paginationEl = document.getElementById('pagination');
   const pageInfoEl = document.getElementById('page-info');
-
-  if (!filtered.length) {
-    grid.innerHTML = '';
-    empty.style.display = 'block';
-    paginationEl.innerHTML = '';
-    pageInfoEl.textContent = '';
-    return;
-  }
+  if (!filtered.length) { grid.innerHTML = ''; empty.style.display = 'block'; paginationEl.innerHTML = ''; pageInfoEl.textContent = ''; return; }
   empty.style.display = 'none';
-
   const totalPages = Math.ceil(filtered.length / PER_PAGE);
   if (currentPage > totalPages) currentPage = 1;
   const start = (currentPage - 1) * PER_PAGE;
   const pageItems = filtered.slice(start, start + PER_PAGE);
-
   grid.innerHTML = pageItems.map(d => `
-    <div class="design-card" data-id="${d.id}" style="cursor:pointer">
+    <div class="design-card" data-id="${d.id}">
       <div class="card-thumb">
         ${d.imageUrl ? `<img src="${d.imageUrl}" alt="${d.title}" loading="lazy">` : `<span class="no-img">${EMOJIS[d.category]||'🎨'}</span>`}
         <div class="card-overlay"><button class="btn-preview">Preview</button></div>
       </div>
       <div class="card-body">
         <div class="card-title">${d.title}</div>
-        <div class="card-meta">
-          <span class="card-tag">${d.category}</span>
-          <span class="card-dl-count">⬇ ${d.downloads||0}</span>
-        </div>
+        <div class="card-meta"><span class="card-tag">${d.category}</span><span class="card-dl-count">⬇ ${d.downloads||0}</span></div>
       </div>
     </div>
   `).join('');
-
   document.querySelectorAll('.design-card[data-id]').forEach(card => {
     card.addEventListener('click', () => openModal(card.getAttribute('data-id')));
   });
-
-  // Render pagination
   pageInfoEl.textContent = `Showing ${start+1}–${Math.min(start+PER_PAGE, filtered.length)} of ${filtered.length} designs`;
   if (totalPages <= 1) { paginationEl.innerHTML = ''; return; }
-
-  let pages = [];
-  pages.push(1);
+  let pages = [1];
   for (let i = Math.max(2, currentPage-1); i <= Math.min(totalPages-1, currentPage+1); i++) pages.push(i);
-  if (totalPages > 1) pages.push(totalPages);
+  pages.push(totalPages);
   pages = [...new Set(pages)].sort((a,b)=>a-b);
-
   let html = '';
   if (currentPage > 1) html += `<button class="page-btn" onclick="goPage(${currentPage-1})">‹</button>`;
   let prev = 0;
@@ -607,11 +676,7 @@ function renderGrid() {
   paginationEl.innerHTML = html;
 }
 
-window.goPage = (p) => {
-  currentPage = p;
-  renderGrid();
-  document.getElementById('gallery-anchor').scrollIntoView({ behavior: 'smooth' });
-};
+window.goPage = p => { currentPage = p; renderGrid(); document.getElementById('gallery-anchor').scrollIntoView({ behavior:'smooth' }); };
 
 function updateSidebar() {
   document.getElementById('sb-total').textContent = allDesigns.length;
@@ -619,33 +684,20 @@ function updateSidebar() {
   const tagCounts = {};
   allDesigns.flatMap(d=>d.tags||[]).forEach(t=>tagCounts[t]=(tagCounts[t]||0)+1);
   const top = Object.entries(tagCounts).sort((a,b)=>b[1]-a[1]).slice(0,12).map(x=>x[0]);
-  document.getElementById('tag-cloud').innerHTML = top.map(t=>
-    `<span class="cloud-tag" onclick="setTagFilter('${t}')">${t}</span>`
-  ).join('');
+  document.getElementById('tag-cloud').innerHTML = top.map(t=>`<span class="cloud-tag" onclick="setTagFilter('${t}')">${t}</span>`).join('');
 }
 
 window.filterDesigns = () => { currentPage = 1; renderGrid(); };
-window.setFilter = (cat, btn) => {
-  currentFilter = cat;
-  currentPage = 1;
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderGrid();
-};
-window.setTagFilter = tag => {
-  document.getElementById('search-input').value = tag;
-  renderGrid();
-  window.scrollToGallery();
-};
+window.setFilter = (cat, btn) => { currentFilter = cat; currentPage = 1; document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); renderGrid(); };
+window.setTagFilter = tag => { document.getElementById('search-input').value = tag; renderGrid(); window.scrollToGallery(); };
 
-// ══ MODAL ══
+// ── MODAL ──
 window.openModal = id => {
   const d = allDesigns.find(x=>x.id===id);
   if (!d) return;
   currentDesign = d;
-  document.getElementById('modal-img-wrap').innerHTML = d.imageUrl
-    ? `<img src="${d.imageUrl}" alt="${d.title}">`
-    : `<div class="no-img">${EMOJIS[d.category]||'🎨'}</div>`;
+  window.currentDesignId = id;
+  document.getElementById('modal-img-wrap').innerHTML = d.imageUrl ? `<img src="${d.imageUrl}" alt="${d.title}">` : `<div style="font-size:3rem;color:var(--text-muted)">${EMOJIS[d.category]||'🎨'}</div>`;
   document.getElementById('modal-title').textContent = d.title;
   document.getElementById('modal-desc').textContent = d.desc || 'No description provided.';
   document.getElementById('modal-meta').textContent = `${d.downloads||0} downloads`;
@@ -655,45 +707,66 @@ window.openModal = id => {
 window.closeModal = e => { if(e.target===document.getElementById('modal-overlay')) closeModalDirect(); };
 window.closeModalDirect = () => document.getElementById('modal-overlay').classList.remove('open');
 
-window.downloadDesign = async () => {
-  if (!currentDesign) return;
-  try {
-    await updateDoc(doc(db,'designs',currentDesign.id), { downloads: increment(1) });
-    const local = allDesigns.find(x=>x.id===currentDesign.id);
-    if (local) local.downloads = (local.downloads||0)+1;
-    updateSidebar();
-  } catch(e) { console.warn('count update failed', e); }
-  if (currentDesign.fileUrl) {
+// ── DESIGN PAGE ──
+window.openDesignPage = id => {
+  const d = allDesigns.find(x=>x.id===id);
+  if (!d) return;
+  currentDesign = d;
+  closeModalDirect();
+  // Update URL
+  history.pushState({ designId: id }, d.title, `?design=${id}`);
+  // Update page meta
+  document.title = `${d.title} — Free Download | DesignDrop`;
+  document.getElementById('meta-desc').content = d.desc || `Download ${d.title} for free on DesignDrop.`;
+  document.getElementById('meta-keywords').content = (d.tags||[]).join(', ');
+  // Fill page
+  document.getElementById('dp-img-wrap').innerHTML = d.imageUrl ? `<img src="${d.imageUrl}" alt="${d.title}">` : `<div style="font-size:5rem;text-align:center;padding:3rem">${EMOJIS[d.category]||'🎨'}</div>`;
+  document.getElementById('dp-title').textContent = d.title;
+  document.getElementById('dp-category').textContent = d.category;
+  document.getElementById('dp-desc').textContent = d.desc || 'No description provided.';
+  document.getElementById('dp-meta').textContent = `${d.downloads||0} downloads · Free for personal & commercial use`;
+  document.getElementById('dp-tags').innerHTML = (d.tags||[]).map(t=>`<span class="card-tag">${t}</span>`).join('');
+  // Related
+  const related = allDesigns.filter(x=>x.id!==id && x.category===d.category).slice(0,6);
+  document.getElementById('related-grid').innerHTML = related.map(r=>`
+    <div class="design-card" data-id="${r.id}">
+      <div class="card-thumb">${r.imageUrl?`<img src="${r.imageUrl}" alt="${r.title}" loading="lazy">`:`<span class="no-img">${EMOJIS[r.category]||'🎨'}</span>`}<div class="card-overlay"><button class="btn-preview">Preview</button></div></div>
+      <div class="card-body"><div class="card-title">${r.title}</div><div class="card-meta"><span class="card-tag">${r.category}</span><span class="card-dl-count">⬇ ${r.downloads||0}</span></div></div>
+    </div>
+  `).join('');
+  document.querySelectorAll('#related-grid .design-card[data-id]').forEach(card => {
+    card.addEventListener('click', () => openDesignPage(card.getAttribute('data-id')));
+  });
+  showView('view-design');
+  window.scrollTo(0, 0);
+};
+
+window.downloadCurrentDesign = () => { if (currentDesign) doDownload(currentDesign); };
+window.downloadDesign = () => { if (currentDesign) doDownload(currentDesign); closeModalDirect(); };
+
+async function doDownload(d) {
+  try { await updateDoc(doc(db,'designs',d.id), { downloads: increment(1) }); const local = allDesigns.find(x=>x.id===d.id); if(local) local.downloads=(local.downloads||0)+1; updateSidebar(); } catch(e) {}
+  if (d.fileUrl) {
     showToast('Preparing download…');
     try {
-      const response = await fetch(currentDesign.fileUrl);
+      const response = await fetch(d.fileUrl);
       const blob = await response.blob();
       const blobUrl = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = blobUrl;
-      a.download = currentDesign.fileName || currentDesign.title || 'design';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      a.href = blobUrl; a.download = d.fileName || d.title || 'design';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
       setTimeout(() => URL.revokeObjectURL(blobUrl), 5000);
       showToast('Download started! ✓');
-    } catch(err) {
-      console.error('Download error:', err);
-      showToast('Download failed. Try right-clicking and Save As.');
-    }
-  } else {
-    showToast('No file attached to this design.');
-  }
-  closeModalDirect();
-  renderGrid();
-};
+    } catch(err) { showToast('Download failed. Try right-clicking and Save As.'); }
+  } else { showToast('No file attached to this design.'); }
+}
 
-// ══ ADMIN ══
+// ── ADMIN ──
 window.switchAdminTab = (tab, btn) => {
   document.querySelectorAll('.admin-tab').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  document.getElementById('tab-upload').style.display = tab==='upload' ? 'block' : 'none';
-  document.getElementById('tab-manage').style.display = tab==='manage' ? 'block' : 'none';
+  document.getElementById('tab-upload').style.display = tab==='upload'?'block':'none';
+  document.getElementById('tab-manage').style.display = tab==='manage'?'block':'none';
   if (tab==='manage') renderManage();
 };
 
@@ -701,15 +774,14 @@ window.previewImage = input => {
   const file = input.files[0];
   if (!file) return;
   const reader = new FileReader();
-  reader.onload = e => {
-    const img = document.getElementById('preview-thumb');
-    img.src = e.target.result;
-    img.style.display = 'block';
-  };
+  reader.onload = e => { const img = document.getElementById('preview-thumb'); img.src = e.target.result; img.style.display = 'block'; };
   reader.readAsDataURL(file);
+  // Reset AI status
+  document.getElementById('ai-status').textContent = '';
+  document.getElementById('btn-ai').textContent = '✨ Generate title, description & tags with AI';
 };
 
-function setProgress(pct) { document.getElementById('progress-bar').style.width = pct + '%'; }
+function setProgress(pct) { document.getElementById('progress-bar').style.width = pct+'%'; }
 function setStatus(msg) { document.getElementById('upload-status').textContent = msg; }
 
 window.uploadDesign = async () => {
@@ -719,120 +791,134 @@ window.uploadDesign = async () => {
   const tags = document.getElementById('f-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
   const imgFile = document.getElementById('img-input').files[0];
   const dlFile = document.getElementById('f-file').files[0];
-
   if (!title) { showToast('Please enter a title.'); return; }
   if (!imgFile) { showToast('Please select a preview image.'); return; }
   if (!dlFile) { showToast('Please select a download file.'); return; }
-
   const btn = document.getElementById('btn-publish');
-  btn.disabled = true;
-  btn.textContent = 'Uploading…';
+  btn.disabled = true; btn.textContent = 'Uploading…';
   document.getElementById('progress-wrap').style.display = 'block';
-
   try {
-    setStatus('Uploading preview image to Cloudinary…');
-    const imgRes = await cloudinaryUpload(imgFile, 'designdrop/previews', p => setProgress(p * 50));
-    const imageUrl = imgRes.secure_url;
-    const imagePublicId = imgRes.public_id;
-
-    setStatus('Uploading design file to Cloudinary…');
-    const fileRes = await cloudinaryUpload(dlFile, 'designdrop/files', p => setProgress(50 + p * 45));
-    const fileUrl = fileRes.secure_url;
-    const filePublicId = fileRes.public_id;
-
-    setStatus('Saving to database…');
-    setProgress(98);
-
-    await addDoc(collection(db, 'designs'), {
-      title, category: cat, desc, tags,
-      imageUrl, imagePublicId,
-      fileUrl, filePublicId,
-      fileName: dlFile.name,
-      downloads: 0,
-      createdAt: new Date().toISOString(),
-      date: new Date().toLocaleDateString()
+    setStatus('Uploading preview image…');
+    const imgRes = await cloudinaryUpload(imgFile, 'designdrop/previews', p => setProgress(p*50));
+    setStatus('Uploading design file…');
+    const fileRes = await cloudinaryUpload(dlFile, 'designdrop/files', p => setProgress(50+p*45));
+    setStatus('Saving to database…'); setProgress(98);
+    await addDoc(collection(db,'designs'), {
+      title, category:cat, desc, tags,
+      imageUrl: imgRes.secure_url, imagePublicId: imgRes.public_id,
+      fileUrl: fileRes.secure_url, filePublicId: fileRes.public_id,
+      fileName: dlFile.name, downloads: 0,
+      createdAt: new Date().toISOString(), date: new Date().toLocaleDateString()
     });
-
-    setProgress(100);
-    setStatus('✓ Published successfully!');
+    setProgress(100); setStatus('✓ Published!');
     showToast('Design published! ✓');
-    resetForm();
-    await loadDesigns();
-    refreshAdmin();
+    resetForm(); await loadDesigns(); refreshAdmin();
   } catch(e) {
-    console.error(e);
-    showToast('Upload failed: ' + e.message);
-    setStatus('❌ Upload failed. See console for details.');
-    btn.disabled = false;
-    btn.textContent = 'Publish Design ↗';
+    showToast('Upload failed: '+e.message); setStatus('❌ Upload failed.');
+    btn.disabled=false; btn.textContent='Publish Design ↗';
   }
 };
 
 function resetForm() {
-  ['f-title','f-desc','f-tags'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('img-input').value = '';
-  document.getElementById('f-file').value = '';
-  document.getElementById('preview-thumb').style.display = 'none';
-  document.getElementById('progress-wrap').style.display = 'none';
-  document.getElementById('progress-bar').style.width = '0%';
-  document.getElementById('upload-status').textContent = '';
-  const btn = document.getElementById('btn-publish');
-  btn.disabled = false;
-  btn.textContent = 'Publish Design ↗';
+  ['f-title','f-desc','f-tags'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('img-input').value='';
+  document.getElementById('f-file').value='';
+  document.getElementById('preview-thumb').style.display='none';
+  document.getElementById('progress-wrap').style.display='none';
+  document.getElementById('progress-bar').style.width='0%';
+  document.getElementById('upload-status').textContent='';
+  document.getElementById('ai-status').textContent='';
+  document.getElementById('btn-ai').textContent='✨ Generate title, description & tags with AI';
+  const btn=document.getElementById('btn-publish');
+  btn.disabled=false; btn.textContent='Publish Design ↗';
 }
+
+// EDIT
+window.openEditModal = id => {
+  const d = allDesigns.find(x=>x.id===id);
+  if (!d) return;
+  document.getElementById('edit-id').value = id;
+  document.getElementById('edit-title').value = d.title||'';
+  document.getElementById('edit-cat').value = d.category||'Cars';
+  document.getElementById('edit-desc').value = d.desc||'';
+  document.getElementById('edit-tags').value = (d.tags||[]).join(', ');
+  document.getElementById('edit-overlay').classList.add('open');
+};
+window.closeEditModal = () => document.getElementById('edit-overlay').classList.remove('open');
+window.saveEdit = async () => {
+  const id = document.getElementById('edit-id').value;
+  const title = document.getElementById('edit-title').value.trim();
+  const category = document.getElementById('edit-cat').value;
+  const desc = document.getElementById('edit-desc').value.trim();
+  const tags = document.getElementById('edit-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  if (!title) { showToast('Title cannot be empty.'); return; }
+  try {
+    await updateDoc(doc(db,'designs',id), { title, category, desc, tags });
+    const local = allDesigns.find(x=>x.id===id);
+    if (local) { local.title=title; local.category=category; local.desc=desc; local.tags=tags; }
+    closeEditModal(); renderManage(); renderGrid(); updateSidebar();
+    showToast('Design updated! ✓');
+  } catch(e) { showToast('Update failed: '+e.message); }
+};
 
 window.deleteDesign = async id => {
   if (!confirm('Delete this design permanently?')) return;
   try {
     await deleteDoc(doc(db,'designs',id));
     allDesigns = allDesigns.filter(d=>d.id!==id);
-    renderManage();
-    renderGrid();
-    updateSidebar();
-    refreshAdmin();
+    renderManage(); renderGrid(); updateSidebar(); refreshAdmin();
     showToast('Design deleted.');
-  } catch(e) { showToast('Delete failed: ' + e.message); }
+  } catch(e) { showToast('Delete failed: '+e.message); }
 };
 
 function renderManage() {
   const tbody = document.getElementById('manage-tbody');
-  if (!allDesigns.length) {
-    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:2rem;">No designs yet. Upload your first one!</td></tr>`;
-    return;
-  }
-  tbody.innerHTML = allDesigns.map(d => `
+  if (!allDesigns.length) { tbody.innerHTML=`<tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:2rem;">No designs yet.</td></tr>`; return; }
+  tbody.innerHTML = allDesigns.map(d=>`
     <tr>
-      <td>${d.imageUrl ? `<img class="thumb-sm" src="${d.imageUrl}" alt="">` : `<div class="thumb-sm-box">${EMOJIS[d.category]||'🎨'}</div>`}</td>
+      <td>${d.imageUrl?`<img class="thumb-sm" src="${d.imageUrl}" alt="">`:`<div class="thumb-sm-box">${EMOJIS[d.category]||'🎨'}</div>`}</td>
       <td style="font-weight:500">${d.title}</td>
       <td><span class="card-tag">${d.category}</span></td>
       <td>${d.downloads||0}</td>
       <td style="color:var(--text-muted)">${d.date||''}</td>
-      <td><button class="btn-danger" onclick="deleteDesign('${d.id}')">Delete</button></td>
+      <td style="white-space:nowrap">
+        <button class="btn-edit" onclick="openEditModal('${d.id}')">✏️ Edit</button>
+        <button class="btn-danger" onclick="deleteDesign('${d.id}')">Delete</button>
+      </td>
     </tr>
   `).join('');
 }
 
 async function refreshAdmin() {
+  if (!allDesigns.length) await loadDesigns();
   document.getElementById('adm-total').textContent = allDesigns.length;
   document.getElementById('adm-dls').textContent = allDesigns.reduce((s,d)=>s+(d.downloads||0),0);
+  renderManage();
 }
 
 window.showToast = msg => {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3000);
 };
 
-// ══ INIT ══
-// Secret admin URL: add ?admin to the URL to open login
-if (window.location.search.includes('admin')) {
-  showView('view-login');
-} else {
+// ── ROUTING ──
+function handleRoute() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.has('admin')) { showView('view-login'); return; }
+  if (params.has('design')) {
+    const id = params.get('design');
+    loadDesigns().then(() => { if (id) openDesignPage(id); });
+    return;
+  }
   loadDesigns();
 }
+
+window.addEventListener('popstate', () => handleRoute());
+handleRoute();
 </script>
+
 <!-- Monetag Ad Code -->
-<script>(function(s){s.dataset.zone='11161853',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+<script>(function(s){s.dataset.zone='11161506',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 </body>
 </html>
