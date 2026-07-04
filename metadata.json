@@ -1,0 +1,6 @@
+{
+  "name": "DesignDrop",
+  "description": "Download free graphics and illustrations — forever free.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
