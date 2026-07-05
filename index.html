@@ -1574,10 +1574,19 @@ window.copyDesignLink = (id) => {
 // ── ROUTING ──
 function handleRoute() {
   const params = new URLSearchParams(window.location.search);
-  if (params.has('admin')) { showView('view-login'); return; }
+  if (params.has('admin')) {
+    const splash = document.getElementById('splash-screen');
+    if (splash) splash.classList.add('hidden');
+    showView('view-login');
+    return;
+  }
   if (params.has('design')) {
     const id = params.get('design');
-    loadDesigns().then(() => { if (id) openDesignPage(id); });
+    loadDesigns().then(() => {
+      if (id) openDesignPage(id);
+      const splash = document.getElementById('splash-screen');
+      if (splash) splash.classList.add('hidden');
+    });
     return;
   }
   loadDesigns();
