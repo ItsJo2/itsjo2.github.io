@@ -2,13 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="google-site-verification" content="dopo63SrH9jPvJ-fbptY5fmn6IUfIu6xYDplwPpd1dM" />
-<meta name="p:domain_verify" content="2873e8395578403e616779cb2664f523"/>
 <link rel="icon" type="image/jpeg" href="https://res.cloudinary.com/dlq5xhxop/image/upload/v1783273849/cropped_Minimalist_logo_for_DropDesigns_2K_202607051834_rsvowo.jpg">
 <link rel="apple-touch-icon" href="https://res.cloudinary.com/dlq5xhxop/image/upload/v1783273849/cropped_Minimalist_logo_for_DropDesigns_2K_202607051834_rsvowo.jpg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Drop Designs — Free Graphics & Illustrations for Everyone</title>
-<link rel="sitemap" type="application/xml" href="/sitemap.xml">
 <meta id="meta-desc" name="description" content="Download 100+ free graphics, illustrations, anime art, car designs, typography and streetwear designs on Drop Designs. Free for personal and commercial use.">
 <meta id="meta-keywords" name="keywords" content="free graphics, illustrations, design assets">
 <meta property="og:title" content="Drop Designs — Free Graphics & Illustrations">
@@ -260,6 +257,10 @@
   .page-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
   .page-btn.dots { cursor: default; border: none; background: transparent; }
   .page-info { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 0.75rem; }
+  .sort-bar { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .sort-btn { font-size: 12px; font-family: 'Inter', sans-serif; padding: 6px 14px; border: 1px solid var(--border); border-radius: 20px; background: var(--surface); color: var(--text-secondary); cursor: pointer; transition: all 0.15s; }
+  .sort-btn:hover { border-color: var(--border-strong); color: var(--text-primary); }
+  .sort-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
   /* OUTER LAYOUT */
   .outer-layout { display: grid; grid-template-columns: 260px 1fr 260px; gap: 1rem; max-width: 1600px; margin: 0 auto; padding: 0 1rem; }
@@ -410,6 +411,14 @@
               <button class="filter-btn" onclick="setFilter('Streetwear',this)">Streetwear</button>
               <button class="filter-btn" onclick="setFilter('Cute',this)">Cute</button>
             </div>
+            <!-- SORT BAR -->
+            <div class="sort-bar">
+              <span class="filter-label">Sort:</span>
+              <button class="sort-btn active" onclick="setSort('new',this)">🆕 New</button>
+              <button class="sort-btn" onclick="setSort('popular',this)">🔥 Most Popular</button>
+              <button class="sort-btn" onclick="setSort('downloads',this)">⬇ Most Downloaded</button>
+              <button class="sort-btn" onclick="setSort('views',this)">👁 Most Viewed</button>
+            </div>
             <div id="results-count" style="font-size:13px;color:var(--text-muted);margin-bottom:1rem;min-height:20px;"></div>
             <div id="design-grid" class="design-grid"></div>
             <div id="loading-state" class="loading-state"><div class="spinner"></div><br>Loading designs…</div>
@@ -426,6 +435,7 @@
               <div class="sidebar-title">Stats</div>
               <div class="stat-row"><span>Total designs</span><span id="sb-total">—</span></div>
               <div class="stat-row"><span>Downloads</span><span id="sb-downloads">—</span></div>
+              <div class="stat-row"><span>Total views</span><span id="sb-views">—</span></div>
               <div class="stat-row"><span>Categories</span><span>5</span></div>
             </div>
             <div class="sidebar-section">
@@ -501,15 +511,11 @@
   <div class="outer-layout">
     <div class="left-ads">
       <a class="affiliate-ad" href="https://referral.bluehost.com/jihedlajili55!bd7fed8ba3!a" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891029/0_H-HZMiDSHvq3YnH5_ajkzd7.png" alt="Bluehost">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891029/0_H-HZMiDSHvq3YnH5_ajkzd7.png" alt="Sponsored">
         <div class="affiliate-ad-label">Sponsored</div>
       </a>
       <a class="affiliate-ad" href="https://www.hostinger.com/ae?REFERRALCODE=ROUJIHEDLE8T" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781890763/e9f8de201355603.6672fa0a045ea_pptvuf.png" alt="Hostinger">
-        <div class="affiliate-ad-label">Sponsored</div>
-      </a>
-      <a class="affiliate-ad" href="https://url.hk/i/en/nq32v" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1783253202/ChatGPT_Image_5_juil._2026_13_06_27_mydu4w.png" alt="RedotPay">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781890763/e9f8de201355603.6672fa0a045ea_pptvuf.png" alt="Sponsored">
         <div class="affiliate-ad-label">Sponsored</div>
       </a>
     </div>
@@ -541,16 +547,12 @@
       </div>
     </div>
     <div class="right-ads">
-      <a class="affiliate-ad" href="https://pawns.app/?r=98401" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1783252197/ChatGPT_Image_5_juil._2026_12_49_45_yssfv7.png" alt="Paws App">
-        <div class="affiliate-ad-label">Sponsored</div>
-      </a>
       <a class="affiliate-ad" href="https://vidiq.com/itsjo" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_14_45_22_nxnkwi.png" alt="Vidiq">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_14_45_22_nxnkwi.png" alt="Sponsored">
         <div class="affiliate-ad-label">Sponsored</div>
       </a>
       <a class="affiliate-ad" href="https://www.greengeeks.com/track/itsjo" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_15_02_16_ff413p.png" alt="Green Geeks">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_15_02_16_ff413p.png" alt="Sponsored">
         <div class="affiliate-ad-label">Sponsored</div>
       </a>
     </div>
@@ -561,7 +563,20 @@
       <div class="affiliate-ad-label">Sponsored</div>
     </a>
   </div>
-
+  <div style="max-width:900px;margin:2rem auto;padding:0 1rem;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;">
+    <a class="affiliate-ad" href="YOUR_ENVATO_AFFILIATE_LINK" target="_blank" rel="noopener sponsored" style="flex:1;min-width:200px;max-width:280px;">
+      <img src="https://placehold.co/280x120/ff6b35/FFFFFF?text=Envato+Elements" alt="Envato Elements" style="width:100%;display:block;">
+      <div class="affiliate-ad-label">Sponsored</div>
+    </a>
+    <a class="affiliate-ad" href="YOUR_CREATIVE_FABRICA_LINK" target="_blank" rel="noopener sponsored" style="flex:1;min-width:200px;max-width:280px;">
+      <img src="https://placehold.co/280x120/7c3aed/FFFFFF?text=Creative+Fabrica" alt="Creative Fabrica" style="width:100%;display:block;">
+      <div class="affiliate-ad-label">Sponsored</div>
+    </a>
+    <a class="affiliate-ad" href="YOUR_CANVA_AFFILIATE_LINK" target="_blank" rel="noopener sponsored" style="flex:1;min-width:200px;max-width:280px;">
+      <img src="https://placehold.co/280x120/00c4cc/FFFFFF?text=Canva+Pro" alt="Canva Pro" style="width:100%;display:block;">
+      <div class="affiliate-ad-label">Sponsored</div>
+    </a>
+  </div>
   <!-- Newsletter Signup -->
   <div class="newsletter-section">
     <h2>Get new designs in your inbox</h2>
@@ -699,7 +714,7 @@
       <div class="manage-table">
         <table>
           <thead>
-            <tr><th>Preview</th><th>Title</th><th>Category</th><th>Downloads</th><th>Date</th><th>Actions</th></tr>
+            <tr><th>Preview</th><th>Title</th><th>Category</th><th>Views</th><th>Downloads</th><th>Date</th><th>Actions</th></tr>
           </thead>
           <tbody id="manage-tbody">
             <tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:2rem;">Loading…</td></tr>
@@ -763,15 +778,11 @@
   <div class="outer-layout">
     <div class="left-ads">
       <a class="affiliate-ad" href="https://referral.bluehost.com/jihedlajili55!bd7fed8ba3!a" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891029/0_H-HZMiDSHvq3YnH5_ajkzd7.png" alt="Bluehost">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891029/0_H-HZMiDSHvq3YnH5_ajkzd7.png" alt="Sponsored">
         <div class="affiliate-ad-label">Sponsored</div>
       </a>
       <a class="affiliate-ad" href="https://www.hostinger.com/ae?REFERRALCODE=ROUJIHEDLE8T" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781890763/e9f8de201355603.6672fa0a045ea_pptvuf.png" alt="Hostinger">
-        <div class="affiliate-ad-label">Sponsored</div>
-      </a>
-      <a class="affiliate-ad" href="https://url.hk/i/en/nq32v" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1783253202/ChatGPT_Image_5_juil._2026_13_06_27_mydu4w.png" alt="RedotPay">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781890763/e9f8de201355603.6672fa0a045ea_pptvuf.png" alt="Sponsored">
         <div class="affiliate-ad-label">Sponsored</div>
       </a>
     </div>
@@ -797,16 +808,12 @@
       </div>
     </div>
     <div class="right-ads">
-      <a class="affiliate-ad" href="https://pawns.app/?r=98401" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1783252197/ChatGPT_Image_5_juil._2026_12_49_45_yssfv7.png" alt="Paws App">
-        <div class="affiliate-ad-label">Sponsored</div>
-      </a>
       <a class="affiliate-ad" href="https://vidiq.com/itsjo" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_14_45_22_nxnkwi.png" alt="Vidiq">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_14_45_22_nxnkwi.png" alt="Sponsored">
         <div class="affiliate-ad-label">Sponsored</div>
       </a>
       <a class="affiliate-ad" href="https://www.greengeeks.com/track/itsjo" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_15_02_16_ff413p.png" alt="Green Geeks">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_15_02_16_ff413p.png" alt="Sponsored">
         <div class="affiliate-ad-label">Sponsored</div>
       </a>
     </div>
@@ -852,15 +859,11 @@
   <div class="outer-layout">
     <div class="left-ads">
       <a class="affiliate-ad" href="https://referral.bluehost.com/jihedlajili55!bd7fed8ba3!a" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891029/0_H-HZMiDSHvq3YnH5_ajkzd7.png" alt="Bluehost">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891029/0_H-HZMiDSHvq3YnH5_ajkzd7.png" alt="Sponsored">
         <div class="affiliate-ad-label">Sponsored</div>
       </a>
       <a class="affiliate-ad" href="https://www.hostinger.com/ae?REFERRALCODE=ROUJIHEDLE8T" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781890763/e9f8de201355603.6672fa0a045ea_pptvuf.png" alt="Hostinger">
-        <div class="affiliate-ad-label">Sponsored</div>
-      </a>
-      <a class="affiliate-ad" href="https://url.hk/i/en/nq32v" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1783253202/ChatGPT_Image_5_juil._2026_13_06_27_mydu4w.png" alt="RedotPay">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781890763/e9f8de201355603.6672fa0a045ea_pptvuf.png" alt="Sponsored">
         <div class="affiliate-ad-label">Sponsored</div>
       </a>
     </div>
@@ -895,16 +898,12 @@
       </div>
     </div>
     <div class="right-ads">
-      <a class="affiliate-ad" href="https://pawns.app/?r=98401" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1783252197/ChatGPT_Image_5_juil._2026_12_49_45_yssfv7.png" alt="Paws App">
-        <div class="affiliate-ad-label">Sponsored</div>
-      </a>
       <a class="affiliate-ad" href="https://vidiq.com/itsjo" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_14_45_22_nxnkwi.png" alt="Vidiq">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_14_45_22_nxnkwi.png" alt="Sponsored">
         <div class="affiliate-ad-label">Sponsored</div>
       </a>
       <a class="affiliate-ad" href="https://www.greengeeks.com/track/itsjo" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_15_02_16_ff413p.png" alt="Green Geeks">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_15_02_16_ff413p.png" alt="Sponsored">
         <div class="affiliate-ad-label">Sponsored</div>
       </a>
     </div>
@@ -950,15 +949,11 @@
   <div class="outer-layout">
     <div class="left-ads">
       <a class="affiliate-ad" href="https://referral.bluehost.com/jihedlajili55!bd7fed8ba3!a" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891029/0_H-HZMiDSHvq3YnH5_ajkzd7.png" alt="Bluehost">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891029/0_H-HZMiDSHvq3YnH5_ajkzd7.png" alt="Sponsored">
         <div class="affiliate-ad-label">Sponsored</div>
       </a>
       <a class="affiliate-ad" href="https://www.hostinger.com/ae?REFERRALCODE=ROUJIHEDLE8T" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781890763/e9f8de201355603.6672fa0a045ea_pptvuf.png" alt="Hostinger">
-        <div class="affiliate-ad-label">Sponsored</div>
-      </a>
-      <a class="affiliate-ad" href="https://url.hk/i/en/nq32v" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1783253202/ChatGPT_Image_5_juil._2026_13_06_27_mydu4w.png" alt="RedotPay">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781890763/e9f8de201355603.6672fa0a045ea_pptvuf.png" alt="Sponsored">
         <div class="affiliate-ad-label">Sponsored</div>
       </a>
     </div>
@@ -992,16 +987,12 @@
       </div>
     </div>
     <div class="right-ads">
-      <a class="affiliate-ad" href="https://pawns.app/?r=98401" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1783252197/ChatGPT_Image_5_juil._2026_12_49_45_yssfv7.png" alt="Paws App">
-        <div class="affiliate-ad-label">Sponsored</div>
-      </a>
       <a class="affiliate-ad" href="https://vidiq.com/itsjo" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_14_45_22_nxnkwi.png" alt="Vidiq">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_14_45_22_nxnkwi.png" alt="Sponsored">
         <div class="affiliate-ad-label">Sponsored</div>
       </a>
       <a class="affiliate-ad" href="https://www.greengeeks.com/track/itsjo" target="_blank" rel="noopener">
-        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_15_02_16_ff413p.png" alt="Green Geeks">
+        <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1781891032/ChatGPT_Image_19_juin_2026_15_02_16_ff413p.png" alt="Sponsored">
         <div class="affiliate-ad-label">Sponsored</div>
       </a>
     </div>
@@ -1053,6 +1044,7 @@ let allDesigns = [];
 let currentDesign = null;
 window.currentDesignId = null;
 let currentFilter = 'all';
+let currentSort = 'new';
 const PER_PAGE = 30;
 let currentPage = 1;
 
@@ -1208,6 +1200,15 @@ function renderGrid() {
       (d.tags||[]).some(t => t.toLowerCase().includes(search));
     return matchCat && matchSearch;
   });
+
+  // Sorting
+  if (currentSort === 'new') {
+    filtered.sort((a,b) => new Date(b.createdAt||0) - new Date(a.createdAt||0));
+  } else if (currentSort === 'popular' || currentSort === 'downloads') {
+    filtered.sort((a,b) => (b.downloads||0) - (a.downloads||0));
+  } else if (currentSort === 'views') {
+    filtered.sort((a,b) => (b.views||0) - (a.views||0));
+  }
   const grid = document.getElementById('design-grid');
   const empty = document.getElementById('empty-state');
   const paginationEl = document.getElementById('pagination');
@@ -1242,7 +1243,7 @@ function renderGrid() {
       </div>
       <div class="card-body">
         <div class="card-title">${d.title}</div>
-        <div class="card-meta"><span class="card-tag">${d.category}</span><span class="card-dl-count">⬇ ${d.downloads||0}</span></div>
+        <div class="card-meta"><span class="card-tag">${d.category}</span><span class="card-dl-count">👁 ${d.views||0} &nbsp;⬇ ${d.downloads||0}</span></div>
       </div>
     </div>
     `;
@@ -1273,6 +1274,8 @@ window.goPage = p => { currentPage = p; renderGrid(); document.getElementById('g
 function updateSidebar() {
   document.getElementById('sb-total').textContent = allDesigns.length;
   document.getElementById('sb-downloads').textContent = allDesigns.reduce((s,d)=>s+(d.downloads||0),0);
+  const sbViews = document.getElementById('sb-views');
+  if (sbViews) sbViews.textContent = allDesigns.reduce((s,d)=>s+(d.views||0),0);
   const tagCounts = {};
   allDesigns.flatMap(d=>d.tags||[]).forEach(t=>tagCounts[t]=(tagCounts[t]||0)+1);
   const top = Object.entries(tagCounts).sort((a,b)=>b[1]-a[1]).slice(0,12).map(x=>x[0]);
@@ -1280,6 +1283,13 @@ function updateSidebar() {
 }
 
 window.filterDesigns = () => { currentPage = 1; renderGrid(); };
+window.setSort = (sort, btn) => {
+  currentSort = sort;
+  currentPage = 1;
+  document.querySelectorAll('.sort-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+};
 window.setFilter = (cat, btn) => { currentFilter = cat; currentPage = 1; document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); renderGrid(); };
 window.setTagFilter = tag => { document.getElementById('search-input').value = tag; renderGrid(); window.scrollToGallery(); };
 
@@ -1320,7 +1330,14 @@ window.openDesignPage = id => {
   document.getElementById('dp-title').textContent = d.title;
   document.getElementById('dp-category').textContent = d.category;
   document.getElementById('dp-desc').textContent = d.desc || 'No description provided.';
-  document.getElementById('dp-meta').textContent = `${d.downloads||0} downloads · Free for personal & commercial use`;
+  document.getElementById('dp-meta').textContent = `👁 ${d.views||0} views · ⬇ ${d.downloads||0} downloads · Free for personal & commercial use`;
+
+  // Increment view counter in Firebase
+  try {
+    await updateDoc(doc(db,'designs',id), { views: increment(1) });
+    const local = allDesigns.find(x=>x.id===id);
+    if (local) local.views = (local.views||0)+1;
+  } catch(e) { console.warn('view count failed', e); }
   updateShareButtons(d);
   document.getElementById('dp-tags').innerHTML = (d.tags||[]).map(t=>`<span class="card-tag">${t}</span>`).join('');
   // Related
@@ -1486,6 +1503,7 @@ function renderManage() {
       <td>${d.imageUrl?`<img class="thumb-sm" src="${d.imageUrl}" alt="">`:`<div class="thumb-sm-box">${EMOJIS[d.category]||'🎨'}</div>`}</td>
       <td style="font-weight:500">${d.title}</td>
       <td><span class="card-tag">${d.category}</span></td>
+      <td>${d.views||0}</td>
       <td>${d.downloads||0}</td>
       <td style="color:var(--text-muted)">${d.date||''}</td>
       <td style="white-space:nowrap">
@@ -1600,7 +1618,7 @@ window.copyDesignLink = (id) => {
 // ── ROUTING ──
 function handleRoute() {
   const params = new URLSearchParams(window.location.search);
-  if (params.has('jihed24')) {
+  if (params.has('admin')) {
     const splash = document.getElementById('splash-screen');
     if (splash) splash.classList.add('hidden');
     showView('view-login');
