@@ -1310,7 +1310,7 @@ window.closeModal = e => { if(e.target===document.getElementById('modal-overlay'
 window.closeModalDirect = () => document.getElementById('modal-overlay').classList.remove('open');
 
 // ── DESIGN PAGE ──
-window.openDesignPage = id => {
+window.openDesignPage = async id => {
   const d = allDesigns.find(x=>x.id===id);
   if (!d) return;
   currentDesign = d;
