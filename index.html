@@ -262,6 +262,18 @@
   .sort-btn:hover { border-color: var(--border-strong); color: var(--text-primary); }
   .sort-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
+  /* TRENDING SECTION */
+  .trending-section { max-width: 1200px; margin: 0 auto; padding: 0 2rem 1rem; }
+  .trending-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+  .trending-title { font-family: 'DM Serif Display', serif; font-size: 1.5rem; letter-spacing: -0.5px; display: flex; align-items: center; gap: 0.5rem; }
+  .trending-subtitle { font-size: 12px; color: var(--text-muted); }
+  .trending-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
+  .trending-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; cursor: pointer; transition: border-color 0.15s, transform 0.15s; position: relative; }
+  .trending-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+  .trending-card .card-thumb { height: 200px; }
+  .trending-rank { position: absolute; top: 8px; left: 8px; background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; }
+  .trending-divider { border: none; border-top: 1px solid var(--border); margin: 1.5rem 2rem; max-width: 1200px; margin-left: auto; margin-right: auto; }
+
   /* OUTER LAYOUT */
   .outer-layout { display: grid; grid-template-columns: 260px 1fr 260px; gap: 1rem; max-width: 1600px; margin: 0 auto; padding: 0 1rem; }
   .left-ads, .right-ads { padding-top: 1rem; display: flex; flex-direction: column; gap: 1rem; }
@@ -383,6 +395,18 @@
       <button class="btn-search">Search</button>
     </div>
   </section>
+  <!-- TRENDING THIS WEEK -->
+  <div class="trending-section" id="trending-section" style="display:none;">
+    <div class="trending-header">
+      <div>
+        <div class="trending-title">🔥 Trending this week</div>
+        <div class="trending-subtitle">Most downloaded in the last 7 days</div>
+      </div>
+    </div>
+    <div class="trending-grid" id="trending-grid"></div>
+  </div>
+  <hr class="trending-divider" id="trending-divider" style="display:none;">
+
   <div class="outer-layout" id="gallery-anchor">
     <div class="left-ads">
       <a class="affiliate-ad" href="https://referral.bluehost.com/jihedlajili55!bd7fed8ba3!a" target="_blank" rel="noopener">
@@ -1181,6 +1205,7 @@ async function loadDesigns() {
     document.getElementById('loading-state').style.display = 'none';
     renderGrid();
     updateSidebar();
+    renderTrending();
     const splash = document.getElementById('splash-screen');
     if (splash) splash.classList.add('hidden');
   } catch(e) {
@@ -1283,6 +1308,48 @@ function updateSidebar() {
 }
 
 window.filterDesigns = () => { currentPage = 1; renderGrid(); };
+
+function renderTrending() {
+  const oneWeekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+  // Get designs uploaded in the last 7 days OR just top downloaded if none recent
+  let recent = allDesigns.filter(d => d.createdAt && new Date(d.createdAt).getTime() > oneWeekAgo);
+  // If less than 3 recent designs, fall back to all designs sorted by downloads
+  if (recent.length < 3) recent = [...allDesigns];
+  const trending = recent
+    .sort((a, b) => (b.downloads || 0) - (a.downloads || 0))
+    .slice(0, 5);
+
+  const section = document.getElementById('trending-section');
+  const divider = document.getElementById('trending-divider');
+  const grid = document.getElementById('trending-grid');
+  if (!section || !grid) return;
+
+  if (trending.length === 0) { section.style.display = 'none'; if(divider) divider.style.display = 'none'; return; }
+
+  section.style.display = 'block';
+  if(divider) divider.style.display = 'block';
+
+  grid.innerHTML = trending.map((d, i) => `
+    <div class="trending-card design-card" data-id="${d.id}">
+      <div class="trending-rank">${i + 1}</div>
+      <div class="card-thumb">
+        ${d.imageUrl ? `<img src="${d.imageUrl}" alt="${d.title}" loading="lazy">` : `<span class="no-img">${EMOJIS[d.category]||'🎨'}</span>`}
+        <div class="card-overlay"><button class="btn-preview">Preview</button></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">${d.title}</div>
+        <div class="card-meta">
+          <span class="card-tag">${d.category}</span>
+          <span class="card-dl-count">⬇ ${d.downloads||0}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  document.querySelectorAll('#trending-grid .design-card[data-id]').forEach(card => {
+    card.addEventListener('click', () => openModal(card.getAttribute('data-id')));
+  });
+}
 window.setSort = (sort, btn) => {
   currentSort = sort;
   currentPage = 1;
