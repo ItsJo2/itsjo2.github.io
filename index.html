@@ -121,6 +121,15 @@
   .btn-view-page:hover { background: var(--accent-soft); }
   .btn-close-modal { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.9); border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; }
   .modal-inner { position: relative; }
+
+  /* IMAGE ZOOM */
+  .zoom-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 500; display: none; align-items: center; justify-content: center; cursor: zoom-out; }
+  .zoom-overlay.open { display: flex; }
+  .zoom-overlay img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 8px; cursor: zoom-out; }
+  .zoom-close { position: absolute; top: 1rem; right: 1.5rem; color: #fff; font-size: 2rem; cursor: pointer; background: none; border: none; line-height: 1; opacity: 0.8; }
+  .zoom-close:hover { opacity: 1; }
+  .design-page-img img { cursor: zoom-in; transition: opacity 0.15s; }
+  .design-page-img img:hover { opacity: 0.9; }
   .empty-state { text-align: center; padding: 4rem 2rem; color: var(--text-muted); }
   .empty-state p { margin-top: 0.5rem; font-size: 14px; }
   .loading-state { text-align: center; padding: 4rem 2rem; color: var(--text-muted); font-size: 14px; }
@@ -623,6 +632,12 @@
   </footer>
 </div>
 
+  <!-- IMAGE ZOOM -->
+<div class="zoom-overlay" id="zoom-overlay" onclick="closeZoom()">
+  <button class="zoom-close" onclick="closeZoom()">✕</button>
+  <img id="zoom-img" src="" alt="Zoomed design">
+</div>
+  
 <!-- MODAL -->
 <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
   <div class="modal">
@@ -1402,7 +1417,7 @@ window.openDesignPage = async id => {
   const canonicalElem = document.getElementById('canonical-link');
   if (canonicalElem) canonicalElem.href = `https://www.dropdesigns.net/?design=${d.id}`;
   // Fill page
-  document.getElementById('dp-img-wrap').innerHTML = d.imageUrl ? `<img src="${d.imageUrl}" alt="${d.title}">` : `<div style="font-size:5rem;text-align:center;padding:3rem">${EMOJIS[d.category]||'🎨'}</div>`;
+  document.getElementById('dp-img-wrap').innerHTML = d.imageUrl ? `<img src="${d.imageUrl}" alt="${d.title}" onclick="openZoom('${d.imageUrl}', '${d.title.replace(/'/g, '')}')" title="Click to zoom">` : `<div style="font-size:5rem;text-align:center;padding:3rem">${EMOJIS[d.category]||'🎨'}</div>`;
   document.getElementById('dp-title').textContent = d.title;
   document.getElementById('dp-category').textContent = d.category;
   document.getElementById('dp-desc').textContent = d.desc || 'No description provided.';
@@ -1682,6 +1697,21 @@ function updateShareButtons(design) {
   `;
 }
 
+window.openZoom = (src, alt) => {
+  document.getElementById('zoom-img').src = src;
+  document.getElementById('zoom-img').alt = alt || 'Design';
+  document.getElementById('zoom-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+};
+window.closeZoom = () => {
+  document.getElementById('zoom-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+};
+// Close zoom on Escape key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeZoom();
+});
+  
 window.copyDesignLink = (id) => {
   const url = 'https://www.dropdesigns.net/?design=' + id;
   navigator.clipboard.writeText(url).then(() => {
