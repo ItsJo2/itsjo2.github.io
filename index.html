@@ -167,6 +167,17 @@
   .dark-toggle:hover { border-color: var(--text-muted); color: var(--text-primary); }
   .design-page-img img { cursor: zoom-in; transition: opacity 0.15s; }
   .design-page-img img:hover { opacity: 0.9; }
+
+  /* COLOR PALETTE */
+  .color-palette { margin-top: 1.25rem; }
+  .palette-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 0.6rem; }
+  .palette-swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+  .color-swatch { width: 36px; height: 36px; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: transform 0.15s, border-color 0.15s; position: relative; }
+  .color-swatch:hover { transform: scale(1.15); border-color: var(--border-strong); }
+  .color-swatch .swatch-tooltip { position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-size: 10px; padding: 3px 7px; border-radius: 4px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.15s; font-family: monospace; }
+  .color-swatch:hover .swatch-tooltip { opacity: 1; }
+  .palette-loading { font-size: 12px; color: var(--text-muted); }
+  body.dark .color-swatch { border-color: #3A3A3A; }
   .empty-state { text-align: center; padding: 4rem 2rem; color: var(--text-muted); }
   .empty-state p { margin-top: 0.5rem; font-size: 14px; }
   .loading-state { text-align: center; padding: 4rem 2rem; color: var(--text-muted); font-size: 14px; }
@@ -614,6 +625,10 @@
             <div id="dp-tags" class="dp-tags"></div>
             <div id="dp-meta" class="dp-meta"></div>
             <button class="btn-dl-big" onclick="downloadCurrentDesign()">⬇ Free Download</button>
+            <div class="color-palette">
+  <div class="palette-title">🎨 Color palette</div>
+  <div class="palette-swatches" id="dp-palette"><span class="palette-loading">Extracting colors…</span></div>
+</div>
             <div class="share-section">
               <div class="share-title">Share this design</div>
               <div class="share-buttons" id="share-buttons">
@@ -1464,6 +1479,7 @@ window.openDesignPage = async id => {
     if (local) local.views = (local.views||0)+1;
   } catch(e) { console.warn('view count failed', e); }
   updateShareButtons(d);
+  if (d.imageUrl) renderPalette(d.imageUrl);
   document.getElementById('dp-tags').innerHTML = (d.tags||[]).map(t=>`<span class="card-tag">${t}</span>`).join('');
   // Related
   const related = allDesigns.filter(x=>x.id!==id && x.category===d.category).slice(0,6);
@@ -1766,6 +1782,65 @@ window.toggleDark = () => {
 };
 initDarkMode();
 
+// ── COLOR PALETTE EXTRACTOR ──
+function extractColors(imageUrl, canvasId) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = 50;
+        canvas.height = 50;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, 50, 50);
+        const data = ctx.getImageData(0, 0, 50, 50).data;
+        const colorMap = {};
+        for (let i = 0; i < data.length; i += 16) {
+          const r = Math.round(data[i] / 32) * 32;
+          const g = Math.round(data[i+1] / 32) * 32;
+          const b = Math.round(data[i+2] / 32) * 32;
+          const a = data[i+3];
+          if (a < 128) continue; // skip transparent
+          const key = `${r},${g},${b}`;
+          colorMap[key] = (colorMap[key] || 0) + 1;
+        }
+        const sorted = Object.entries(colorMap)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 6)
+          .map(([key]) => {
+            const [r, g, b] = key.split(',').map(Number);
+            return '#' + [r,g,b].map(v => v.toString(16).padStart(2,'0')).join('');
+          });
+        resolve(sorted);
+      } catch(e) { resolve([]); }
+    };
+    img.onerror = () => resolve([]);
+    img.src = imageUrl;
+  });
+}
+
+async function renderPalette(imageUrl) {
+  const container = document.getElementById('dp-palette');
+  if (!container) return;
+  container.innerHTML = '<span class="palette-loading">Extracting colors…</span>';
+  const colors = await extractColors(imageUrl);
+  if (!colors.length) { container.innerHTML = '<span class="palette-loading">Could not extract colors.</span>'; return; }
+  container.innerHTML = colors.map(hex => `
+    <div class="color-swatch" style="background:${hex}" onclick="copyColor('${hex}')" title="${hex}">
+      <span class="swatch-tooltip">${hex}</span>
+    </div>
+  `).join('');
+}
+
+window.copyColor = (hex) => {
+  navigator.clipboard.writeText(hex).then(() => {
+    showToast(`Copied ${hex} to clipboard! ✓`);
+  }).catch(() => {
+    showToast(`Color: ${hex}`);
+  });
+};
+  
 // ── KEYBOARD SHORTCUTS ──
 document.addEventListener('keydown', e => {
   // Skip if user is typing in an input
