@@ -447,6 +447,7 @@
       <input type="text" id="search-input" placeholder="Search illustrations, graphics…" oninput="filterDesigns()" onkeydown="if(event.key==='Enter'){currentPage=1;filterDesigns();}">
       <button class="btn-search">Search</button>
     </div>
+<p style="font-size:11px;color:var(--text-muted);margin-top:0.5rem;">Press <kbd style="background:var(--tag-bg);color:var(--tag-text);padding:1px 6px;border-radius:4px;font-size:11px;font-family:monospace;">/</kbd> to search · <kbd style="background:var(--tag-bg);color:var(--tag-text);padding:1px 6px;border-radius:4px;font-size:11px;font-family:monospace;">Esc</kbd> to close · <kbd style="background:var(--tag-bg);color:var(--tag-text);padding:1px 6px;border-radius:4px;font-size:11px;font-family:monospace;">H</kbd> to go home</p>
   </section>
   <!-- TRENDING THIS WEEK -->
   <div class="trending-section" id="trending-section" style="display:none;">
@@ -1764,6 +1765,38 @@ window.toggleDark = () => {
   updateToggleBtn(isDark);
 };
 initDarkMode();
+
+// ── KEYBOARD SHORTCUTS ──
+document.addEventListener('keydown', e => {
+  // Skip if user is typing in an input
+  if (['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) return;
+
+  // Press "/" to focus search
+  if (e.key === '/') {
+    e.preventDefault();
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+      searchInput.focus();
+      searchInput.select();
+      window.scrollToGallery && window.scrollToGallery();
+    }
+  }
+
+  // Press "Escape" to close modal or zoom
+  if (e.key === 'Escape') {
+    closeZoom && closeZoom();
+    closeModalDirect && closeModalDirect();
+  }
+
+  // Press "h" to go home
+  if (e.key === 'h' || e.key === 'H') {
+    const modal = document.getElementById('modal-overlay');
+    const zoom = document.getElementById('zoom-overlay');
+    if (!modal?.classList.contains('open') && !zoom?.classList.contains('open')) {
+      goHome && goHome();
+    }
+  }
+});
   
 window.copyDesignLink = (id) => {
   const url = 'https://www.dropdesigns.net/?design=' + id;
