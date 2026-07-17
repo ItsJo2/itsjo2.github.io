@@ -1133,6 +1133,12 @@ const CLOUDINARY_PRESET = 'vidhgnck';
 const ADMIN_USER = 'jihed lajili';
 const ADMIN_PASS = 'Jo248.';
 
+// ── CLOUDINARY IMAGE OPTIMIZER ──
+function optimizeImg(url, width = 600) {
+  if (!url || !url.includes('res.cloudinary.com')) return url;
+  return url.replace('/upload/', `/upload/q_auto,f_auto,w_${width},c_limit/`);
+}
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, orderBy, increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -1346,7 +1352,7 @@ const isTop = (d.downloads || 0) >= 50;
     return `
     <div class="design-card" data-id="${d.id}">
       <div class="card-thumb">
-        ${d.imageUrl ? `<img src="${d.imageUrl}" alt="${d.title}" loading="lazy">` : `<span class="no-img">${EMOJIS[d.category]||'🎨'}</span>`}
+        ${d.imageUrl ? `<img src="${optimizeImg(d.imageUrl, 400)}" alt="${d.title}" loading="lazy">` : `<span class="no-img">${EMOJIS[d.category]||'🎨'}</span>`}
         ${isNew ? '<span class="milestone-badge badge-new" style="left:8px;">NEW</span>' : ''}
 ${isTop ? '<span class="milestone-badge badge-top">💎 Top Pick</span>' : isHot ? '<span class="milestone-badge badge-hot">🔥 Hot</span>' : ''}
         <div class="card-overlay"><button class="btn-preview">Preview</button></div>
@@ -1418,7 +1424,7 @@ function renderTrending() {
     <div class="trending-card design-card" data-id="${d.id}">
       <div class="trending-rank">${i + 1}</div>
       <div class="card-thumb">
-        ${d.imageUrl ? `<img src="${d.imageUrl}" alt="${d.title}" loading="lazy">` : `<span class="no-img">${EMOJIS[d.category]||'🎨'}</span>`}
+        ${d.imageUrl ? `<img src="${optimizeImg(d.imageUrl, 400)}" alt="${d.title}" loading="lazy">` : `<span class="no-img">${EMOJIS[d.category]||'🎨'}</span>`}
         <div class="card-overlay"><button class="btn-preview">Preview</button></div>
       </div>
       <div class="card-body">
@@ -1451,7 +1457,7 @@ window.openModal = id => {
   if (!d) return;
   currentDesign = d;
   window.currentDesignId = id;
-  document.getElementById('modal-img-wrap').innerHTML = d.imageUrl ? `<img src="${d.imageUrl}" alt="${d.title}">` : `<div style="font-size:3rem;color:var(--text-muted)">${EMOJIS[d.category]||'🎨'}</div>`;
+  document.getElementById('modal-img-wrap').innerHTML = d.imageUrl ? `<img src="${optimizeImg(d.imageUrl, 560)}" alt="${d.title}">` : `<div style="font-size:3rem;color:var(--text-muted)">${EMOJIS[d.category]||'🎨'}</div>`;
   document.getElementById('modal-title').textContent = d.title;
   document.getElementById('modal-desc').textContent = d.desc || 'No description provided.';
   document.getElementById('modal-meta').textContent = `${d.downloads||0} downloads`;
@@ -1495,7 +1501,7 @@ window.openDesignPage = async id => {
   if (pinterestDesc) pinterestDesc.content = d.desc || `${d.title} — Free download on Drop Designs`;
   if (pinterestMedia && d.imageUrl) pinterestMedia.content = d.imageUrl;
   // Fill page
-  document.getElementById('dp-img-wrap').innerHTML = d.imageUrl ? `<img src="${d.imageUrl}" alt="${d.title}" onclick="openZoom('${d.imageUrl}', '${d.title.replace(/'/g, '')}')" title="Click to zoom">` : `<div style="font-size:5rem;text-align:center;padding:3rem">${EMOJIS[d.category]||'🎨'}</div>`;
+  document.getElementById('dp-img-wrap').innerHTML = d.imageUrl ? `<img src="${optimizeImg(d.imageUrl, 900)}" alt="${d.title}" onclick="openZoom('${d.imageUrl}', '${d.title.replace(/'/g, '')}')" title="Click to zoom">` : `<div style="font-size:5rem;text-align:center;padding:3rem">${EMOJIS[d.category]||'🎨'}</div>`;
   document.getElementById('dp-title').textContent = d.title;
   document.getElementById('dp-category').textContent = d.category;
   document.getElementById('dp-desc').textContent = d.desc || 'No description provided.';
@@ -1514,7 +1520,7 @@ window.openDesignPage = async id => {
   const related = allDesigns.filter(x=>x.id!==id && x.category===d.category).slice(0,6);
   document.getElementById('related-grid').innerHTML = related.map(r=>`
     <div class="design-card" data-id="${r.id}">
-      <div class="card-thumb">${r.imageUrl?`<img src="${r.imageUrl}" alt="${r.title}" loading="lazy">`:`<span class="no-img">${EMOJIS[r.category]||'🎨'}</span>`}<div class="card-overlay"><button class="btn-preview">Preview</button></div></div>
+      <div class="card-thumb">${r.imageUrl?`<img src="${optimizeImg(r.imageUrl, 400)}" alt="${r.title}" loading="lazy">`:`<span class="no-img">${EMOJIS[r.category]||'🎨'}</span>`}<div class="card-overlay"><button class="btn-preview">Preview</button></div></div>
       <div class="card-body"><div class="card-title">${r.title}</div><div class="card-meta"><span class="card-tag">${r.category}</span><span class="card-dl-count">⬇ ${r.downloads||0}</span></div></div>
     </div>
   `).join('');
@@ -1670,7 +1676,7 @@ function renderManage() {
   if (!allDesigns.length) { tbody.innerHTML=`<tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:2rem;">No designs yet.</td></tr>`; return; }
   tbody.innerHTML = allDesigns.map(d=>`
     <tr>
-      <td>${d.imageUrl?`<img class="thumb-sm" src="${d.imageUrl}" alt="">`:`<div class="thumb-sm-box">${EMOJIS[d.category]||'🎨'}</div>`}</td>
+      <td>${d.imageUrl?`<img class="thumb-sm" src="${optimizeImg(d.imageUrl, 100)}" alt="">`:`<div class="thumb-sm-box">${EMOJIS[d.category]||'🎨'}</div>`}</td>
       <td style="font-weight:500">${d.title}</td>
       <td><span class="card-tag">${d.category}</span></td>
       <td>${d.views||0}</td>
