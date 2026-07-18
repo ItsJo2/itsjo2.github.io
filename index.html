@@ -178,6 +178,14 @@
   .dark-toggle { background: none; border: 1px solid var(--border-strong); border-radius: 20px; padding: 5px 12px; font-size: 12px; cursor: pointer; color: var(--text-secondary); font-family: 'Inter', sans-serif; transition: all 0.15s; display: flex; align-items: center; gap: 5px; }
   .dark-toggle:hover { border-color: var(--text-muted); color: var(--text-primary); }
   .design-page-img img { cursor: zoom-in; transition: opacity 0.15s; }
+  .card-thumb img, .modal-img img, .design-page-img img, .trending-card img { 
+  -webkit-user-drag: none; 
+  user-drag: none; 
+  pointer-events: none; 
+}
+.card-thumb, .modal-img, .design-page-img, .trending-card { 
+  pointer-events: auto; 
+}
   .design-page-img img:hover { opacity: 0.9; }
 
   /* COLOR PALETTE */
@@ -629,7 +637,7 @@
       <div class="design-page">
         <a class="design-page-back" onclick="goHome()">← Back to all designs</a>
         <div class="design-page-grid">
-          <div class="design-page-img" id="dp-img-wrap"></div>
+          <div class="design-page-img" id="dp-img-wrap" onclick="currentDesign && openZoom(currentDesign.imageUrl, currentDesign.title)" style="cursor:zoom-in;"></div>
           <div class="design-page-info">
             <div id="dp-category" class="dp-category"></div>
             <h1 id="dp-title"></h1>
@@ -1503,7 +1511,7 @@ window.openDesignPage = async id => {
   if (pinterestDesc) pinterestDesc.content = d.desc || `${d.title} — Free download on Drop Designs`;
   if (pinterestMedia && d.imageUrl) pinterestMedia.content = d.imageUrl;
   // Fill page
-  document.getElementById('dp-img-wrap').innerHTML = d.imageUrl ? `<img src="${optimizeImg(d.imageUrl, 900)}" alt="${d.title}" onclick="openZoom('${d.imageUrl}', '${d.title.replace(/'/g, '')}')" title="Click to zoom">` : `<div style="font-size:5rem;text-align:center;padding:3rem">${EMOJIS[d.category]||'🎨'}</div>`;
+  document.getElementById('dp-img-wrap').innerHTML = d.imageUrl ? `<img src="${optimizeImg(d.imageUrl, 900)}" alt="${d.title}" title="Click to zoom">` : `<div style="font-size:5rem;text-align:center;padding:3rem">${EMOJIS[d.category]||'🎨'}</div>`;
   document.getElementById('dp-title').textContent = d.title;
   document.getElementById('dp-category').textContent = d.category;
   document.getElementById('dp-desc').textContent = d.desc || 'No description provided.';
@@ -1877,6 +1885,14 @@ window.copyColor = (hex) => {
     showToast(`Color: ${hex}`);
   });
 };
+
+// ── DISABLE RIGHT-CLICK ON IMAGES ──
+document.addEventListener('contextmenu', e => {
+  if (e.target.tagName === 'IMG') {
+    e.preventDefault();
+    return false;
+  }
+});
   
 // ── KEYBOARD SHORTCUTS ──
 document.addEventListener('keydown', e => {
