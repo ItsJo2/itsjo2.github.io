@@ -637,7 +637,7 @@
       <div class="design-page">
         <a class="design-page-back" onclick="goHome()">← Back to all designs</a>
         <div class="design-page-grid">
-          <div class="design-page-img" id="dp-img-wrap" onclick="currentDesign && openZoom(currentDesign.imageUrl, currentDesign.title)" style="cursor:zoom-in;"></div>
+          <div class="design-page-img" id="dp-img-wrap" onclick="handleZoomClick()" style="cursor:zoom-in;"></div>
           <div class="design-page-info">
             <div id="dp-category" class="dp-category"></div>
             <h1 id="dp-title"></h1>
@@ -1886,6 +1886,12 @@ window.copyColor = (hex) => {
   });
 };
 
+window.handleZoomClick = () => {
+  if (currentDesign && currentDesign.imageUrl) {
+    openZoom(currentDesign.imageUrl, currentDesign.title || '');
+  }
+};
+  
 // ── DISABLE RIGHT-CLICK ON IMAGES ──
 document.addEventListener('contextmenu', e => {
   if (e.target.tagName === 'IMG') {
