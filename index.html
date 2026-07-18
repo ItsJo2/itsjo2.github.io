@@ -1364,7 +1364,7 @@ ${isTop ? '<span class="milestone-badge badge-top">💎 Top Pick</span>' : isHot
     </div>
     `;
   }).join('');
-  document.querySelectorAll('.design-card[data-id]').forEach(card => {
+  document.querySelectorAll('#design-grid .design-card[data-id]').forEach(card => {
     card.addEventListener('click', () => openModal(card.getAttribute('data-id')));
   });
   pageInfoEl.textContent = `Showing ${start+1}–${Math.min(start+PER_PAGE, filtered.length)} of ${filtered.length} designs`;
