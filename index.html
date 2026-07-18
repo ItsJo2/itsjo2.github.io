@@ -712,7 +712,7 @@
         <div class="modal-footer">
           <div class="modal-meta" id="modal-meta"></div>
           <div style="display:flex;gap:8px;">
-            <button class="btn-view-page" onclick="openDesignPage(currentDesignId)">View &amp; Download →</button>
+            <button class="btn-view-page" id="modal-view-btn" onclick="">View & Download →</button>
           </div>
         </div>
       </div>
@@ -1457,6 +1457,8 @@ window.openModal = id => {
   if (!d) return;
   currentDesign = d;
   window.currentDesignId = id;
+  const viewBtn = document.getElementById('modal-view-btn');
+  if (viewBtn) viewBtn.onclick = () => openDesignPage(id);
   document.getElementById('modal-img-wrap').innerHTML = d.imageUrl ? `<img src="${optimizeImg(d.imageUrl, 560)}" alt="${d.title}">` : `<div style="font-size:3rem;color:var(--text-muted)">${EMOJIS[d.category]||'🎨'}</div>`;
   document.getElementById('modal-title').textContent = d.title;
   document.getElementById('modal-desc').textContent = d.desc || 'No description provided.';
