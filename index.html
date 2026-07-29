@@ -521,12 +521,12 @@
           <div>
             <div class="filters">
               <span class="filter-label">Filter:</span>
-              <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
-              <button class="filter-btn" onclick="setFilter('Cars',this)">Cars</button>
-              <button class="filter-btn" onclick="setFilter('Anime',this)">Anime</button>
-              <button class="filter-btn" onclick="setFilter('Typography',this)">Typography</button>
-              <button class="filter-btn" onclick="setFilter('Streetwear',this)">Streetwear</button>
-              <button class="filter-btn" onclick="setFilter('Cute',this)">Cute</button>
+              <button class="filter-btn active" onclick="navigateCategory('all',this)">All</button>
+              <button class="filter-btn" onclick="navigateCategory('cars',this)">Cars</button>
+              <button class="filter-btn" onclick="navigateCategory('anime',this)">Anime</button>
+              <button class="filter-btn" onclick="navigateCategory('typography',this)">Typography</button>
+              <button class="filter-btn" onclick="navigateCategory('streetwear',this)">Streetwear</button>
+              <button class="filter-btn" onclick="navigateCategory('cute',this)">Cute</button>
             </div>
             <!-- SORT BAR -->
             <div class="sort-bar">
@@ -1471,7 +1471,54 @@ window.setSort = (sort, btn) => {
   btn.classList.add('active');
   renderGrid();
 };
-window.setFilter = (cat, btn) => { currentFilter = cat; currentPage = 1; document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); renderGrid(); };
+window.setFilter = (cat, btn) => {
+  currentFilter = cat;
+  currentPage = 1;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderGrid();
+  updateCategoryMeta(cat);
+};
+
+// Category URL mapping
+const CAT_SLUG = { all: '', cars: 'Cars', anime: 'Anime', typography: 'Typography', streetwear: 'Streetwear', cute: 'Cute' };
+const SLUG_CAT = { cars: 'Cars', anime: 'Anime', typography: 'Typography', streetwear: 'Streetwear', cute: 'Cute' };
+const CAT_META = {
+  all: { title: 'Drop Designs — Free Graphics & Illustrations for Everyone', desc: 'Download 100+ free graphics, illustrations, anime art, car designs, typography and streetwear designs. Free for personal and commercial use.', keywords: 'free graphics, free illustrations, free design assets, drop designs' },
+  cars: { title: 'Free Car Designs & Automotive Graphics — Drop Designs', desc: 'Download free car designs, automotive graphics and racing illustrations. All free for personal and commercial use.', keywords: 'free car designs, automotive graphics, racing illustrations, car t-shirt designs' },
+  anime: { title: 'Free Anime Illustrations & Graphics — Drop Designs', desc: 'Download free anime illustrations, manga-inspired graphics and Japanese art. All free for personal and commercial use.', keywords: 'free anime illustrations, anime graphics, manga art, anime t-shirt designs, free anime download' },
+  typography: { title: 'Free Typography Designs & Text Graphics — Drop Designs', desc: 'Download free typography designs, lettering graphics and text-based art. All free for personal and commercial use.', keywords: 'free typography designs, lettering graphics, text art, typography t-shirts, free font designs' },
+  streetwear: { title: 'Free Streetwear Graphics & Urban Designs — Drop Designs', desc: 'Download free streetwear graphics, urban art and street fashion designs. All free for personal and commercial use.', keywords: 'free streetwear graphics, urban art, street fashion designs, streetwear t-shirts' },
+  cute: { title: 'Free Cute Illustrations & Kawaii Graphics — Drop Designs', desc: 'Download free cute illustrations, kawaii graphics and adorable designs. All free for personal and commercial use.', keywords: 'free cute illustrations, kawaii graphics, cute designs, adorable graphics free download' }
+};
+
+function updateCategoryMeta(slug) {
+  const meta = CAT_META[slug] || CAT_META.all;
+  document.title = meta.title;
+  const descEl = document.getElementById('meta-desc');
+  const kwEl = document.getElementById('meta-keywords');
+  const ogTitle = document.querySelector('meta[property="og:title"]');
+  const ogDesc = document.querySelector('meta[property="og:description"]');
+  const canonical = document.getElementById('canonical-link');
+  if (descEl) descEl.content = meta.desc;
+  if (kwEl) kwEl.content = meta.keywords;
+  if (ogTitle) ogTitle.content = meta.title;
+  if (ogDesc) ogDesc.content = meta.desc;
+  if (canonical) canonical.href = slug === 'all' ? 'https://www.dropdesigns.net/' : `https://www.dropdesigns.net/${slug}`;
+}
+
+window.navigateCategory = (slug, btn) => {
+  const newUrl = slug === 'all' ? '/' : `/${slug}`;
+  history.pushState({ category: slug }, '', newUrl);
+  const cat = SLUG_CAT[slug] || 'all';
+  currentFilter = cat === 'all' ? 'all' : cat;
+  currentPage = 1;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderGrid();
+  updateCategoryMeta(slug);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
 window.setTagFilter = tag => { document.getElementById('search-input').value = tag; renderGrid(); window.scrollToGallery(); };
 
 // ── MODAL ──
@@ -1959,6 +2006,8 @@ window.copyDesignLink = (id) => {
 // ── ROUTING ──
 function handleRoute() {
   const params = new URLSearchParams(window.location.search);
+  const path = window.location.pathname.replace(/\/+$/, '').toLowerCase();
+
   if (params.has('admin')) {
     const splash = document.getElementById('splash-screen');
     if (splash) splash.classList.add('hidden');
@@ -1974,10 +2023,45 @@ function handleRoute() {
     });
     return;
   }
+
+  // Handle category URLs: /cars /anime /typography /streetwear /cute
+  const categorySlug = path.split('/').filter(Boolean).pop() || '';
+  const validSlugs = ['cars', 'anime', 'typography', 'streetwear', 'cute'];
+  if (validSlugs.includes(categorySlug)) {
+    currentFilter = SLUG_CAT[categorySlug];
+    currentPage = 1;
+    loadDesigns().then(() => {
+      // Activate correct filter button
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        const btnSlug = btn.textContent.trim().toLowerCase();
+        if (btnSlug === categorySlug) btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+      updateCategoryMeta(categorySlug);
+    });
+    return;
+  }
+
   loadDesigns();
 }
 
-window.addEventListener('popstate', () => handleRoute());
+window.addEventListener('popstate', (e) => {
+  if (e.state && e.state.category !== undefined) {
+    const slug = e.state.category;
+    const cat = SLUG_CAT[slug] || 'all';
+    currentFilter = cat;
+    currentPage = 1;
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      const btnSlug = btn.textContent.trim().toLowerCase();
+      if (btnSlug === slug || (slug === 'all' && btnSlug === 'all')) btn.classList.add('active');
+      else btn.classList.remove('active');
+    });
+    renderGrid();
+    updateCategoryMeta(slug);
+  } else {
+    handleRoute();
+  }
+});
 handleRoute();
 
 window.addEventListener('scroll', () => {
