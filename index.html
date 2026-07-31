@@ -362,6 +362,7 @@
   .trending-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; cursor: pointer; transition: border-color 0.15s, transform 0.15s; position: relative; }
   .trending-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
   .trending-card .card-thumb { height: 200px; }
+  .trending-card .card-thumb img { object-fit: contain; background: var(--accent-soft); }
   .trending-rank { position: absolute; top: 8px; left: 8px; background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; }
   .trending-divider { border: none; border-top: 1px solid var(--border); margin: 1.5rem 2rem; max-width: 1200px; margin-left: auto; margin-right: auto; }
 
@@ -1425,13 +1426,19 @@ window.filterDesigns = () => { currentPage = 1; renderGrid(); };
 
 function renderTrending() {
   const oneWeekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
-  // Get designs uploaded in the last 7 days OR just top downloaded if none recent
-  let recent = allDesigns.filter(d => d.createdAt && new Date(d.createdAt).getTime() > oneWeekAgo);
-  // If less than 3 recent designs, fall back to all designs sorted by downloads
-  if (recent.length < 3) recent = [...allDesigns];
-  const trending = recent
+  const recentWithDownloads = allDesigns.filter(d =>
+    d.createdAt && new Date(d.createdAt).getTime() > oneWeekAgo && (d.downloads || 0) > 0
+  );
+  let pool = recentWithDownloads.length >= 3 ? recentWithDownloads : [...allDesigns];
+  const trending = pool
     .sort((a, b) => (b.downloads || 0) - (a.downloads || 0))
     .slice(0, 5);
+  const subtitle = document.querySelector('.trending-subtitle');
+  if (subtitle) {
+    subtitle.textContent = recentWithDownloads.length >= 3
+      ? 'Most downloaded in the last 7 days'
+      : 'Most downloaded designs of all time';
+  }
 
   const section = document.getElementById('trending-section');
   const divider = document.getElementById('trending-divider');
