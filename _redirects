@@ -3,3 +3,5 @@
 /typography     /index.html     200
 /streetwear     /index.html     200
 /cute           /index.html     200
+/blog               /index.html     200
+/blog/*             /index.html     200
