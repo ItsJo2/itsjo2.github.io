@@ -376,6 +376,37 @@
   .affiliate-ad-label { font-size: 10px; color: var(--text-muted); text-align: center; padding: 4px; letter-spacing: 0.05em; text-transform: uppercase; }
 
   @media (max-width: 1300px) { .outer-layout { grid-template-columns: 1fr; } .left-ads, .right-ads { display: none; } }
+  /* ── BLOG ── */
+.blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+.blog-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; cursor: pointer; transition: border-color 0.15s, transform 0.15s; }
+.blog-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+.blog-card-img { height: 200px; background: var(--accent-soft); overflow: hidden; }
+.blog-card-img img { width: 100%; height: 100%; object-fit: cover; }
+.blog-card-img .blog-no-img { display: flex; align-items: center; justify-content: center; height: 100%; font-size: 3rem; }
+.blog-card-body { padding: 1.25rem; }
+.blog-card-category { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 0.5rem; }
+.blog-card-title { font-family: 'DM Serif Display', serif; font-size: 1.1rem; line-height: 1.3; margin-bottom: 0.5rem; }
+.blog-card-excerpt { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0.75rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.blog-card-meta { font-size: 11px; color: var(--text-muted); display: flex; gap: 1rem; }
+.blog-post-wrap { max-width: 780px; margin: 0 auto; padding: 2rem; }
+.blog-post-back { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); cursor: pointer; margin-bottom: 2rem; }
+.blog-post-back:hover { color: var(--text-primary); }
+.blog-post-category { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 0.75rem; }
+.blog-post-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 1rem; }
+.blog-post-meta { font-size: 13px; color: var(--text-muted); margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.blog-post-img { width: 100%; max-height: 420px; object-fit: cover; border-radius: 12px; margin-bottom: 2rem; }
+.blog-post-content { font-size: 16px; line-height: 1.8; color: var(--text-primary); }
+.blog-post-content h2 { font-family: 'DM Serif Display', serif; font-size: 1.5rem; margin: 2rem 0 0.75rem; }
+.blog-post-content h3 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+.blog-post-content p { margin-bottom: 1.25rem; }
+.blog-post-content ul, .blog-post-content ol { margin: 0 0 1.25rem 1.5rem; }
+.blog-post-content li { margin-bottom: 0.4rem; }
+.blog-post-content strong { font-weight: 600; }
+.blog-post-share { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.blog-post-share p { font-size: 13px; font-weight: 600; margin-bottom: 0.75rem; }
+.blog-editor textarea { min-height: 300px; font-family: 'Inter', sans-serif; }
+.blog-manage-row { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 1rem; padding: 1rem; border-bottom: 1px solid var(--border); }
+.blog-manage-row:last-child { border-bottom: none; }
   @media (max-width: 768px) { .content-with-sidebar { grid-template-columns: 1fr; } .sidebar { position: static; } .form-grid { grid-template-columns: 1fr; } .stats-grid { grid-template-columns: 1fr 1fr; } .design-page-grid { grid-template-columns: 1fr; } }
 
   /* SHARE SECTION */
@@ -469,6 +500,7 @@
     </div>
     <div class="nav-right">
       <span class="nav-link" onclick="scrollToGallery()">Browse</span>
+      <span class="nav-link" onclick="showBlog()">Blog</span>
       <button class="dark-toggle" id="dark-toggle" onclick="toggleDark()">🌙 Dark</button>
       <span class="nav-link" onclick="showView('view-about')">About</span>
       <span class="nav-link" onclick="showView('view-privacy')">Privacy</span>
@@ -738,6 +770,61 @@
   </div>
 </div>
 
+<!-- BLOG LIST -->
+<div id="view-blog" class="view">
+  <nav>
+    <div class="logo" onclick="goHome()" style="cursor:pointer;display:flex;align-items:center;">
+      <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1784202038/Minimalist_logo_for_DropDesigns_2K_202607051834_wvsjrv.png" alt="Drop Designs" style="height:44px;width:auto;object-fit:contain;display:block;">
+    </div>
+    <div class="nav-right">
+      <span class="nav-link" onclick="goHome()">← Gallery</span>
+      <button class="dark-toggle" onclick="toggleDark()">🌙 Dark</button>
+    </div>
+  </nav>
+  <div style="max-width:1100px;margin:0 auto;padding:3rem 2rem;">
+    <div style="margin-bottom:2.5rem;">
+      <h1 style="font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.5px;margin-bottom:0.5rem;">Blog</h1>
+      <p style="color:var(--text-secondary);font-size:1rem;">Design tips, inspiration and free resources for creators.</p>
+    </div>
+    <div class="blog-grid" id="blog-grid">
+      <div class="loading-state"><div class="spinner"></div><br>Loading posts…</div>
+    </div>
+  </div>
+  <footer>
+    <p style="font-size:11px;color:var(--text-muted);margin-bottom:0.5rem;">This site contains affiliate links. We may earn a commission if you make a purchase — at no extra cost to you.</p>
+    &copy; 2026 Drop Designs — Free Graphics &amp; Illustrations
+  </footer>
+</div>
+
+<!-- BLOG POST -->
+<div id="view-blog-post" class="view">
+  <nav>
+    <div class="logo" onclick="goHome()" style="cursor:pointer;display:flex;align-items:center;">
+      <img src="https://res.cloudinary.com/dlq5xhxop/image/upload/v1784202038/Minimalist_logo_for_DropDesigns_2K_202607051834_wvsjrv.png" alt="Drop Designs" style="height:44px;width:auto;object-fit:contain;display:block;">
+    </div>
+    <div class="nav-right">
+      <span class="nav-link" onclick="showBlog()">← Blog</span>
+      <button class="dark-toggle" onclick="toggleDark()">🌙 Dark</button>
+    </div>
+  </nav>
+  <div class="blog-post-wrap">
+    <span class="blog-post-back" onclick="showBlog()">← Back to Blog</span>
+    <div id="bp-category" class="blog-post-category"></div>
+    <h1 id="bp-title" class="blog-post-title"></h1>
+    <div id="bp-meta" class="blog-post-meta"></div>
+    <img id="bp-img" class="blog-post-img" src="" alt="" style="display:none;">
+    <div id="bp-content" class="blog-post-content"></div>
+    <div class="blog-post-share">
+      <p>Share this article</p>
+      <div class="share-buttons" id="bp-share-buttons"></div>
+    </div>
+  </div>
+  <footer>
+    <p style="font-size:11px;color:var(--text-muted);margin-bottom:0.5rem;">This site contains affiliate links. We may earn a commission if you make a purchase — at no extra cost to you.</p>
+    &copy; 2026 Drop Designs — Free Graphics &amp; Illustrations
+  </footer>
+</div>
+  
 <!-- ADMIN LOGIN -->
 <div id="view-login" class="view">
   <div class="login-screen">
@@ -779,6 +866,7 @@
     <div class="admin-tabs">
       <button class="admin-tab active" onclick="switchAdminTab('upload',this)">Upload New Design</button>
       <button class="admin-tab" onclick="switchAdminTab('manage',this)">Manage Designs</button>
+      <button class="admin-tab" onclick="switchAdminTab('blog',this)">✍️ Blog</button>
     </div>
 
     <!-- UPLOAD TAB -->
@@ -848,7 +936,56 @@
     </div>
   </div>
 </div>
-
+    <!-- BLOG TAB -->
+    <div id="tab-blog" style="display:none;">
+      <div class="upload-form">
+        <h3 style="font-family:'DM Serif Display',serif;font-size:1.4rem;margin-bottom:1.5rem;">✍️ Write Blog Post</h3>
+        <input type="hidden" id="blog-edit-id">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Title *</label>
+            <input type="text" id="blog-title" placeholder="e.g. Top 10 Free Anime Designs for 2026">
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="blog-category">
+              <option value="Design Tips">Design Tips</option>
+              <option value="Inspiration">Inspiration</option>
+              <option value="Free Resources">Free Resources</option>
+              <option value="Tutorial">Tutorial</option>
+              <option value="News">News</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>Excerpt (short summary shown on blog list)</label>
+            <textarea id="blog-excerpt" rows="2" placeholder="A short 1-2 sentence summary of this post…"></textarea>
+          </div>
+          <div class="form-group full">
+            <label>Content * (HTML supported)</label>
+            <textarea id="blog-content" rows="15" placeholder="Write your blog post here. Use HTML tags: &lt;p&gt;, &lt;h2&gt;, &lt;ul&gt;, &lt;strong&gt;"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Cover Image URL (optional — upload to Cloudinary first)</label>
+            <input type="text" id="blog-img" placeholder="https://res.cloudinary.com/...">
+          </div>
+          <div class="form-group">
+            <label>Tags (comma-separated)</label>
+            <input type="text" id="blog-tags" placeholder="anime, free designs, t-shirt">
+          </div>
+        </div>
+        <div style="display:flex;gap:0.75rem;margin-top:0.5rem;">
+          <button class="btn-submit" onclick="saveBlogPost()">Publish Post ↗</button>
+          <button class="btn-admin" onclick="clearBlogForm()">Clear</button>
+        </div>
+      </div>
+      <div style="margin-top:2rem;">
+        <h3 style="font-family:'DM Serif Display',serif;font-size:1.2rem;margin-bottom:1rem;">Published Posts</h3>
+        <div class="manage-table">
+          <div id="blog-manage-list" style="padding:1rem;color:var(--text-muted);font-size:13px;">Loading…</div>
+        </div>
+      </div>
+    </div>
+  
 <!-- EDIT MODAL -->
 <div class="edit-overlay" id="edit-overlay">
   <div class="edit-modal">
@@ -2011,6 +2148,169 @@ window.copyDesignLink = (id) => {
   });
 };
 
+// ── BLOG ──
+let allPosts = [];
+
+async function loadBlogPosts() {
+  try {
+    const q = query(collection(db, 'blog'), orderBy('createdAt', 'desc'));
+    const snap = await getDocs(q);
+    allPosts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    return allPosts;
+  } catch(e) { console.warn('Blog load failed', e); return []; }
+}
+
+function renderBlogGrid(posts) {
+  const grid = document.getElementById('blog-grid');
+  if (!grid) return;
+  if (!posts.length) {
+    grid.innerHTML = '<p style="color:var(--text-muted);font-size:14px;">No posts yet. Check back soon!</p>';
+    return;
+  }
+  grid.innerHTML = posts.map(p => `
+    <div class="blog-card" onclick="openBlogPost('${p.id}')">
+      <div class="blog-card-img">
+        ${p.coverImg ? `<img src="${p.coverImg}" alt="${p.title}" loading="lazy">` : `<div class="blog-no-img">✍️</div>`}
+      </div>
+      <div class="blog-card-body">
+        <div class="blog-card-category">${p.category || 'Design Tips'}</div>
+        <div class="blog-card-title">${p.title}</div>
+        <div class="blog-card-excerpt">${p.excerpt || ''}</div>
+        <div class="blog-card-meta">
+          <span>📅 ${p.date || ''}</span>
+          <span>⏱ ${Math.max(1, Math.ceil((p.content || '').split(' ').length / 200))} min read</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+window.showBlog = async () => {
+  showView('view-blog');
+  history.pushState({}, '', '/blog');
+  document.title = 'Blog — Design Tips & Free Resources | Drop Designs';
+  const posts = await loadBlogPosts();
+  renderBlogGrid(posts);
+};
+
+window.openBlogPost = async (id) => {
+  if (!allPosts.length) await loadBlogPosts();
+  const p = allPosts.find(x => x.id === id);
+  if (!p) return;
+  showView('view-blog-post');
+  history.pushState({ blogId: id }, p.title, `/blog/${id}`);
+  document.title = `${p.title} | Drop Designs Blog`;
+  document.getElementById('bp-category').textContent = p.category || '';
+  document.getElementById('bp-title').textContent = p.title;
+  document.getElementById('bp-meta').innerHTML = `<span>📅 ${p.date || ''}</span><span>⏱ ${Math.max(1, Math.ceil((p.content || '').split(' ').length / 200))} min read</span><span>🏷 ${(p.tags || []).join(', ')}</span>`;
+  const imgEl = document.getElementById('bp-img');
+  if (p.coverImg) { imgEl.src = p.coverImg; imgEl.alt = p.title; imgEl.style.display = 'block'; }
+  else imgEl.style.display = 'none';
+  document.getElementById('bp-content').innerHTML = p.content || '';
+  const shareUrl = encodeURIComponent(`https://www.dropdesigns.net/blog/${id}`);
+  const shareTitle = encodeURIComponent(p.title + ' | Drop Designs Blog');
+  document.getElementById('bp-share-buttons').innerHTML = `
+    <a class="share-btn pinterest" href="https://pinterest.com/pin/create/button/?url=${shareUrl}&description=${shareTitle}" target="_blank" rel="noopener">📌 Pinterest</a>
+    <a class="share-btn twitter" href="https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareTitle}" target="_blank" rel="noopener">𝕏 Twitter</a>
+    <a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=${shareUrl}" target="_blank" rel="noopener">f Facebook</a>
+    <button class="share-btn copy-link" onclick="navigator.clipboard.writeText(decodeURIComponent('${shareUrl}')).then(()=>showToast('Link copied! ✓'))">🔗 Copy Link</button>
+  `;
+  window.scrollTo(0, 0);
+};
+
+// Admin blog functions
+window.switchAdminTab = (tab, btn) => {
+  document.querySelectorAll('.admin-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-upload').style.display = tab === 'upload' ? 'block' : 'none';
+  document.getElementById('tab-manage').style.display = tab === 'manage' ? 'block' : 'none';
+  document.getElementById('tab-blog').style.display = tab === 'blog' ? 'block' : 'none';
+  if (tab === 'manage') renderManage();
+  if (tab === 'blog') loadAndRenderBlogAdmin();
+};
+
+async function loadAndRenderBlogAdmin() {
+  const posts = await loadBlogPosts();
+  const container = document.getElementById('blog-manage-list');
+  if (!container) return;
+  if (!posts.length) { container.innerHTML = '<p style="padding:1rem;">No posts yet.</p>'; return; }
+  container.innerHTML = posts.map(p => `
+    <div class="blog-manage-row">
+      <div>
+        <div style="font-weight:500;font-size:14px;">${p.title}</div>
+        <div style="font-size:12px;color:var(--text-muted);">${p.category} · ${p.date}</div>
+      </div>
+      <button class="btn-edit" onclick="editBlogPost('${p.id}')">✏️ Edit</button>
+      <button class="btn-danger" onclick="deleteBlogPost('${p.id}')">Delete</button>
+    </div>
+  `).join('');
+}
+
+window.saveBlogPost = async () => {
+  const id = document.getElementById('blog-edit-id').value;
+  const title = document.getElementById('blog-title').value.trim();
+  const category = document.getElementById('blog-category').value;
+  const excerpt = document.getElementById('blog-excerpt').value.trim();
+  const content = document.getElementById('blog-content').value.trim();
+  const coverImg = document.getElementById('blog-img').value.trim();
+  const tags = document.getElementById('blog-tags').value.split(',').map(t => t.trim()).filter(Boolean);
+  if (!title) { showToast('Please enter a title.'); return; }
+  if (!content) { showToast('Please enter content.'); return; }
+  const data = {
+    title, category, excerpt, content, coverImg, tags,
+    date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+    createdAt: id ? undefined : new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  };
+  try {
+    if (id) {
+      const cleanData = Object.fromEntries(Object.entries(data).filter(([_, v]) => v !== undefined));
+      await updateDoc(doc(db, 'blog', id), cleanData);
+      showToast('Post updated! ✓');
+    } else {
+      data.createdAt = new Date().toISOString();
+      await addDoc(collection(db, 'blog'), data);
+      showToast('Post published! ✓');
+    }
+    clearBlogForm();
+    loadAndRenderBlogAdmin();
+  } catch(e) { showToast('Failed: ' + e.message); }
+};
+
+window.editBlogPost = async (id) => {
+  if (!allPosts.length) await loadBlogPosts();
+  const p = allPosts.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('blog-edit-id').value = id;
+  document.getElementById('blog-title').value = p.title || '';
+  document.getElementById('blog-category').value = p.category || 'Design Tips';
+  document.getElementById('blog-excerpt').value = p.excerpt || '';
+  document.getElementById('blog-content').value = p.content || '';
+  document.getElementById('blog-img').value = p.coverImg || '';
+  document.getElementById('blog-tags').value = (p.tags || []).join(', ');
+  document.querySelector('[onclick="switchAdminTab(\'blog\',this)"]').click();
+  window.scrollTo(0, 0);
+  showToast('Editing post — make changes and click Publish.');
+};
+
+window.deleteBlogPost = async (id) => {
+  if (!confirm('Delete this blog post permanently?')) return;
+  try {
+    await deleteDoc(doc(db, 'blog', id));
+    allPosts = allPosts.filter(p => p.id !== id);
+    loadAndRenderBlogAdmin();
+    showToast('Post deleted.');
+  } catch(e) { showToast('Delete failed: ' + e.message); }
+};
+
+window.clearBlogForm = () => {
+  ['blog-edit-id', 'blog-title', 'blog-excerpt', 'blog-content', 'blog-img', 'blog-tags'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  document.getElementById('blog-category').value = 'Design Tips';
+};
+  
 // ── ROUTING ──
 function handleRoute() {
   const params = new URLSearchParams(window.location.search);
@@ -2032,6 +2332,19 @@ function handleRoute() {
     return;
   }
 
+    // Handle blog URLs
+  if (path === '/blog') {
+    window.showBlog && window.showBlog();
+    return;
+  }
+  if (path.startsWith('/blog/')) {
+    const blogId = path.replace('/blog/', '');
+    loadBlogPosts().then(() => openBlogPost(blogId));
+    const splash = document.getElementById('splash-screen');
+    if (splash) splash.classList.add('hidden');
+    return;
+  }
+  
   // Handle category URLs: /cars /anime /typography /streetwear /cute
   const categorySlug = path.split('/').filter(Boolean).pop() || '';
   const validSlugs = ['cars', 'anime', 'typography', 'streetwear', 'cute'];
