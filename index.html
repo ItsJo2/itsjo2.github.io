@@ -502,9 +502,9 @@
       <span class="nav-link" onclick="scrollToGallery()">Browse</span>
       <span class="nav-link" onclick="showBlog()">Blog</span>
       <button class="dark-toggle" id="dark-toggle" onclick="toggleDark()">🌙 Dark</button>
-      <span class="nav-link" onclick="showView('view-about')">About</span>
-      <span class="nav-link" onclick="showView('view-privacy')">Privacy</span>
-      <span class="nav-link" onclick="showView('view-terms')">Terms</span>
+      <span class="nav-link" onclick="showAbout()">About</span>
+      <span class="nav-link" onclick="showPrivacy()">Privacy</span>
+      <span class="nav-link" onclick="showTerms()">Terms</span>
     </div>
   </nav>
   <div style="display:flex;justify-content:center;padding:1rem 1rem 0;">
@@ -1437,6 +1437,9 @@ function showView(id) {
   document.getElementById(id).classList.add('active');
 }
 window.showView = showView;
+window.showAbout = () => { history.pushState({}, '', '/about'); showView('view-about'); document.title = 'About — Drop Designs'; };
+window.showPrivacy = () => { history.pushState({}, '', '/privacy'); showView('view-privacy'); document.title = 'Privacy Policy — Drop Designs'; };
+window.showTerms = () => { history.pushState({}, '', '/terms'); showView('view-terms'); document.title = 'Terms of Use — Drop Designs'; };
 function resetMetadataToHome() {
   document.title = "Drop Designs — Free Graphics & Illustrations for Everyone";
   document.getElementById('meta-desc').content = "Download 100+ free graphics, illustrations, anime art, car designs, typography and streetwear designs on Drop Designs. Free for personal and commercial use.";
@@ -1445,9 +1448,9 @@ function resetMetadataToHome() {
   const canonicalElem = document.getElementById('canonical-link');
   if (canonicalElem) canonicalElem.href = "https://www.dropdesigns.net";
 }
-window.showPublic = () => { history.pushState({}, '', window.location.pathname); resetMetadataToHome(); showView('view-public'); loadDesigns(); };
+window.showPublic = () => { history.pushState({}, '', '/'); showView('view-public'); loadDesigns(); };
 window.showAdminLogin = () => showView('view-login');
-window.goHome = () => { history.pushState({}, '', window.location.pathname); resetMetadataToHome(); showView('view-public'); loadDesigns(); };
+window.goHome = () => { history.pushState({}, '', '/'); showView('view-public'); loadDesigns(); };
 window.scrollToGallery = () => document.getElementById('gallery-anchor').scrollIntoView({ behavior:'smooth' });
 window.logout = () => { resetMetadataToHome(); showView('view-public'); loadDesigns(); };
 
@@ -2361,8 +2364,13 @@ function handleRoute() {
     });
     return;
   }
-
-    // Handle blog URLs
+  
+// Handle static pages
+if (path === '/about') { showView('view-about'); document.title = 'About — Drop Designs'; const s = document.getElementById('splash-screen'); if(s) s.classList.add('hidden'); return; }
+if (path === '/privacy') { showView('view-privacy'); document.title = 'Privacy Policy — Drop Designs'; const s = document.getElementById('splash-screen'); if(s) s.classList.add('hidden'); return; }
+if (path === '/terms') { showView('view-terms'); document.title = 'Terms of Use — Drop Designs'; const s = document.getElementById('splash-screen'); if(s) s.classList.add('hidden'); return; }
+  
+  // Handle blog URLs
   if (params.has('blog')) {
     window.showBlog && window.showBlog();
     const splash = document.getElementById('splash-screen');
