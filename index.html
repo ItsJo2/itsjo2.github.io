@@ -2217,7 +2217,7 @@ function renderBlogGrid(posts) {
 
 window.showBlog = async () => {
   showView('view-blog');
-  history.pushState({}, '', '?blog');
+  history.pushState({}, '', '/blog');
   document.title = 'Blog — Design Tips & Free Resources | Drop Designs';
   const posts = await loadBlogPosts();
   renderBlogGrid(posts);
